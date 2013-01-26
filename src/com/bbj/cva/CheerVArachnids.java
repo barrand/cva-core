@@ -93,7 +93,7 @@ public class CheerVArachnids implements ApplicationListener {
 
 		tiledMapHelper.loadMap("data/world/level1/level.tmx");
 
-		tiledMapHelper.prepareCamera(screenWidth, screenHeight);
+		tiledMapHelper.prepareCamera(tiledMapHelper.getWidth(), tiledMapHelper.getHeight());
 
 
 		/**
@@ -261,29 +261,29 @@ public class CheerVArachnids implements ApplicationListener {
 		 * character, and secondarily by the map boundaries.
 		 */
 
-		tiledMapHelper.getCamera().position.x = PIXELS_PER_METER
-				* jumper.getPosition().x;
+//		tiledMapHelper.getCamera().position.x =  700;
+//		tiledMapHelper.getCamera().position.y =  Gdx.graphics.getHeight() / 2;
 
-		/**
-		 * Ensure that the camera is only showing the map, nothing outside.
-		 */
-		if (tiledMapHelper.getCamera().position.x < Gdx.graphics.getWidth() / 2) {
-			tiledMapHelper.getCamera().position.x = Gdx.graphics.getWidth() / 2;
-		}
-		if (tiledMapHelper.getCamera().position.x >= tiledMapHelper.getWidth()
-				- Gdx.graphics.getWidth() / 2) {
-			tiledMapHelper.getCamera().position.x = tiledMapHelper.getWidth()
-					- Gdx.graphics.getWidth() / 2;
-		}
-
-		if (tiledMapHelper.getCamera().position.y < Gdx.graphics.getHeight() / 2) {
-			tiledMapHelper.getCamera().position.y = Gdx.graphics.getHeight() / 2;
-		}
-		if (tiledMapHelper.getCamera().position.y >= tiledMapHelper.getHeight()
-				- Gdx.graphics.getHeight() / 2) {
-			tiledMapHelper.getCamera().position.y = tiledMapHelper.getHeight()
-					- Gdx.graphics.getHeight() / 2;
-		}
+//		/**
+//		 * Ensure that the camera is only showing the map, nothing outside.
+//		 */
+//		if (tiledMapHelper.getCamera().position.x < Gdx.graphics.getWidth() / 2) {
+//			tiledMapHelper.getCamera().position.x = Gdx.graphics.getWidth() / 2;
+//		}
+//		if (tiledMapHelper.getCamera().position.x >= tiledMapHelper.getWidth()
+//				- Gdx.graphics.getWidth() / 2) {
+//			tiledMapHelper.getCamera().position.x = tiledMapHelper.getWidth()
+//					- Gdx.graphics.getWidth() / 2;
+//		}
+//
+//		if (tiledMapHelper.getCamera().position.y < Gdx.graphics.getHeight() / 2) {
+//			tiledMapHelper.getCamera().position.y = Gdx.graphics.getHeight() / 2;
+//		}
+//		if (tiledMapHelper.getCamera().position.y >= tiledMapHelper.getHeight()
+//				- Gdx.graphics.getHeight() / 2) {
+//			tiledMapHelper.getCamera().position.y = tiledMapHelper.getHeight()
+//					- Gdx.graphics.getHeight() / 2;
+//		}
 
 		tiledMapHelper.getCamera().update();
 		tiledMapHelper.render();

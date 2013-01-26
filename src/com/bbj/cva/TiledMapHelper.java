@@ -292,9 +292,9 @@ public class TiledMapHelper {
 	 * @param screenHeight
 	 */
 	public void prepareCamera(int screenWidth, int screenHeight) {
-		camera = new OrthographicCamera(screenWidth, screenHeight);
+		camera = new OrthographicCamera(getWidth(), getHeight());
 
-		camera.position.set(0, 0, 0);
+		camera.position.set(getWidth()/2, getHeight()/2, 0);
 	}
 
 	/**
