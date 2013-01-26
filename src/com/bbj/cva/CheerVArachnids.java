@@ -34,18 +34,9 @@ public class CheerVArachnids implements ApplicationListener {
 	private boolean jumperFacingRight;
 	
 	/**
-	 * This is the main box2d "container" object. All bodies will be loaded in
-	 * this object and will be simulated through calls to this object.
-	 */
-	private World world;
-
-	/**
 	 * This is the player character. It will be created as a dynamic object.
 	 */
 	private Body jumper;
-	private Box2DDebugRenderer debugRenderer;
-	
-	public static final float PIXELS_PER_METER = 60.0f;
 	
 	/**
 	 * The screen coordinates of where a drag event began, used when updating
@@ -108,47 +99,9 @@ public class CheerVArachnids implements ApplicationListener {
 		spriteBatch = new SpriteBatch();
 
 		/**
-		 * You can set the world's gravity in its constructor. Here, the gravity
-		 * is negative in the y direction (as in, pulling things down).
-		 */
-		world = new World(new Vector2(0.0f, -10.0f), true);
-
-		BodyDef jumperBodyDef = new BodyDef();
-		jumperBodyDef.type = BodyDef.BodyType.DynamicBody;
-		jumperBodyDef.position.set(1.0f, 5.0f);
-
-		jumper = world.createBody(jumperBodyDef);
-
-		/**
-		 * Boxes are defined by their "half width" and "half height", hence the
-		 * 2 multiplier.
-		 */
-		PolygonShape jumperShape = new PolygonShape();
-		jumperShape.setAsBox(jumperSprite.getWidth() / (2 * PIXELS_PER_METER),
-				jumperSprite.getHeight() / (2 * PIXELS_PER_METER));
-
-		/**
 		 * The character should not ever spin around on impact.
 		 */
-		jumper.setFixedRotation(true);
-
-		/**
-		 * The density and friction of the jumper were found experimentally.
-		 * Play with the numbers and watch how the character moves faster or
-		 * slower.
-		 */
-		FixtureDef jumperFixtureDef = new FixtureDef();
-		jumperFixtureDef.shape = jumperShape;
-		jumperFixtureDef.density = 1.0f;
-		jumperFixtureDef.friction = 5.0f;
-
-		jumper.createFixture(jumperFixtureDef);
-		jumperShape.dispose();
-
-		tiledMapHelper.loadCollisions("data/collisions.txt", world,
-				PIXELS_PER_METER);
-		
-		debugRenderer = new Box2DDebugRenderer();
+//		jumper.setFixedRotation(true);
 
 		spriteBatch = new SpriteBatch(); // #12
 	}
@@ -202,53 +155,11 @@ public class CheerVArachnids implements ApplicationListener {
 			}
 		}
 
-		/**
-		 * Act on that requested motion.
-		 * 
-		 * This code changes the jumper's direction. It's handled separately
-		 * from the jumping so that the player can jump and move simultaneously.
-		 * The horizontal figure was arrived at experimentally -- try other
-		 * values to experience different speeds.
-		 * 
-		 * The impulses are applied to the center of the jumper.
-		 */
 		if (moveRight) {
-			jumper.applyLinearImpulse(new Vector2(0.05f, 0.0f),
-					jumper.getWorldCenter());
-			if (jumperFacingRight == false) {
-				jumperSprite.flip(true, false);
-			}
-			jumperFacingRight = true;
+
 		} else if (moveLeft) {
-			jumper.applyLinearImpulse(new Vector2(-0.05f, 0.0f),
-					jumper.getWorldCenter());
-			if (jumperFacingRight == true) {
-				jumperSprite.flip(true, false);
-			}
-			jumperFacingRight = false;
-		}
 
-		/**
-		 * The jumper dude can only jump while on the ground. There are better
-		 * ways to detect ground contact, but for our purposes it is sufficient
-		 * to test that the vertical velocity is zero (or close to it). As in
-		 * the above code, the vertical figure here was found through
-		 * experimentation. It's enough to get the guy off the ground.
-		 * 
-		 * As before, impulse is applied to the center of the jumper.
-		 */
-		if (doJump && Math.abs(jumper.getLinearVelocity().y) < 1e-9) {
-			jumper.applyLinearImpulse(new Vector2(0.0f, 0.8f),
-					jumper.getWorldCenter());
 		}
-
-		/**
-		 * Have box2d update the positions and velocities (and etc) of all
-		 * tracked objects. The second and third argument specify the number of
-		 * iterations of velocity and position tests to perform -- higher is
-		 * more accurate but is also slower.
-		 */
-		world.step(Gdx.app.getGraphics().getDeltaTime(), 3, 3);
 
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		/**
@@ -256,34 +167,6 @@ public class CheerVArachnids implements ApplicationListener {
 		 */
 		Gdx.gl.glClearColor(0, 0.5f, 0.9f, 0);
 
-		/**
-		 * The camera is now controlled primarily by the position of the main
-		 * character, and secondarily by the map boundaries.
-		 */
-
-//		tiledMapHelper.getCamera().position.x =  700;
-//		tiledMapHelper.getCamera().position.y =  Gdx.graphics.getHeight() / 2;
-
-//		/**
-//		 * Ensure that the camera is only showing the map, nothing outside.
-//		 */
-//		if (tiledMapHelper.getCamera().position.x < Gdx.graphics.getWidth() / 2) {
-//			tiledMapHelper.getCamera().position.x = Gdx.graphics.getWidth() / 2;
-//		}
-//		if (tiledMapHelper.getCamera().position.x >= tiledMapHelper.getWidth()
-//				- Gdx.graphics.getWidth() / 2) {
-//			tiledMapHelper.getCamera().position.x = tiledMapHelper.getWidth()
-//					- Gdx.graphics.getWidth() / 2;
-//		}
-//
-//		if (tiledMapHelper.getCamera().position.y < Gdx.graphics.getHeight() / 2) {
-//			tiledMapHelper.getCamera().position.y = Gdx.graphics.getHeight() / 2;
-//		}
-//		if (tiledMapHelper.getCamera().position.y >= tiledMapHelper.getHeight()
-//				- Gdx.graphics.getHeight() / 2) {
-//			tiledMapHelper.getCamera().position.y = tiledMapHelper.getHeight()
-//					- Gdx.graphics.getHeight() / 2;
-//		}
 
 		tiledMapHelper.getCamera().update();
 		tiledMapHelper.render();
@@ -294,26 +177,18 @@ public class CheerVArachnids implements ApplicationListener {
 		spriteBatch.setProjectionMatrix(tiledMapHelper.getCamera().combined);
 		spriteBatch.begin();
 
-		jumperSprite.setPosition(
-				PIXELS_PER_METER * jumper.getPosition().x
-						- jumperSprite.getWidth() / 2,
-				PIXELS_PER_METER * jumper.getPosition().y
-						- jumperSprite.getHeight() / 2);
-		jumperSprite.draw(spriteBatch);
+//		jumperSprite.setPosition(
+//				PIXELS_PER_METER * jumper.getPosition().x
+//						- jumperSprite.getWidth() / 2,
+//				PIXELS_PER_METER * jumper.getPosition().y
+//						- jumperSprite.getHeight() / 2);
+//		jumperSprite.draw(spriteBatch);
 
 		/**
 		 * "Flush" the sprites to screen.
 		 */
 		spriteBatch.end();
 
-		/**
-		 * Draw this last, so we can see the collision boundaries on top of the
-		 * sprites and map.
-		 */
-		debugRenderer.render(world, tiledMapHelper.getCamera().combined.scale(
-				PIXELS_PER_METER,
-				PIXELS_PER_METER,
-				PIXELS_PER_METER));
 	}
 
 	@Override
