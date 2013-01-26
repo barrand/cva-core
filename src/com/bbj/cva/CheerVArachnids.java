@@ -1,5 +1,7 @@
 package com.bbj.cva;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -21,59 +23,40 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.ScreenObjectBase;
+import com.bbj.cva.screenobjects.Selection;
 
 public class CheerVArachnids implements ApplicationListener {
-	private static final float TILE_WIDTH = 128;
-	private static final float TILE_HEIGHT = 135;
-	private static final long SELECTION_WAIT = 100000000;
+
 	OrthographicCamera camera;
 	SpriteBatch spriteBatch;
 	TiledMap tiledMap;
 	TileMapRenderer tileMapRenderer;
-	Rectangle selectionRect;
-	Texture selectionImage;
 
-	private long lastMoveSelectionTime;
+	Selection selection;
+
+	//this holds all the objects that are going to be on screen
+	//when we render the whole world, we'll call render on each
+	//of these objects so the logic will be in the classes
+	private ArrayList<ScreenObjectBase> screenObjects;
 
 	private TiledMapHelper tiledMapHelper;
 	private Texture overallTexture;
-
-	private Sprite jumperSprite;
-	private boolean jumperFacingRight;
-
-	/**
-	 * This is the player character. It will be created as a dynamic object.
-	 */
-	private Body jumper;
-
-	/**
-	 * The screen coordinates of where a drag event began, used when updating
-	 * the camera position.
-	 */
-	private int lastTouchedX;
-	private int lastTouchedY;
-
-	/**
-	 * The screen's width and height. This may not match that computed by
-	 * libgdx's gdx.graphics.getWidth() / getHeight() on devices that make use
-	 * of on-screen menu buttons.
-	 */
-	private int screenWidth;
-	private int screenHeight;
 
 	public CheerVArachnids() {
 		super();
 
 		// Defer until create() when Gdx is initialized.
-		screenWidth = -1;
-		screenHeight = -1;
+		CvaModel.screenWidth = -1;
+		CvaModel.screenHeight = -1;
 	}
 
 	public CheerVArachnids(int width, int height) {
 		super();
 
-		screenWidth = width;
-		screenHeight = height;
+		CvaModel.screenWidth = width;
+		CvaModel.screenHeight = height;
 	}
 
 	@Override
@@ -83,12 +66,11 @@ public class CheerVArachnids implements ApplicationListener {
 		/**
 		 * If the viewport's size is not yet known, determine it here.
 		 */
-		if (screenWidth == -1) {
-			screenWidth = Gdx.graphics.getWidth();
-			screenHeight = Gdx.graphics.getHeight();
+		if (CvaModel.screenWidth == -1) {
+			CvaModel.screenWidth = Gdx.graphics.getWidth();
+			CvaModel.screenHeight = Gdx.graphics.getHeight();
 		}
 
-		selectionImage = new Texture(Gdx.files.internal("data/selection.png"));
 
 		tiledMapHelper = new TiledMapHelper();
 
@@ -101,11 +83,15 @@ public class CheerVArachnids implements ApplicationListener {
 
 		TiledMap map = tiledMapHelper.getMap();
 
-		selectionRect = new Rectangle();
-		selectionRect.width = TILE_WIDTH;
-		selectionRect.height = TILE_HEIGHT;
-		selectionRect.x = 0;
-		selectionRect.y = 0;
+		//add all the objects that are going to be on screen here
+		screenObjects = new ArrayList<ScreenObjectBase>();
+		selection = new Selection();
+		screenObjects.add(selection);
+
+
+		for (ScreenObjectBase o : screenObjects) {
+			o.create();
+		}
 
 		/**
 		 * Load up the overall texture and chop it in to pieces. In this case,
@@ -113,8 +99,6 @@ public class CheerVArachnids implements ApplicationListener {
 		 */
 		overallTexture = new Texture(Gdx.files.internal("data/sprite.png"));
 		overallTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-
-		jumperSprite = new Sprite(overallTexture, 0, 0, 21, 37);
 
 		spriteBatch = new SpriteBatch(); // #12
 	}
@@ -126,26 +110,6 @@ public class CheerVArachnids implements ApplicationListener {
 
 	@Override
 	public void render() {
-		long now = System.nanoTime();
-
-		/**
-		 * Detect requested motion.
-		 */
-
-		if (now - lastMoveSelectionTime > SELECTION_WAIT) {
-			if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
-				selectionRect.x += TILE_WIDTH;
-			} else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
-				selectionRect.x -= TILE_WIDTH;
-			}
-			if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
-				selectionRect.y += TILE_HEIGHT;
-			} else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
-				selectionRect.y -= TILE_HEIGHT;
-			}
-			lastMoveSelectionTime = now;
-		}
-
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		/**
 		 * A nice(?), blue backdrop.
@@ -161,13 +125,9 @@ public class CheerVArachnids implements ApplicationListener {
 		spriteBatch.setProjectionMatrix(tiledMapHelper.getCamera().combined);
 		spriteBatch.begin();
 
-		// jumperSprite.setPosition(
-		// PIXELS_PER_METER * jumper.getPosition().x
-		// - jumperSprite.getWidth() / 2,
-		// PIXELS_PER_METER * jumper.getPosition().y
-		// - jumperSprite.getHeight() / 2);
-		// jumperSprite.draw(spriteBatch);
-		spriteBatch.draw(selectionImage, selectionRect.x, selectionRect.y);
+		for (ScreenObjectBase o : screenObjects) {
+			o.render(spriteBatch);
+		}
 
 		/**
 		 * "Flush" the sprites to screen.
