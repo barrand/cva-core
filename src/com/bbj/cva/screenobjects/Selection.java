@@ -25,6 +25,10 @@ public class Selection implements ScreenObjectBase {
 		selectionRect.y = 0;
 		
 	}
+	private boolean rightWasDownLastFrame = false;
+	private boolean leftWasDownLastFrame = false;
+	private boolean upWasDownLastFrame = false;
+	private boolean downWasDownLastFrame = false;
 	@Override
 	public void render(SpriteBatch spriteBatch) {
 		long now = System.nanoTime();
@@ -33,19 +37,46 @@ public class Selection implements ScreenObjectBase {
 		 * Detect requested motion.
 		 */
 
-		if (now - lastMoveSelectionTime > SELECTION_WAIT) {
-			if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
-				selectionRect.x += CvaModel.TILE_WIDTH;
-			} else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
-				selectionRect.x -= CvaModel.TILE_WIDTH;
-			}
-			if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
-				selectionRect.y += CvaModel.TILE_HEIGHT;
-			} else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
-				selectionRect.y -= CvaModel.TILE_HEIGHT;
-			}
-			lastMoveSelectionTime = now;
+		if(Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)){
+			rightWasDownLastFrame = true;
+		}else if(rightWasDownLastFrame == true){
+			selectionRect.x += CvaModel.TILE_WIDTH;
+			rightWasDownLastFrame = false;
 		}
+		
+		if(Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)){
+			leftWasDownLastFrame = true;
+		}else if(leftWasDownLastFrame == true){
+			selectionRect.x -= CvaModel.TILE_WIDTH;
+			leftWasDownLastFrame = false;
+		}
+		
+		if(Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)){
+			upWasDownLastFrame = true;
+		}else if(upWasDownLastFrame == true){
+			selectionRect.y += CvaModel.TILE_HEIGHT;
+			upWasDownLastFrame = false;
+		}
+		if(Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)){
+			downWasDownLastFrame = true;
+		}else if(downWasDownLastFrame == true){
+			selectionRect.y -= CvaModel.TILE_HEIGHT;
+			downWasDownLastFrame = false;
+		}
+		
+//		if (now - lastMoveSelectionTime > SELECTION_WAIT) {
+//			if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
+//				selectionRect.x += CvaModel.TILE_WIDTH;
+//			} else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
+//				selectionRect.x -= CvaModel.TILE_WIDTH;
+//			}
+//			if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
+//				selectionRect.y += CvaModel.TILE_HEIGHT;
+//			} else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
+//				selectionRect.y -= CvaModel.TILE_HEIGHT;
+//			}
+//			lastMoveSelectionTime = now;
+//		}
 		
 		spriteBatch.draw(selectionImage, selectionRect.x, selectionRect.y);
 	}
