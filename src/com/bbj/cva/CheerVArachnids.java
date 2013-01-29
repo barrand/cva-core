@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -24,6 +25,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.GruntTest;
 import com.bbj.cva.screenobjects.ScreenObjectBase;
 import com.bbj.cva.screenobjects.Selection;
 
@@ -34,6 +36,8 @@ public class CheerVArachnids implements ApplicationListener {
 	TiledMap tiledMap;
 	TileMapRenderer tileMapRenderer;
 
+	FPSLogger fpsLogger = new FPSLogger();
+	
 	Selection selection;
 
 	//this holds all the objects that are going to be on screen
@@ -87,6 +91,14 @@ public class CheerVArachnids implements ApplicationListener {
 		screenObjects = new ArrayList<ScreenObjectBase>();
 		selection = new Selection();
 		screenObjects.add(selection);
+		
+		for(int i = 0; i < 20; i++){
+			
+			GruntTest g = new GruntTest();
+			g.x = (int) (Math.random() * CvaModel.screenWidth);
+			g.y = (int) (Math.random() * CvaModel.screenHeight);
+			screenObjects.add(g);
+		}
 
 
 		for (ScreenObjectBase o : screenObjects) {
@@ -133,6 +145,7 @@ public class CheerVArachnids implements ApplicationListener {
 		 * "Flush" the sprites to screen.
 		 */
 		spriteBatch.end();
+		fpsLogger.log();
 
 	}
 
