@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.bbj.cva.model.CvaModel;
 
 public class GruntTest implements ScreenObjectBase {
 
@@ -12,7 +13,6 @@ public class GruntTest implements ScreenObjectBase {
 	private static final int FRAME_ROWS = 4; // #2
 
 	Animation walkAnimation; // #3
-	Texture walkSheet; // #4
 	TextureRegion[] walkFrames; // #5
 	SpriteBatch spriteBatch; // #6
 	TextureRegion currentFrame; // #7
@@ -24,9 +24,11 @@ public class GruntTest implements ScreenObjectBase {
 	
 	@Override
 	public void create() {
-		walkSheet = new Texture(Gdx.files.internal("data/spriteSheets/gruntTest.png")); // #9
-		TextureRegion[][] tmp = TextureRegion.split(walkSheet,
-				walkSheet.getWidth() / FRAME_COLS, walkSheet.getHeight()
+		if(CvaModel.walkSheet == null){
+			CvaModel.walkSheet = new Texture(Gdx.files.internal("data/spriteSheets/gruntTest.png")); // #9
+		}
+		TextureRegion[][] tmp = TextureRegion.split(CvaModel.walkSheet,
+				CvaModel.walkSheet.getWidth() / FRAME_COLS, CvaModel.walkSheet.getHeight()
 						/ FRAME_ROWS); // #10
 		walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
 		int index = 0;
@@ -35,7 +37,7 @@ public class GruntTest implements ScreenObjectBase {
 				walkFrames[index++] = tmp[i][j];
 			}
 		}
-		walkAnimation = new Animation(0.025f, walkFrames); // #11
+		walkAnimation = new Animation(0.05f, walkFrames); // #11
 		stateTime = 0f; // #13
 		
 	}

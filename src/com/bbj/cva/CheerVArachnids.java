@@ -92,7 +92,7 @@ public class CheerVArachnids implements ApplicationListener {
 		selection = new Selection();
 		screenObjects.add(selection);
 		
-		for(int i = 0; i < 20; i++){
+		for(int i = 0; i < 200; i++){
 			
 			GruntTest g = new GruntTest();
 			g.x = (int) (Math.random() * CvaModel.screenWidth);
