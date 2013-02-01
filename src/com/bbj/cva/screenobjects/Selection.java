@@ -1,10 +1,13 @@
 package com.bbj.cva.screenobjects;
 
+import org.bushe.swing.event.EventBus;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.model.CvaModel;
 
 public class Selection implements ScreenObjectBase {
@@ -62,6 +65,7 @@ public class Selection implements ScreenObjectBase {
 				//        ** Instead of "creating" a new object...should it just grab an already created one?
 				//        ** What are our memory limitations?  Standard on dynamic memory allocation?
 				//       Then it needs to get added to the ScreenObject Array for the CVA::render() call.
+				EventBus.publish(new PlaceUnitEvent(selectionRect.x, selectionRect.y));
 			}
 			lastMoveSelectionTime = now;
 		}

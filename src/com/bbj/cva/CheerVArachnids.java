@@ -2,6 +2,12 @@ package com.bbj.cva;
 
 import java.util.ArrayList;
 
+import org.bushe.swing.event.EventBus;
+import org.bushe.swing.event.EventServiceExistsException;
+import org.bushe.swing.event.EventServiceLocator;
+import org.bushe.swing.event.EventSubscriber;
+import org.bushe.swing.event.ThreadSafeEventService;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -23,23 +29,26 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.ScreenObjectBase;
 import com.bbj.cva.screenobjects.Selection;
+import com.bbj.cva.screenobjects.SpiderUnit;
+import com.bbj.cva.screenobjectsdata.SpiderUnitData;
 
-public class CheerVArachnids implements ApplicationListener {
-
+public class CheerVArachnids implements ApplicationListener, EventSubscriber<PlaceUnitEvent>{
 	OrthographicCamera camera;
 	SpriteBatch spriteBatch;
 	TiledMap tiledMap;
 	TileMapRenderer tileMapRenderer;
-
 	Selection selection;
-
+	
 	//this holds all the objects that are going to be on screen
 	//when we render the whole world, we'll call render on each
 	//of these objects so the logic will be in the classes
 	private ArrayList<ScreenObjectBase> screenObjects;
+	
+	private ArrayList<SpiderUnitData> createObjectsQueue;
 
 	private TiledMapHelper tiledMapHelper;
 	private Texture overallTexture;
@@ -50,6 +59,8 @@ public class CheerVArachnids implements ApplicationListener {
 		// Defer until create() when Gdx is initialized.
 		CvaModel.screenWidth = -1;
 		CvaModel.screenHeight = -1;
+
+		EventBus.subscribe(PlaceUnitEvent.class, this);
 	}
 
 	public CheerVArachnids(int width, int height) {
@@ -57,10 +68,13 @@ public class CheerVArachnids implements ApplicationListener {
 
 		CvaModel.screenWidth = width;
 		CvaModel.screenHeight = height;
+
+		EventBus.subscribe(PlaceUnitEvent.class, this);
 	}
 
 	@Override
 	public void create() {
+		
 		Texture.setEnforcePotImages(false);
 
 		/**
@@ -83,6 +97,7 @@ public class CheerVArachnids implements ApplicationListener {
 
 		TiledMap map = tiledMapHelper.getMap();
 
+		createObjectsQueue = new ArrayList<SpiderUnitData>();
 		//add all the objects that are going to be on screen here
 		screenObjects = new ArrayList<ScreenObjectBase>();
 		selection = new Selection();
@@ -109,7 +124,16 @@ public class CheerVArachnids implements ApplicationListener {
 	}
 
 	@Override
-	public void render() {
+	public void render() 
+	{
+		for (SpiderUnitData o : createObjectsQueue)
+		{
+			SpiderUnit su = new SpiderUnit(o);
+			su.create();
+			screenObjects.add(su);
+		}
+		createObjectsQueue.clear();
+		
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		/**
 		 * A nice(?), blue backdrop.
@@ -146,5 +170,12 @@ public class CheerVArachnids implements ApplicationListener {
 
 	@Override
 	public void resume() {
+	}
+
+	@Override
+	public void onEvent(PlaceUnitEvent event) 
+	{
+		SpiderUnitData spd = new SpiderUnitData(event.x, event.y);
+		createObjectsQueue.add(spd);
 	}
 }
