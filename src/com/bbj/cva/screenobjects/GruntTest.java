@@ -10,7 +10,7 @@ import com.bbj.cva.model.CvaModel;
 public class GruntTest implements ScreenObjectBase {
 
 	private static final int FRAME_COLS = 5; // #1
-	private static final int FRAME_ROWS = 4; // #2
+	private static final int FRAME_ROWS = 2; // #2
 
 	Animation walkAnimation; // #3
 	TextureRegion[] walkFrames; // #5
@@ -25,7 +25,7 @@ public class GruntTest implements ScreenObjectBase {
 	@Override
 	public void create() {
 		if(CvaModel.walkSheet == null){
-			CvaModel.walkSheet = new Texture(Gdx.files.internal("data/spriteSheets/gruntTest.png")); // #9
+			CvaModel.walkSheet = new Texture(Gdx.files.internal("data/spriteSheets/gruntDie.png")); // #9
 		}
 		TextureRegion[][] tmp = TextureRegion.split(CvaModel.walkSheet,
 				CvaModel.walkSheet.getWidth() / FRAME_COLS, CvaModel.walkSheet.getHeight()
@@ -37,7 +37,7 @@ public class GruntTest implements ScreenObjectBase {
 				walkFrames[index++] = tmp[i][j];
 			}
 		}
-		walkAnimation = new Animation(0.05f, walkFrames); // #11
+		walkAnimation = new Animation(0.1f, walkFrames); // #11
 		stateTime = 0f; // #13
 		
 	}
