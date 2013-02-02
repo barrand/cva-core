@@ -28,6 +28,10 @@ public class Selection implements ScreenObjectBase {
 		selectionRect.y = 0;
 		
 	}
+	private boolean rightWasDownLastFrame = false;
+	private boolean leftWasDownLastFrame = false;
+	private boolean upWasDownLastFrame = false;
+	private boolean downWasDownLastFrame = false;
 	@Override
 	public void render(SpriteBatch spriteBatch) {
 		long now = System.nanoTime();
@@ -36,40 +40,41 @@ public class Selection implements ScreenObjectBase {
 		 * Detect requested motion.
 		 */
 
-		if (now - lastMoveSelectionTime > SELECTION_WAIT) 
-		{
-			if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) 
-			{
-				if (selectionRect.x + CvaModel.TILE_WIDTH < CvaModel.screenWidth)
-					selectionRect.x += CvaModel.TILE_WIDTH;
-			} 
-			else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) 
-			{
-				if (selectionRect.x - CvaModel.TILE_WIDTH >= 0)
-					selectionRect.x -= CvaModel.TILE_WIDTH;
-			}
-			if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) 
-			{
-				// FIXME: This has an issue because the tile height is not a multiple of the ScreenHeight
-				if (selectionRect.y + CvaModel.TILE_HEIGHT < CvaModel.screenHeight)
-					selectionRect.y += CvaModel.TILE_HEIGHT;
-			}
-			else if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) 
-			{
-				if (selectionRect.y - CvaModel.TILE_HEIGHT >= 0)
-					selectionRect.y -= CvaModel.TILE_HEIGHT;
-			}
-			if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
-			{
-				// TODO: This should call a Factory to create a new object
-				//        ** Instead of "creating" a new object...should it just grab an already created one?
-				//        ** What are our memory limitations?  Standard on dynamic memory allocation?
-				//       Then it needs to get added to the ScreenObject Array for the CVA::render() call.
-				EventBus.publish(new PlaceUnitEvent(selectionRect.x, selectionRect.y));
-			}
-			lastMoveSelectionTime = now;
+		if(Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)){
+			rightWasDownLastFrame = true;
+		}else if(rightWasDownLastFrame == true){
+			selectionRect.x += CvaModel.TILE_WIDTH;
+			rightWasDownLastFrame = false;
 		}
 		
+		if(Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)){
+			leftWasDownLastFrame = true;
+		}else if(leftWasDownLastFrame == true){
+			selectionRect.x -= CvaModel.TILE_WIDTH;
+			leftWasDownLastFrame = false;
+		}
+		
+		if(Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)){
+			upWasDownLastFrame = true;
+		}else if(upWasDownLastFrame == true){
+			selectionRect.y += CvaModel.TILE_HEIGHT;
+			upWasDownLastFrame = false;
+		}
+		if(Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)){
+			downWasDownLastFrame = true;
+		}else if(downWasDownLastFrame == true){
+			selectionRect.y -= CvaModel.TILE_HEIGHT;
+			downWasDownLastFrame = false;
+		}
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
+		{
+			// TODO: This should call a Factory to create a new object
+			//        ** Instead of "creating" a new object...should it just grab an already created one?
+			//        ** What are our memory limitations?  Standard on dynamic memory allocation?
+			//       Then it needs to get added to the ScreenObject Array for the CVA::render() call.
+			EventBus.publish(new PlaceUnitEvent(selectionRect.x, selectionRect.y));
+		}
 		spriteBatch.draw(selectionImage, selectionRect.x, selectionRect.y);
 	}
 }

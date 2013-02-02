@@ -20,8 +20,9 @@ public class SpiderUnit implements ScreenObjectBase {
 	
 	@Override
 	public void create() {
-		unitImage = new Texture(Gdx.files.internal("data/sprite.png"));
-		
+		if(CvaModel.spider== null){
+			CvaModel.spider = new Texture(Gdx.files.internal("data/spriteSheets/spider.png")); // #9
+		}
 		unitRect = new Rectangle();
 		unitRect.width = CvaModel.TILE_WIDTH;
 		unitRect.height = CvaModel.TILE_HEIGHT;	
@@ -31,6 +32,6 @@ public class SpiderUnit implements ScreenObjectBase {
 	@Override
 	public void render(SpriteBatch spriteBatch) 
 	{
-		spriteBatch.draw(unitImage, unitRect.x, unitRect.y);
+		spriteBatch.draw(CvaModel.spider, unitRect.x, unitRect.y);
 	}
 }
