@@ -32,6 +32,7 @@ public class Selection implements ScreenObjectBase {
 	private boolean leftWasDownLastFrame = false;
 	private boolean upWasDownLastFrame = false;
 	private boolean downWasDownLastFrame = false;
+	private boolean enterWasDownLastFrame = false;
 	@Override
 	public void render(SpriteBatch spriteBatch) {
 		long now = System.nanoTime();
@@ -67,14 +68,27 @@ public class Selection implements ScreenObjectBase {
 			downWasDownLastFrame = false;
 		}
 		
-		if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
-		{
+		if(Gdx.input.isKeyPressed(Input.Keys.ENTER)){
+			enterWasDownLastFrame = true;
+		}else if(enterWasDownLastFrame == true){
 			// TODO: This should call a Factory to create a new object
 			//        ** Instead of "creating" a new object...should it just grab an already created one?
 			//        ** What are our memory limitations?  Standard on dynamic memory allocation?
 			//       Then it needs to get added to the ScreenObject Array for the CVA::render() call.
 			EventBus.publish(new PlaceUnitEvent(selectionRect.x, selectionRect.y));
+			enterWasDownLastFrame = false;
 		}
+		
 		spriteBatch.draw(selectionImage, selectionRect.x, selectionRect.y);
+	}
+	@Override
+	public void setX(int x) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void setY(int y) {
+		// TODO Auto-generated method stub
+		
 	}
 }

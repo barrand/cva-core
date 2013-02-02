@@ -5,17 +5,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.model.CvaModel;
-import com.bbj.cva.screenobjectsdata.SpiderUnitData;
+import com.bbj.cva.screenobjectsdata.SpawnUnitData;
 
 public class SpiderUnit implements ScreenObjectBase {
 	Rectangle unitRect;
 	Texture unitImage;
-	float dx, dy;
+	float x, y;
 		
-	public SpiderUnit(SpiderUnitData spd)
+	public SpiderUnit(SpawnUnitData spd)
 	{
-		dx = spd.dx;
-		dy = spd.dy;
+		x = spd.dx;
+		y = spd.dy;
 	}
 	
 	@Override
@@ -26,12 +26,22 @@ public class SpiderUnit implements ScreenObjectBase {
 		unitRect = new Rectangle();
 		unitRect.width = CvaModel.TILE_WIDTH;
 		unitRect.height = CvaModel.TILE_HEIGHT;	
-		unitRect.x = dx;
-		unitRect.y = dy;
+		unitRect.x = x;
+		unitRect.y = y;
 	}
 	@Override
 	public void render(SpriteBatch spriteBatch) 
 	{
 		spriteBatch.draw(CvaModel.spider, unitRect.x, unitRect.y);
+	}
+
+	@Override
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	@Override
+	public void setY(int y) {
+		this.y = y;
 	}
 }

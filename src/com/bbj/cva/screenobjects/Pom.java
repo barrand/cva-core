@@ -7,20 +7,22 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bbj.cva.model.CvaModel;
 
-public class CheerborgGrunt implements ScreenObjectBase {
+public class Pom implements ScreenObjectBase {
 
 	private static final int FRAME_COLS = 5; // #1
-	private static final int FRAME_ROWS = 2; // #2
+	private static final int FRAME_ROWS = 4; // #2
 
 	Animation walkAnimation; // #3
 	TextureRegion[] walkFrames; // #5
 	SpriteBatch spriteBatch; // #6
 	TextureRegion currentFrame; // #7
+	
+	int speed = 3;
 
 	float stateTime; // #8
 	
-	public int x;
-	public int y;
+	private int x;
+	private int y;
 	
 	@Override
 	public void create() {
@@ -37,16 +39,27 @@ public class CheerborgGrunt implements ScreenObjectBase {
 				walkFrames[index++] = tmp[i][j];
 			}
 		}
-		walkAnimation = new Animation(0.1f, walkFrames); // #11
+		walkAnimation = new Animation(0.05f, walkFrames); // #11
 		stateTime = 0f; // #13
 		
 	}
 
 	@Override
 	public void render(SpriteBatch spriteBatch) {
+		x -= speed;
 		stateTime += Gdx.graphics.getDeltaTime();
         currentFrame = walkAnimation.getKeyFrame(stateTime, true);
         spriteBatch.draw(currentFrame, x, y); 
+	}
+
+	@Override
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	@Override
+	public void setY(int y) {
+		this.y = y;
 	}
 
 }

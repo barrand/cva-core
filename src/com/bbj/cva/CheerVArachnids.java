@@ -16,10 +16,11 @@ import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.Pom;
 import com.bbj.cva.screenobjects.ScreenObjectBase;
 import com.bbj.cva.screenobjects.Selection;
 import com.bbj.cva.screenobjects.SpiderUnit;
-import com.bbj.cva.screenobjectsdata.SpiderUnitData;
+import com.bbj.cva.screenobjectsdata.SpawnUnitData;
 
 public class CheerVArachnids implements ApplicationListener, EventSubscriber<PlaceUnitEvent>{
 	OrthographicCamera camera;
@@ -33,7 +34,7 @@ public class CheerVArachnids implements ApplicationListener, EventSubscriber<Pla
 	//of these objects so the logic will be in the classes
 	private ArrayList<ScreenObjectBase> screenObjects;
 	
-	private ArrayList<SpiderUnitData> createObjectsQueue;
+	private ArrayList<SpawnUnitData> createObjectsQueue;
 
 	private TiledMapHelper tiledMapHelper;
 
@@ -81,7 +82,7 @@ public class CheerVArachnids implements ApplicationListener, EventSubscriber<Pla
 
 		TiledMap map = tiledMapHelper.getMap();
 
-		createObjectsQueue = new ArrayList<SpiderUnitData>();
+		createObjectsQueue = new ArrayList<SpawnUnitData>();
 		//add all the objects that are going to be on screen here
 		screenObjects = new ArrayList<ScreenObjectBase>();
 		selection = new Selection();
@@ -103,11 +104,10 @@ public class CheerVArachnids implements ApplicationListener, EventSubscriber<Pla
 	@Override
 	public void render() 
 	{
-		for (SpiderUnitData o : createObjectsQueue)
+		for (SpawnUnitData o : createObjectsQueue)
 		{
-			SpiderUnit su = new SpiderUnit(o);
-			su.create();
-			screenObjects.add(su);
+			o.screenObject.create();
+			screenObjects.add(o.screenObject);
 		}
 		createObjectsQueue.clear();
 		
@@ -152,7 +152,11 @@ public class CheerVArachnids implements ApplicationListener, EventSubscriber<Pla
 	@Override
 	public void onEvent(PlaceUnitEvent event) 
 	{
-		SpiderUnitData spd = new SpiderUnitData(event.x, event.y);
+		//todo look at the selected class type at the top of the UI
+		Pom screenObject = new Pom();
+		screenObject.setX((int) event.x);
+		screenObject.setY((int) event.y);
+		SpawnUnitData spd = new SpawnUnitData(screenObject, event.x, event.y);
 		createObjectsQueue.add(spd);
 	}
 }
