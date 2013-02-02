@@ -16,29 +16,35 @@ import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.CheerborgFieldSelection;
+import com.bbj.cva.screenobjects.CheerborgUnitSelection;
 import com.bbj.cva.screenobjects.Pom;
 import com.bbj.cva.screenobjects.ScreenObjectBase;
 import com.bbj.cva.screenobjects.Selection;
+import com.bbj.cva.screenobjects.SpiderFieldSelection;
 import com.bbj.cva.screenobjects.SpiderUnit;
+import com.bbj.cva.screenobjects.SpiderUnitSelection;
 import com.bbj.cva.screenobjectsdata.SpawnUnitData;
 
-public class CheerVArachnids implements ApplicationListener, EventSubscriber<PlaceUnitEvent>{
+public class CheerVArachnids implements ApplicationListener,
+		EventSubscriber<PlaceUnitEvent>
+{
 	OrthographicCamera camera;
 	SpriteBatch spriteBatch;
 	TiledMap tiledMap;
 	TileMapRenderer tileMapRenderer;
-	Selection selection;
-	
-	//this holds all the objects that are going to be on screen
-	//when we render the whole world, we'll call render on each
-	//of these objects so the logic will be in the classes
+
+	// this holds all the objects that are going to be on screen
+	// when we render the whole world, we'll call render on each
+	// of these objects so the logic will be in the classes
 	private ArrayList<ScreenObjectBase> screenObjects;
-	
+
 	private ArrayList<SpawnUnitData> createObjectsQueue;
 
 	private TiledMapHelper tiledMapHelper;
 
-	public CheerVArachnids() {
+	public CheerVArachnids()
+	{
 		super();
 
 		// Defer until create() when Gdx is initialized.
@@ -48,7 +54,8 @@ public class CheerVArachnids implements ApplicationListener, EventSubscriber<Pla
 		EventBus.subscribe(PlaceUnitEvent.class, this);
 	}
 
-	public CheerVArachnids(int width, int height) {
+	public CheerVArachnids(int width, int height)
+	{
 		super();
 
 		CvaModel.screenWidth = width;
@@ -58,18 +65,19 @@ public class CheerVArachnids implements ApplicationListener, EventSubscriber<Pla
 	}
 
 	@Override
-	public void create() {
-		
+	public void create()
+	{
+
 		Texture.setEnforcePotImages(false);
 
 		/**
 		 * If the viewport's size is not yet known, determine it here.
 		 */
-		if (CvaModel.screenWidth == -1) {
+		if (CvaModel.screenWidth == -1)
+		{
 			CvaModel.screenWidth = Gdx.graphics.getWidth();
 			CvaModel.screenHeight = Gdx.graphics.getHeight();
 		}
-
 
 		tiledMapHelper = new TiledMapHelper();
 
@@ -83,13 +91,15 @@ public class CheerVArachnids implements ApplicationListener, EventSubscriber<Pla
 		TiledMap map = tiledMapHelper.getMap();
 
 		createObjectsQueue = new ArrayList<SpawnUnitData>();
-		//add all the objects that are going to be on screen here
+		// add all the objects that are going to be on screen here
 		screenObjects = new ArrayList<ScreenObjectBase>();
-		selection = new Selection();
-		screenObjects.add(selection);
+		screenObjects.add(new CheerborgUnitSelection());
+		screenObjects.add(new SpiderUnitSelection());
+		screenObjects.add(new CheerborgFieldSelection());
+		screenObjects.add(new SpiderFieldSelection());
 
-
-		for (ScreenObjectBase o : screenObjects) {
+		for (ScreenObjectBase o : screenObjects)
+		{
 			o.create();
 		}
 
@@ -97,12 +107,13 @@ public class CheerVArachnids implements ApplicationListener, EventSubscriber<Pla
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose()
+	{
 		spriteBatch.dispose();
 	}
 
 	@Override
-	public void render() 
+	public void render()
 	{
 		for (SpawnUnitData o : createObjectsQueue)
 		{
@@ -110,7 +121,7 @@ public class CheerVArachnids implements ApplicationListener, EventSubscriber<Pla
 			screenObjects.add(o.screenObject);
 		}
 		createObjectsQueue.clear();
-		
+
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		/**
 		 * A nice(?), blue backdrop.
@@ -126,7 +137,8 @@ public class CheerVArachnids implements ApplicationListener, EventSubscriber<Pla
 		spriteBatch.setProjectionMatrix(tiledMapHelper.getCamera().combined);
 		spriteBatch.begin();
 
-		for (ScreenObjectBase o : screenObjects) {
+		for (ScreenObjectBase o : screenObjects)
+		{
 			o.render(spriteBatch);
 		}
 
@@ -138,21 +150,24 @@ public class CheerVArachnids implements ApplicationListener, EventSubscriber<Pla
 	}
 
 	@Override
-	public void resize(int width, int height) {
-	}
-
-	@Override
-	public void pause() {
-	}
-
-	@Override
-	public void resume() {
-	}
-
-	@Override
-	public void onEvent(PlaceUnitEvent event) 
+	public void resize(int width, int height)
 	{
-		//todo look at the selected class type at the top of the UI
+	}
+
+	@Override
+	public void pause()
+	{
+	}
+
+	@Override
+	public void resume()
+	{
+	}
+
+	@Override
+	public void onEvent(PlaceUnitEvent event)
+	{
+		// todo look at the selected class type at the top of the UI
 		Pom screenObject = new Pom();
 		screenObject.setX((int) event.x);
 		screenObject.setY((int) event.y);

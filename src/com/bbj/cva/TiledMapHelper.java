@@ -44,13 +44,15 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class TiledMapHelper {
+public class TiledMapHelper
+{
 	private static final int[] layersList = { 0 };
 
 	/**
 	 * Renders the part of the map that should be visible to the user.
 	 */
-	public void render() {
+	public void render()
+	{
 		tileMapRenderer.getProjectionMatrix().set(camera.combined);
 
 		Vector3 tmp = new Vector3();
@@ -66,7 +68,8 @@ public class TiledMapHelper {
 	 * 
 	 * @return y
 	 */
-	public int getHeight() {
+	public int getHeight()
+	{
 		return map.height * map.tileHeight;
 	}
 
@@ -75,7 +78,8 @@ public class TiledMapHelper {
 	 * 
 	 * @return x
 	 */
-	public int getWidth() {
+	public int getWidth()
+	{
 		return map.width * map.tileWidth;
 	}
 
@@ -84,14 +88,16 @@ public class TiledMapHelper {
 	 * 
 	 * @return TiledMap
 	 */
-	public TiledMap getMap() {
+	public TiledMap getMap()
+	{
 		return map;
 	}
 
 	/**
 	 * Calls dispose on all disposable resources held by this object.
 	 */
-	public void dispose() {
+	public void dispose()
+	{
 		tileAtlas.dispose();
 		tileMapRenderer.dispose();
 	}
@@ -101,7 +107,8 @@ public class TiledMapHelper {
 	 * 
 	 * @param packDirectory
 	 */
-	public void setPackerDirectory(String packDirectory) {
+	public void setPackerDirectory(String packDirectory)
+	{
 		packFileDirectory = Gdx.files.internal(packDirectory);
 	}
 
@@ -110,8 +117,10 @@ public class TiledMapHelper {
 	 * 
 	 * @param tmxFile
 	 */
-	public void loadMap(String tmxFile) {
-		if (packFileDirectory == null) {
+	public void loadMap(String tmxFile)
+	{
+		if (packFileDirectory == null)
+		{
 			throw new IllegalStateException("loadMap() called out of sequence");
 		}
 
@@ -131,7 +140,8 @@ public class TiledMapHelper {
 	 *            the pixels per meter scale used for this world
 	 */
 	public void loadCollisions(String collisionsFile, World world,
-			float pixelsPerMeter) {
+			float pixelsPerMeter)
+	{
 		/**
 		 * Detect the tiles and dynamically create a representation of the map
 		 * layout, for collision detection. Each tile has its own collision
@@ -164,13 +174,15 @@ public class TiledMapHelper {
 		tileCollisionJoints.put(Integer.valueOf(0),
 				new ArrayList<LineSegment>());
 
-		for (int n = 0; n < lines.length; n++) {
+		for (int n = 0; n < lines.length; n++)
+		{
 			String cols[] = lines[n].split(" ");
 			int tileNo = Integer.parseInt(cols[0]);
 
 			ArrayList<LineSegment> tmp = new ArrayList<LineSegment>();
 
-			for (int m = 1; m < cols.length; m++) {
+			for (int m = 1; m < cols.length; m++)
+			{
 				String coords[] = cols[m].split(",");
 
 				String start[] = coords[0].split("x");
@@ -186,13 +198,16 @@ public class TiledMapHelper {
 
 		ArrayList<LineSegment> collisionLineSegments = new ArrayList<LineSegment>();
 
-		for (int y = 0; y < getMap().height; y++) {
-			for (int x = 0; x < getMap().width; x++) {
+		for (int y = 0; y < getMap().height; y++)
+		{
+			for (int x = 0; x < getMap().width; x++)
+			{
 				int tileType = getMap().layers.get(0).tiles[(getMap().height - 1)
 						- y][x];
 
 				for (int n = 0; n < tileCollisionJoints.get(
-						Integer.valueOf(tileType)).size(); n++) {
+						Integer.valueOf(tileType)).size(); n++)
+				{
 					LineSegment lineSeg = tileCollisionJoints.get(
 							Integer.valueOf(tileType)).get(n);
 
@@ -208,12 +223,12 @@ public class TiledMapHelper {
 		BodyDef groundBodyDef = new BodyDef();
 		groundBodyDef.type = BodyDef.BodyType.StaticBody;
 		Body groundBody = world.createBody(groundBodyDef);
-		for (LineSegment lineSegment : collisionLineSegments) {
+		for (LineSegment lineSegment : collisionLineSegments)
+		{
 			EdgeShape environmentShape = new EdgeShape();
-			
-			environmentShape.set(
-					lineSegment.start().mul(1 / pixelsPerMeter), lineSegment
-							.end().mul(1 / pixelsPerMeter));
+
+			environmentShape.set(lineSegment.start().mul(1 / pixelsPerMeter),
+					lineSegment.end().mul(1 / pixelsPerMeter));
 			groundBody.createFixture(environmentShape, 0);
 			environmentShape.dispose();
 		}
@@ -234,8 +249,8 @@ public class TiledMapHelper {
 						/ pixelsPerMeter));
 		groundBody.createFixture(mapBounds, 0);
 
-		mapBounds.set(new Vector2(0.0f, 0.0f), new Vector2(0.0f,
-				getHeight() / pixelsPerMeter));
+		mapBounds.set(new Vector2(0.0f, 0.0f), new Vector2(0.0f, getHeight()
+				/ pixelsPerMeter));
 		groundBody.createFixture(mapBounds, 0);
 
 		mapBounds.set(new Vector2(getWidth() / pixelsPerMeter, 0.0f),
@@ -268,19 +283,23 @@ public class TiledMapHelper {
 	 *            the current list of line segments
 	 */
 	private void addOrExtendCollisionLineSegment(float lsx1, float lsy1,
-			float lsx2, float lsy2, ArrayList<LineSegment> collisionLineSegments) {
+			float lsx2, float lsy2, ArrayList<LineSegment> collisionLineSegments)
+	{
 		LineSegment line = new LineSegment(lsx1, lsy1, lsx2, lsy2);
 
 		boolean didextend = false;
 
-		for (LineSegment test : collisionLineSegments) {
-			if (test.extendIfPossible(line)) {
+		for (LineSegment test : collisionLineSegments)
+		{
+			if (test.extendIfPossible(line))
+			{
 				didextend = true;
 				break;
 			}
 		}
 
-		if (!didextend) {
+		if (!didextend)
+		{
 			collisionLineSegments.add(line);
 		}
 	}
@@ -291,10 +310,11 @@ public class TiledMapHelper {
 	 * @param screenWidth
 	 * @param screenHeight
 	 */
-	public void prepareCamera(int screenWidth, int screenHeight) {
+	public void prepareCamera(int screenWidth, int screenHeight)
+	{
 		camera = new OrthographicCamera(getWidth(), getHeight());
 
-		camera.position.set(getWidth()/2, getHeight()/2, 0);
+		camera.position.set(getWidth() / 2, getHeight() / 2, 0);
 	}
 
 	/**
@@ -302,8 +322,10 @@ public class TiledMapHelper {
 	 * 
 	 * @return OrthographicCamera
 	 */
-	public OrthographicCamera getCamera() {
-		if (camera == null) {
+	public OrthographicCamera getCamera()
+	{
+		if (camera == null)
+		{
 			throw new IllegalStateException(
 					"getCamera() called out of sequence");
 		}
@@ -314,7 +336,8 @@ public class TiledMapHelper {
 	 * Describes the start and end points of a line segment and contains a
 	 * helper method useful for extending line segments.
 	 */
-	private class LineSegment {
+	private class LineSegment
+	{
 		private Vector2 start = new Vector2();
 		private Vector2 end = new Vector2();
 
@@ -326,7 +349,8 @@ public class TiledMapHelper {
 		 * @param x2
 		 * @param y2
 		 */
-		public LineSegment(float x1, float y1, float x2, float y2) {
+		public LineSegment(float x1, float y1, float x2, float y2)
+		{
 			start = new Vector2(x1, y1);
 			end = new Vector2(x2, y2);
 		}
@@ -337,7 +361,8 @@ public class TiledMapHelper {
 		 * 
 		 * @return Vector2
 		 */
-		public Vector2 start() {
+		public Vector2 start()
+		{
 			return start;
 		}
 
@@ -347,7 +372,8 @@ public class TiledMapHelper {
 		 * 
 		 * @return Vector2
 		 */
-		public Vector2 end() {
+		public Vector2 end()
+		{
 			return end;
 		}
 
@@ -359,7 +385,8 @@ public class TiledMapHelper {
 		 * @param lineSegment
 		 * @return boolean true if line was extended, false if not.
 		 */
-		public boolean extendIfPossible(LineSegment lineSegment) {
+		public boolean extendIfPossible(LineSegment lineSegment)
+		{
 			/**
 			 * First, let's see if the slopes of the two segments are the same.
 			 */
@@ -367,7 +394,8 @@ public class TiledMapHelper {
 			double slope2 = Math.atan2(lineSegment.end.y - lineSegment.start.y,
 					lineSegment.end.x - lineSegment.start.x);
 
-			if (Math.abs(slope1 - slope2) > 1e-9) {
+			if (Math.abs(slope1 - slope2) > 1e-9)
+			{
 				return false;
 			}
 
@@ -379,16 +407,23 @@ public class TiledMapHelper {
 			 * Whichever two points are within the right range will be "merged"
 			 * so that the two outer points will describe the line segment.
 			 */
-			if (start.dst(lineSegment.start) <= Math.sqrt(2) + 1e-9) {
+			if (start.dst(lineSegment.start) <= Math.sqrt(2) + 1e-9)
+			{
 				start.set(lineSegment.end);
 				return true;
-			} else if (end.dst(lineSegment.start) <= Math.sqrt(2) + 1e-9) {
+			}
+			else if (end.dst(lineSegment.start) <= Math.sqrt(2) + 1e-9)
+			{
 				end.set(lineSegment.end);
 				return true;
-			} else if (end.dst(lineSegment.end) <= Math.sqrt(2) + 1e-9) {
+			}
+			else if (end.dst(lineSegment.end) <= Math.sqrt(2) + 1e-9)
+			{
 				end.set(lineSegment.start);
 				return true;
-			} else if (start.dst(lineSegment.end) <= Math.sqrt(2) + 1e-9) {
+			}
+			else if (start.dst(lineSegment.end) <= Math.sqrt(2) + 1e-9)
+			{
 				start.set(lineSegment.start);
 				return true;
 			}
@@ -402,7 +437,8 @@ public class TiledMapHelper {
 		 * @return String
 		 */
 		@Override
-		public String toString() {
+		public String toString()
+		{
 			return "[" + start.x + "x" + start.y + "] -> [" + end.x + "x"
 					+ end.y + "]";
 		}
