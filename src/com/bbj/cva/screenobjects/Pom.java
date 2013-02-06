@@ -1,10 +1,12 @@
 package com.bbj.cva.screenobjects;
 
+import org.bushe.swing.event.EventBus;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
-import com.bbj.cva.screenobjectsdata.SpawnUnitData;
 
 public class Pom extends AnimatedScreenObject {
 
@@ -16,6 +18,12 @@ public class Pom extends AnimatedScreenObject {
 
 	@Override
 	public void render(SpriteBatch spriteBatch) {
+		for(ScreenObject o:CvaModel.thingsCheerborgsInteractWith){
+			if(o.unitRect.overlaps(unitRect)){
+				EventBus.publish(new RemoveScreenObjectEvent(this));
+				EventBus.publish(new RemoveScreenObjectEvent(o));
+			}
+		}
 		super.render(spriteBatch);
 	}
 
@@ -50,6 +58,16 @@ public class Pom extends AnimatedScreenObject {
 	@Override
 	public float getSpeedY() {
 		return 0f;
+	}
+	
+	@Override
+	public float getWidth() {
+		return 50;
+	}
+
+	@Override
+	public float getHeight() {
+		return 125;
 	}
 
 }

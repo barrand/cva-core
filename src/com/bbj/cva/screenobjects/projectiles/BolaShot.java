@@ -2,12 +2,9 @@ package com.bbj.cva.screenobjects.projectiles;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.model.CvaModel;
-import com.bbj.cva.screenobjects.IScreenObject;
 import com.bbj.cva.screenobjects.ScreenObject;
-import com.bbj.cva.screenobjectsdata.SpawnUnitData;
 
 public class BolaShot extends ScreenObject implements IProjectile {
 	
@@ -45,11 +42,21 @@ public class BolaShot extends ScreenObject implements IProjectile {
 
 	@Override
 	public float getSpeedX() {
-		return 3f;
+		return 10f;
 	}
 
 	@Override
 	public float getSpeedY() {
 		return 0;
+	}
+
+	@Override
+	public float getWidth() {
+		return 40;
+	}
+
+	@Override
+	public float getHeight() {
+		return 40;
 	}
 }

@@ -25,4 +25,14 @@ public class SpiderUnit extends ScreenObject implements IScreenObject {
 	public float getSpeedY() {
 		return 0;
 	}
+	
+	@Override
+	public float getWidth() {
+		return 50;
+	}
+
+	@Override
+	public float getHeight() {
+		return 50;
+	}
 }

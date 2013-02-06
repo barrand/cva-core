@@ -85,4 +85,14 @@ public class CheerborgFieldSelection extends Selection
 
 		spriteBatch.draw(selectionImage, selectionRect.x, selectionRect.y);
 	}
+
+	@Override
+	public float getWidth() {
+		return CvaModel.TILE_WIDTH;
+	}
+
+	@Override
+	public float getHeight() {
+		return CvaModel.TILE_HEIGHT;
+	}
 }

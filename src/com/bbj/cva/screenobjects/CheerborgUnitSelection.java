@@ -85,4 +85,14 @@ public class CheerborgUnitSelection extends Selection
 
 		spriteBatch.draw(select, selectionRect.x, selectionRect.y);
 	}
+	
+	@Override
+	public float getWidth() {
+		return CvaModel.TILE_WIDTH;
+	}
+
+	@Override
+	public float getHeight() {
+		return CvaModel.TILE_HEIGHT;
+	}
 }

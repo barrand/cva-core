@@ -2,17 +2,13 @@ package com.bbj.cva.screenobjects;
 
 import java.awt.Point;
 
-import org.bushe.swing.event.EventBus;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.model.CvaModel;
 
-public class Selection implements IScreenObject
+public abstract class Selection implements IScreenObject
 {
 	protected Rectangle selectionRect;
 	protected Texture selectionImage;
@@ -64,5 +60,10 @@ public class Selection implements IScreenObject
 	@Override
 	public float getSpeedY() {
 		return 0;
+	}
+	
+	@Override
+	public void destroy() {
+		//
 	}
 }
