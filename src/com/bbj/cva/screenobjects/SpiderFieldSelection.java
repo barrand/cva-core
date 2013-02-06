@@ -77,8 +77,9 @@ public class SpiderFieldSelection extends Selection
 		}
 		else if (enterWasDownLastFrame == true)
 		{
-			EventBus.publish(new PlaceUnitEvent(selectionRect.x,
-					selectionRect.y));
+			SpiderUnit spider = new SpiderUnit(selectionRect.x,
+					selectionRect.y);
+			EventBus.publish(new PlaceUnitEvent(spider));
 			enterWasDownLastFrame = false;
 		}
 	

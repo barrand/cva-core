@@ -20,6 +20,7 @@ public class CvaModel {
 	public static ArrayList<ScreenObject> thingsCheerborgsInteractWith = new ArrayList<ScreenObject>();
 
 	public static Texture pomWalk;
+	public static Texture pomDie;
 	public static Texture spider;
 	public static Texture bolaShot;
 

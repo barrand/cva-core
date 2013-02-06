@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.projectiles.BolaShot;
+import com.bbj.cva.screenobjectsdata.SpawnUnitData;
 
 public class CheerborgFieldSelection extends Selection
 {
@@ -78,8 +80,12 @@ public class CheerborgFieldSelection extends Selection
 		}
 		else if (enterWasDownLastFrame == true)
 		{
-			EventBus.publish(new PlaceUnitEvent(selectionRect.x,
-					selectionRect.y));
+			Pom pom = new Pom(selectionRect.x, selectionRect.y);
+			EventBus.publish(new PlaceUnitEvent(pom));
+
+			BolaShot shot = new BolaShot(0f, selectionRect.y + CvaModel.TILE_HEIGHT/2);
+			EventBus.publish(new PlaceUnitEvent(shot));
+
 			enterWasDownLastFrame = false;
 		}
 

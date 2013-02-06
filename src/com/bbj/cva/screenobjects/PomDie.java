@@ -5,44 +5,36 @@ import org.bushe.swing.event.EventBus;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
 
-public class Pom extends AnimatedScreenObject {
+public class PomDie extends AnimatedScreenObject {
 
-	public Pom(float x, float y)
+	public PomDie(float x, float y)
 	{
 		super(x,y);
+		this.loop = false;
 		
 	}
 
 	@Override
 	public void render(SpriteBatch spriteBatch) {
-		for(ScreenObject o:CvaModel.thingsCheerborgsInteractWith){
-			
-			//if she got hit, then kill her and put in the die animation
-			if(o.unitRect.overlaps(unitRect)){
-				Gdx.app.log("cva", this.toString());
-				EventBus.publish(new RemoveScreenObjectEvent(this));
-				EventBus.publish(new RemoveScreenObjectEvent(o));
-				
-				PomDie pomDie = new PomDie(unitRect.x, unitRect.y);
-				EventBus.publish(new PlaceUnitEvent(pomDie));
-				
-			}
-		}
 		super.render(spriteBatch);
 	}
 
 	@Override
 	public void loadTextureIfNeeded() {
-		if(CvaModel.pomWalk == null){
-			CvaModel.pomWalk = new Texture(Gdx.files.internal("data/spriteSheets/pomWalk.png")); // #9
+		if(CvaModel.pomDie == null){
+			CvaModel.pomDie = new Texture(Gdx.files.internal("data/spriteSheets/pomDie.png")); // #9
 		}
-		texture = CvaModel.pomWalk;
+		texture = CvaModel.pomDie;
 	}
 
+	@Override
+	protected void onAnimationEnd() {
+		EventBus.publish(new RemoveScreenObjectEvent(this));
+	}
+	
 	@Override
 	public int getFrameCols() {
 		return 5;
@@ -50,7 +42,7 @@ public class Pom extends AnimatedScreenObject {
 
 	@Override
 	public int getFrameRows() {
-		return 4;
+		return 2;
 	}
 
 	@Override
@@ -60,7 +52,7 @@ public class Pom extends AnimatedScreenObject {
 
 	@Override
 	public float getSpeedX() {
-		return -4f;
+		return 0f;
 	}
 
 	@Override

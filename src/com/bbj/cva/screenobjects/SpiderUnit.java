@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.bbj.cva.model.CvaModel;
 
 public class SpiderUnit extends ScreenObject implements IScreenObject {
-	public SpiderUnit()
+	public SpiderUnit(float x, float y)
 	{
-		super();
+		super(x,y);
 	}
 
 	@Override

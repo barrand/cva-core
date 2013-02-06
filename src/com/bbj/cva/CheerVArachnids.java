@@ -27,6 +27,7 @@ import com.bbj.cva.screenobjects.SpiderFieldSelection;
 import com.bbj.cva.screenobjects.SpiderUnit;
 import com.bbj.cva.screenobjects.SpiderUnitSelection;
 import com.bbj.cva.screenobjects.projectiles.BolaShot;
+import com.bbj.cva.screenobjects.projectiles.IProjectile;
 import com.bbj.cva.screenobjectsdata.SpawnUnitData;
 
 public class CheerVArachnids implements ApplicationListener {
@@ -45,7 +46,7 @@ public class CheerVArachnids implements ApplicationListener {
 	// problems coming from the event
 	private ArrayList<IScreenObject> objectsToDelete = new ArrayList<IScreenObject>();
 
-	private ArrayList<SpawnUnitData> createObjectsQueue;
+	private ArrayList<ScreenObject> createObjectsQueue;
 
 	private TiledMapHelper tiledMapHelper;
 	private EventSubscriber placeUnitListener;
@@ -97,7 +98,7 @@ public class CheerVArachnids implements ApplicationListener {
 
 		TiledMap map = tiledMapHelper.getMap();
 
-		createObjectsQueue = new ArrayList<SpawnUnitData>();
+		createObjectsQueue = new ArrayList<ScreenObject>();
 		// add all the objects that are going to be on screen here
 		screenObjects = new ArrayList<IScreenObject>();
 		screenObjects.add(new CheerborgUnitSelection());
@@ -119,9 +120,9 @@ public class CheerVArachnids implements ApplicationListener {
 
 	@Override
 	public void render() {
-		for (SpawnUnitData o : createObjectsQueue) {
-			o.screenObject.create();
-			screenObjects.add(o.screenObject);
+		for (ScreenObject o : createObjectsQueue) {
+			o.create();
+			screenObjects.add(o);
 		}
 		
 		for(IScreenObject o : objectsToDelete){
@@ -164,21 +165,10 @@ public class CheerVArachnids implements ApplicationListener {
 
 		@Override
 		public void onEvent(PlaceUnitEvent event) {
-			Pom screenObject = new Pom();
-			screenObject.setX((int) event.x);
-			screenObject.setY((int) event.y);
-			SpawnUnitData spd = new SpawnUnitData(screenObject, event.x,
-					event.y);
-			createObjectsQueue.add(spd);
-
-			BolaShot shot = new BolaShot();
-			shot.setX(0f);
-			shot.setY(event.y + CvaModel.TILE_HEIGHT/2);
-			spd = new SpawnUnitData(shot, event.x, event.y);
-			createObjectsQueue.add(spd);
-
-			CvaModel.thingsCheerborgsInteractWith.add(shot);
-
+			createObjectsQueue.add(event.screenObject);
+			if(event.screenObject instanceof IProjectile){
+				CvaModel.thingsCheerborgsInteractWith.add(event.screenObject);
+			}
 		}
 	}
 

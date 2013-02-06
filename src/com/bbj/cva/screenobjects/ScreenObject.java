@@ -12,10 +12,12 @@ public abstract class ScreenObject implements IScreenObject {
 	public float speedYModifier;
 	protected Texture texture;
 
-	public ScreenObject() {
+	public ScreenObject(float x, float y) {
 		unitRect = new Rectangle();
 		unitRect.width = getWidth();
 		unitRect.height = getHeight();
+		unitRect.x = x;
+		unitRect.y = y;
 	}
 
 	@Override
