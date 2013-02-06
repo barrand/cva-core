@@ -19,7 +19,7 @@ import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.CheerborgFieldSelection;
 import com.bbj.cva.screenobjects.CheerborgUnitSelection;
 import com.bbj.cva.screenobjects.Pom;
-import com.bbj.cva.screenobjects.ScreenObjectBase;
+import com.bbj.cva.screenobjects.IScreenObject;
 import com.bbj.cva.screenobjects.Selection;
 import com.bbj.cva.screenobjects.SpiderFieldSelection;
 import com.bbj.cva.screenobjects.SpiderUnit;
@@ -33,12 +33,13 @@ public class CheerVArachnids implements ApplicationListener,
 	SpriteBatch spriteBatch;
 	TiledMap tiledMap;
 	TileMapRenderer tileMapRenderer;
-
-	// this holds all the objects that are going to be on screen
-	// when we render the whole world, we'll call render on each
-	// of these objects so the logic will be in the classes
-	private ArrayList<ScreenObjectBase> screenObjects;
-
+	Selection selection;
+	
+	//this holds all the objects that are going to be on screen
+	//when we render the whole world, we'll call render on each
+	//of these objects so the logic will be in the classes
+	private ArrayList<IScreenObject> screenObjects;
+	
 	private ArrayList<SpawnUnitData> createObjectsQueue;
 
 	private TiledMapHelper tiledMapHelper;
@@ -92,13 +93,13 @@ public class CheerVArachnids implements ApplicationListener,
 
 		createObjectsQueue = new ArrayList<SpawnUnitData>();
 		// add all the objects that are going to be on screen here
-		screenObjects = new ArrayList<ScreenObjectBase>();
+		screenObjects = new ArrayList<IScreenObject>();
 		screenObjects.add(new CheerborgUnitSelection());
 		screenObjects.add(new SpiderUnitSelection());
 		screenObjects.add(new CheerborgFieldSelection());
 		screenObjects.add(new SpiderFieldSelection());
 
-		for (ScreenObjectBase o : screenObjects)
+		for (IScreenObject o : screenObjects)
 		{
 			o.create();
 		}
@@ -137,7 +138,7 @@ public class CheerVArachnids implements ApplicationListener,
 		spriteBatch.setProjectionMatrix(tiledMapHelper.getCamera().combined);
 		spriteBatch.begin();
 
-		for (ScreenObjectBase o : screenObjects)
+		for (IScreenObject o : screenObjects)
 		{
 			o.render(spriteBatch);
 		}

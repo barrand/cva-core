@@ -2,73 +2,54 @@ package com.bbj.cva.screenobjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjectsdata.SpawnUnitData;
 
-public class Pom implements ScreenObjectBase
-{
+public class Pom extends AnimatedScreenObject {
 
-	private static final int FRAME_COLS = 5; // #1
-	private static final int FRAME_ROWS = 4; // #2
-
-	Animation walkAnimation; // #3
-	TextureRegion[] walkFrames; // #5
-	SpriteBatch spriteBatch; // #6
-	TextureRegion currentFrame; // #7
-
-	int speed = 3;
-
-	float stateTime; // #8
-
-	private int x;
-	private int y;
+	public Pom()
+	{
+		super();
+		
+	}
 
 	@Override
-	public void create()
-	{
-		if (CvaModel.pomWalk == null)
-		{
-			CvaModel.pomWalk = new Texture(
-					Gdx.files.internal("data/spriteSheets/pomWalk.png")); // #9
+	public void render(SpriteBatch spriteBatch) {
+		super.render(spriteBatch);
+	}
+
+	@Override
+	public void loadTextureIfNeeded() {
+		if(CvaModel.pomWalk == null){
+			CvaModel.pomWalk = new Texture(Gdx.files.internal("data/spriteSheets/pomWalk.png")); // #9
 		}
-		TextureRegion[][] tmp = TextureRegion.split(CvaModel.pomWalk,
-				CvaModel.pomWalk.getWidth() / FRAME_COLS,
-				CvaModel.pomWalk.getHeight() / FRAME_ROWS); // #10
-		walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
-		int index = 0;
-		for (int i = 0; i < FRAME_ROWS; i++)
-		{
-			for (int j = 0; j < FRAME_COLS; j++)
-			{
-				walkFrames[index++] = tmp[i][j];
-			}
-		}
-		walkAnimation = new Animation(0.05f, walkFrames); // #11
-		stateTime = 0f; // #13
-
+		texture = CvaModel.pomWalk;
 	}
 
 	@Override
-	public void render(SpriteBatch spriteBatch)
-	{
-		x -= speed;
-		stateTime += Gdx.graphics.getDeltaTime();
-		currentFrame = walkAnimation.getKeyFrame(stateTime, true);
-		spriteBatch.draw(currentFrame, x, y);
+	public int getFrameCols() {
+		return 5;
 	}
 
 	@Override
-	public void setX(int x)
-	{
-		this.x = x;
+	public int getFrameRows() {
+		return 4;
 	}
 
 	@Override
-	public void setY(int y)
-	{
-		this.y = y;
+	public float getAnimationSpeed() {
+		return 0.05f;
+	}
+
+	@Override
+	public float getSpeedX() {
+		return -4f;
+	}
+
+	@Override
+	public float getSpeedY() {
+		return 0f;
 	}
 
 }

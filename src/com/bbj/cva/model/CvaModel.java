@@ -17,5 +17,6 @@ public class CvaModel
 
 	public static Texture pomWalk;
 	public static Texture spider;
+	public static Texture bolaShot;
 
 }

@@ -1,13 +1,13 @@
 package com.bbj.cva.screenobjectsdata;
 
-import com.bbj.cva.screenobjects.ScreenObjectBase;
+import com.bbj.cva.screenobjects.ScreenObject;
 
 public class SpawnUnitData
 {
 	public float dx, dy;
-	public ScreenObjectBase screenObject;
+	public ScreenObject screenObject;
 
-	public SpawnUnitData(ScreenObjectBase screenObject, float x, float y)
+	public SpawnUnitData(ScreenObject screenObject, float x, float y)
 	{
 		this.screenObject = screenObject;
 		dx = x;
