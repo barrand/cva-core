@@ -42,14 +42,6 @@ public abstract class Selection implements IScreenObject
 	}
 
 	@Override
-	public void setX(int x) {
-	}
-
-	@Override
-	public void setY(int y) {
-	}
-	
-	@Override
 	public void loadTextureIfNeeded() {
 		
 	}

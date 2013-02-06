@@ -127,6 +127,9 @@ public class CheerVArachnids implements ApplicationListener {
 		for(IScreenObject o : objectsToDelete){
 			o.destroy();
 			screenObjects.remove(o);
+			if(CvaModel.thingsCheerborgsInteractWith.contains(o)){
+				CvaModel.thingsCheerborgsInteractWith.remove(o);
+			}
 		}
 		
 		createObjectsQueue.clear();
@@ -169,8 +172,8 @@ public class CheerVArachnids implements ApplicationListener {
 			createObjectsQueue.add(spd);
 
 			BolaShot shot = new BolaShot();
-			shot.setX((int) 0);
-			shot.setY((int) event.y);
+			shot.setX(0f);
+			shot.setY(event.y + CvaModel.TILE_HEIGHT/2);
 			spd = new SpawnUnitData(shot, event.x, event.y);
 			createObjectsQueue.add(spd);
 

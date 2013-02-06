@@ -46,6 +46,6 @@ public abstract class AnimatedScreenObject extends ScreenObject implements IAnim
 		unitRect.y += getSpeedY() + speedYModifier;
 		stateTime += Gdx.graphics.getDeltaTime();
         currentFrame = animation.getKeyFrame(stateTime, true);
-        spriteBatch.draw(currentFrame, unitRect.x, unitRect.y); 
+        spriteBatch.draw(currentFrame, unitRect.x - unitRect.getWidth()/2, unitRect.y); 
 	}
 }

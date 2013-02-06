@@ -27,16 +27,16 @@ public abstract class ScreenObject implements IScreenObject {
 	public void render(SpriteBatch spriteBatch) {
 		unitRect.x += getSpeedX() + speedXModifier;
 		unitRect.y += getSpeedY() + speedYModifier;
-		spriteBatch.draw(texture, unitRect.x, unitRect.y);
+		spriteBatch.draw(texture, unitRect.x - unitRect.getWidth()/2 , unitRect.y);
 	}
 
 	@Override
-	public void setX(int x) {
+	public void setX(float x) {
 		unitRect.x = x;
 	}
 
 	@Override
-	public void setY(int y) {
+	public void setY(float y) {
 		unitRect.y = y;
 	}
 	

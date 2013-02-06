@@ -95,4 +95,12 @@ public class CheerborgUnitSelection extends Selection
 	public float getHeight() {
 		return CvaModel.TILE_HEIGHT;
 	}
+	
+	@Override
+	public void setX(float x) {
+	}
+
+	@Override
+	public void setY(float y) {
+	}
 }

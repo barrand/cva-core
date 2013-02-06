@@ -20,6 +20,7 @@ public class Pom extends AnimatedScreenObject {
 	public void render(SpriteBatch spriteBatch) {
 		for(ScreenObject o:CvaModel.thingsCheerborgsInteractWith){
 			if(o.unitRect.overlaps(unitRect)){
+				Gdx.app.log("cva", this.toString());
 				EventBus.publish(new RemoveScreenObjectEvent(this));
 				EventBus.publish(new RemoveScreenObjectEvent(o));
 			}
