@@ -8,8 +8,10 @@ import com.bbj.cva.screenobjects.ScreenObject;
 
 public class BolaShot extends ScreenObject implements IProjectile {
 	
-	public BolaShot(float x, float y) {
+	public BolaShot(float x, float y) 
+	{
 		super(x, y);
+		type = CvaModel.Unit.BOLA;
 	}
 
 	Rectangle unitRect;//super class

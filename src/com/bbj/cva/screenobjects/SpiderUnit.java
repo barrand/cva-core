@@ -5,15 +5,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bbj.cva.model.CvaModel;
 
-<<<<<<< HEAD
-public class SpiderUnit extends ScreenObject implements IScreenObject {
-	public SpiderUnit(float x, float y)
-=======
 public class SpiderUnit extends ScreenObject {
-	public SpiderUnit()
->>>>>>> Refined the selection objects/heirarchy
+	public SpiderUnit(float x, float y)
 	{
 		super(x,y);
+		type = CvaModel.Unit.SPIDER;
 	}
 
 	@Override

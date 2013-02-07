@@ -7,9 +7,9 @@ import com.bbj.cva.model.CvaModel;
 
 public class SpiderSelect extends ScreenObject 
 {
-	public SpiderSelect()
+	public SpiderSelect(float x, float y)
 	{
-		super();
+		super(x,y);
 		type = CvaModel.Unit.SPIDER;
 	}
 

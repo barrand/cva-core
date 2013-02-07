@@ -7,9 +7,9 @@ import com.bbj.cva.model.CvaModel;
 
 public class PomSelect extends ScreenObject 
 {
-	public PomSelect()
+	public PomSelect(float x, float y)
 	{
-		super();
+		super(x,y);
 		type = CvaModel.Unit.POM;
 	}
 

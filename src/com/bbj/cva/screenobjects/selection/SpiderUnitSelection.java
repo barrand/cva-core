@@ -82,17 +82,31 @@ public class SpiderUnitSelection extends Selection
 	}
 
 	@Override
-	public int getX()
+	public float getX()
 	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int getY()
+	public float getY()
 	{
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void setX(float x)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setY(float y)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }
 

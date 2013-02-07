@@ -79,7 +79,6 @@ public class CheerborgUnitSelection extends Selection
 	public float getHeight() {
 		return CvaModel.TILE_HEIGHT;
 	}
-<<<<<<< HEAD:src/com/bbj/cva/screenobjects/CheerborgUnitSelection.java
 	
 	@Override
 	public void setX(float x) {
@@ -87,20 +86,19 @@ public class CheerborgUnitSelection extends Selection
 
 	@Override
 	public void setY(float y) {
-=======
+	}
 
 	@Override
-	public int getX()
+	public float getX()
 	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int getY()
+	public float getY()
 	{
 		// TODO Auto-generated method stub
 		return 0;
->>>>>>> Refined the selection objects/heirarchy:src/com/bbj/cva/screenobjects/selection/CheerborgUnitSelection.java
 	}
 }

@@ -14,7 +14,7 @@ public class Pom extends AnimatedScreenObject {
 	public Pom(float x, float y)
 	{
 		super(x,y);
-		
+		type = CvaModel.Unit.POM;
 	}
 
 	@Override

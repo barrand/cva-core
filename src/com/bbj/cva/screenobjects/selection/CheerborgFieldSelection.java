@@ -11,12 +11,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.events.CheerborgUnitTypeEvent;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.model.CvaModel;
-<<<<<<< HEAD:src/com/bbj/cva/screenobjects/CheerborgFieldSelection.java
 import com.bbj.cva.screenobjects.projectiles.BolaShot;
-import com.bbj.cva.screenobjectsdata.SpawnUnitData;
-=======
 import com.bbj.cva.screenobjects.ScreenObject;
->>>>>>> Refined the selection objects/heirarchy:src/com/bbj/cva/screenobjects/selection/CheerborgFieldSelection.java
 
 public class CheerborgFieldSelection extends Selection
 {
@@ -93,19 +89,19 @@ public class CheerborgFieldSelection extends Selection
 		}
 		else if (enterWasDownLastFrame == true)
 		{
-<<<<<<< HEAD:src/com/bbj/cva/screenobjects/CheerborgFieldSelection.java
-			Pom pom = new Pom(selectionRect.x, selectionRect.y);
-			EventBus.publish(new PlaceUnitEvent(pom));
 
-			BolaShot shot = new BolaShot(0f, selectionRect.y + CvaModel.TILE_HEIGHT/2);
-			EventBus.publish(new PlaceUnitEvent(shot));
+			//Pom pom = new Pom(selectionRect.x, selectionRect.y);
+			//EventBus.publish(new PlaceUnitEvent(pom));
 
-=======
+			//BolaShot shot = new BolaShot(0f, selectionRect.y + CvaModel.TILE_HEIGHT/2);
+			//EventBus.publish(new PlaceUnitEvent(shot));
+
 			if (unitType != null)
 			{
 				EventBus.publish(new PlaceUnitEvent(selectionRect.x, selectionRect.y, unitType));
+				BolaShot shot = new BolaShot(0f, selectionRect.y + CvaModel.TILE_HEIGHT/2);
+				EventBus.publish(new PlaceUnitEvent(shot));
 			}
->>>>>>> Refined the selection objects/heirarchy:src/com/bbj/cva/screenobjects/selection/CheerborgFieldSelection.java
 			enterWasDownLastFrame = false;
 		}
 
@@ -133,24 +129,31 @@ public class CheerborgFieldSelection extends Selection
 	}
 
 	@Override
-<<<<<<< HEAD:src/com/bbj/cva/screenobjects/CheerborgFieldSelection.java
-	public void setX(float x) {
+	public void setX(float x)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void setY(float y) {
-=======
-	public int getX()
+	public void setY(float y)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float getX()
 	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int getY()
+	public float getY()
 	{
 		// TODO Auto-generated method stub
 		return 0;
->>>>>>> Refined the selection objects/heirarchy:src/com/bbj/cva/screenobjects/selection/CheerborgFieldSelection.java
 	}
+
 }

@@ -30,6 +30,8 @@ public class CvaModel {
 	public static enum Unit
 	{
 		POM,
-		SPIDER
+		POM_DIE,
+		SPIDER,
+		BOLA
 	}
 }

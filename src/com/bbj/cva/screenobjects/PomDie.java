@@ -14,7 +14,7 @@ public class PomDie extends AnimatedScreenObject {
 	{
 		super(x,y);
 		this.loop = false;
-		
+		type = CvaModel.Unit.POM_DIE;
 	}
 
 	@Override

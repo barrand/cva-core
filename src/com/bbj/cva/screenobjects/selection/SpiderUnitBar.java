@@ -81,20 +81,6 @@ public class SpiderUnitBar implements IScreenObject
 	}
 
 	@Override
-	public void setX(int x)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setY(int y)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public float getWidth()
 	{
 		return CvaModel.TILE_WIDTH*5;
@@ -129,15 +115,29 @@ public class SpiderUnitBar implements IScreenObject
 	}
 
 	@Override
-	public int getX()
+	public float getX()
 	{
-		return (int)(0);
+		return 0f;
 	}
 
 	@Override
-	public int getY()
+	public float getY()
 	{
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void setX(float x)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setY(float y)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }

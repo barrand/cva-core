@@ -10,7 +10,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
@@ -23,10 +22,7 @@ import com.bbj.cva.screenobjects.PomSelect;
 import com.bbj.cva.screenobjects.ScreenObject;
 import com.bbj.cva.screenobjects.SpiderSelect;
 import com.bbj.cva.screenobjects.SpiderUnit;
-import com.bbj.cva.screenobjects.projectiles.BolaShot;
-<<<<<<< HEAD
 import com.bbj.cva.screenobjects.projectiles.IProjectile;
-=======
 import com.bbj.cva.screenobjects.selection.CheerborgFieldSelection;
 import com.bbj.cva.screenobjects.selection.CheerborgUnitBar;
 import com.bbj.cva.screenobjects.selection.CheerborgUnitSelection;
@@ -34,8 +30,6 @@ import com.bbj.cva.screenobjects.selection.Selection;
 import com.bbj.cva.screenobjects.selection.SpiderFieldSelection;
 import com.bbj.cva.screenobjects.selection.SpiderUnitBar;
 import com.bbj.cva.screenobjects.selection.SpiderUnitSelection;
->>>>>>> Refined the selection objects/heirarchy
-import com.bbj.cva.screenobjectsdata.SpawnUnitData;
 
 public class CheerVArachnids implements ApplicationListener {
 	OrthographicCamera camera;
@@ -56,8 +50,6 @@ public class CheerVArachnids implements ApplicationListener {
 	private ArrayList<ScreenObject> createObjectsQueue;
 
 	private TiledMapHelper tiledMapHelper;
-	private EventSubscriber placeUnitListener;
-
 	public CheerVArachnids() {
 		super();
 
@@ -117,13 +109,13 @@ public class CheerVArachnids implements ApplicationListener {
 		// FIXME: Eventually we need another screen/mechanism to choose units for the unitbar
 		CheerborgUnitBar cbunitbar = new CheerborgUnitBar();
 		cbunitbar.create();
-		PomSelect so = new PomSelect();
+		PomSelect so = new PomSelect(0,0);
 		so.loadTextureIfNeeded();
 		cbunitbar.addUnitToBar(so);
 
 		SpiderUnitBar spunitbar = new SpiderUnitBar();
 		spunitbar.create();
-		SpiderSelect spo = new SpiderSelect();
+		SpiderSelect spo = new SpiderSelect(0,0);
 		spo.loadTextureIfNeeded();
 		spunitbar.addUnitToBar(spo);
 		
@@ -187,35 +179,28 @@ public class CheerVArachnids implements ApplicationListener {
 	class PlaceUnitListener implements EventSubscriber<PlaceUnitEvent> {
 
 		@Override
-		public void onEvent(PlaceUnitEvent event) {
-<<<<<<< HEAD
-			createObjectsQueue.add(event.screenObject);
-			if(event.screenObject instanceof IProjectile){
-				CvaModel.thingsCheerborgsInteractWith.add(event.screenObject);
-=======
+		public void onEvent(PlaceUnitEvent event) 
+		{	
 			switch (event.screenObject.type)
 			{
 			case POM:
-				Pom screenObject = new Pom();
-				screenObject.setX((int) event.x);
-				screenObject.setY((int) event.y);
-				SpawnUnitData spd = new SpawnUnitData(screenObject, event.x, event.y);
-				createObjectsQueue.add(spd);
-				BolaShot shot = new BolaShot();
-				shot.setX((int) 0);
-				shot.setY((int) event.y);
-				spd = new SpawnUnitData(shot, event.x, event.y);
-				createObjectsQueue.add(spd);
-				CvaModel.thingsCheerborgsInteractWith.add(shot);
+				Pom screenObject = new Pom(event.x, event.y);
+				createObjectsQueue.add(screenObject);
+				break;
+			case POM_DIE:
+				createObjectsQueue.add(event.screenObject);
 				break;
 			case SPIDER:
-				SpiderUnit spi = new SpiderUnit();
-				spi.setX((int) event.x);
-				spi.setY((int) event.y);
-				SpawnUnitData spud = new SpawnUnitData(spi, event.x, event.y);
-				createObjectsQueue.add(spud);
+				SpiderUnit spi = new SpiderUnit(event.x, event.y);
+				createObjectsQueue.add(spi);
 				break;
->>>>>>> Refined the selection objects/heirarchy
+			case BOLA:
+				createObjectsQueue.add(event.screenObject);
+				break;
+			}
+			if(event.screenObject instanceof IProjectile)
+			{
+				CvaModel.thingsCheerborgsInteractWith.add(event.screenObject);
 			}
 		}
 	}
@@ -229,20 +214,23 @@ public class CheerVArachnids implements ApplicationListener {
 	}
 
 	@Override
-	public void resize(int width, int height) {
+	public void resize(int width, int height)
+	{
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void pause() {
+	public void pause()
+	{
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void resume() {
+	public void resume()
+	{
 		// TODO Auto-generated method stub
-
+		
 	}
 }

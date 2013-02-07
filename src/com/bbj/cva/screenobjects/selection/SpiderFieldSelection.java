@@ -87,16 +87,13 @@ public class SpiderFieldSelection extends Selection
 		}
 		else if (enterWasDownLastFrame == true)
 		{
-<<<<<<< HEAD:src/com/bbj/cva/screenobjects/SpiderFieldSelection.java
-			SpiderUnit spider = new SpiderUnit(selectionRect.x,
-					selectionRect.y);
-			EventBus.publish(new PlaceUnitEvent(spider));
-=======
+
+			//SpiderUnit spider = new SpiderUnit(selectionRect.x,selectionRect.y);
+			//EventBus.publish(new PlaceUnitEvent(spider));
 			if (unitType != null)
 			{
 				EventBus.publish(new PlaceUnitEvent(selectionRect.x, selectionRect.y, unitType));
 			}
->>>>>>> Refined the selection objects/heirarchy:src/com/bbj/cva/screenobjects/selection/SpiderFieldSelection.java
 			enterWasDownLastFrame = false;
 		}
 	
@@ -122,7 +119,6 @@ public class SpiderFieldSelection extends Selection
 	public float getHeight() {
 		return CvaModel.TILE_HEIGHT;
 	}
-<<<<<<< HEAD:src/com/bbj/cva/screenobjects/SpiderFieldSelection.java
 	
 	@Override
 	public void setX(float x) {
@@ -130,20 +126,18 @@ public class SpiderFieldSelection extends Selection
 
 	@Override
 	public void setY(float y) {
-=======
-
+	}
 	@Override
-	public int getX()
+	public float getX()
 	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int getY()
+	public float getY()
 	{
 		// TODO Auto-generated method stub
 		return 0;
->>>>>>> Refined the selection objects/heirarchy:src/com/bbj/cva/screenobjects/selection/SpiderFieldSelection.java
 	}
 }

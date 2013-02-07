@@ -45,15 +45,15 @@ public abstract class ScreenObject implements IScreenObject {
 	}
 	
 	@Override
-	public int getX() 
+	public float getX() 
 	{
-		return (int) unitRect.x;
+		return unitRect.x;
 	}
 
 	@Override
-	public int getY()
+	public float getY()
 	{
-		return (int) unitRect.y;
+		return unitRect.y;
 	}
 	
 	@Override
