@@ -32,8 +32,8 @@ public class CheerborgUnitBar implements IScreenObject
 	{
 		int pos = unitbar.size();
 		if (pos >= 5) return false;
-		so.setX((int)(pos*CvaModel.TILE_WIDTH + CvaModel.TILE_WIDTH*7));
-		so.setY((int)(CvaModel.TILE_HEIGHT*7));
+		so.setX((pos*CvaModel.TILE_WIDTH) + (CvaModel.TILE_WIDTH*7) + so.getWidth()/2);
+		so.setY(CvaModel.TILE_HEIGHT*7);
 		unitbar.add(so);
 		return true;
 	}
@@ -62,7 +62,7 @@ public class CheerborgUnitBar implements IScreenObject
 			boolean fireEvent = false;
 			for (ScreenObject so : unitbar)
 			{
-				if (so.getX() == unitSelect.x)
+				if (Math.abs(so.getX() - unitSelect.x) < 0.01)
 				{
 					// FIXME: Eventually the screenobjects here should have a state of being 'ready' to deploy, which we will check...
 					fireEvent = true;

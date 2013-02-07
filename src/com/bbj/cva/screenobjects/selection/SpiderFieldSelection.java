@@ -92,7 +92,7 @@ public class SpiderFieldSelection extends Selection
 			//EventBus.publish(new PlaceUnitEvent(spider));
 			if (unitType != null)
 			{
-				EventBus.publish(new PlaceUnitEvent(selectionRect.x, selectionRect.y, unitType));
+				EventBus.publish(new PlaceUnitEvent(selectionRect.x + getWidth()/2, selectionRect.y, unitType));
 			}
 			enterWasDownLastFrame = false;
 		}
