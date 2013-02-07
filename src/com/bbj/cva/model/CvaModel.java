@@ -24,4 +24,12 @@ public class CvaModel {
 	public static Texture spider;
 	public static Texture bolaShot;
 
+	public static Texture pomSelect;
+	public static Texture spiderSelect;
+	
+	public static enum Unit
+	{
+		POM,
+		SPIDER
+	}
 }

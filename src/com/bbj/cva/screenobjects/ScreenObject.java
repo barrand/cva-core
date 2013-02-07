@@ -3,6 +3,7 @@ package com.bbj.cva.screenobjects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.bbj.cva.model.CvaModel;
 
 public abstract class ScreenObject implements IScreenObject {
 	Rectangle unitRect;
@@ -11,6 +12,7 @@ public abstract class ScreenObject implements IScreenObject {
 	public float speedXModifier;
 	public float speedYModifier;
 	protected Texture texture;
+	public CvaModel.Unit type;
 
 	public ScreenObject(float x, float y) {
 		unitRect = new Rectangle();
@@ -40,6 +42,18 @@ public abstract class ScreenObject implements IScreenObject {
 	@Override
 	public void setY(float y) {
 		unitRect.y = y;
+	}
+	
+	@Override
+	public int getX() 
+	{
+		return (int) unitRect.x;
+	}
+
+	@Override
+	public int getY()
+	{
+		return (int) unitRect.y;
 	}
 	
 	@Override

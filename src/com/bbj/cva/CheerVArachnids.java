@@ -17,17 +17,24 @@ import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
-import com.bbj.cva.screenobjects.CheerborgFieldSelection;
-import com.bbj.cva.screenobjects.CheerborgUnitSelection;
 import com.bbj.cva.screenobjects.Pom;
 import com.bbj.cva.screenobjects.IScreenObject;
+import com.bbj.cva.screenobjects.PomSelect;
 import com.bbj.cva.screenobjects.ScreenObject;
-import com.bbj.cva.screenobjects.Selection;
-import com.bbj.cva.screenobjects.SpiderFieldSelection;
+import com.bbj.cva.screenobjects.SpiderSelect;
 import com.bbj.cva.screenobjects.SpiderUnit;
-import com.bbj.cva.screenobjects.SpiderUnitSelection;
 import com.bbj.cva.screenobjects.projectiles.BolaShot;
+<<<<<<< HEAD
 import com.bbj.cva.screenobjects.projectiles.IProjectile;
+=======
+import com.bbj.cva.screenobjects.selection.CheerborgFieldSelection;
+import com.bbj.cva.screenobjects.selection.CheerborgUnitBar;
+import com.bbj.cva.screenobjects.selection.CheerborgUnitSelection;
+import com.bbj.cva.screenobjects.selection.Selection;
+import com.bbj.cva.screenobjects.selection.SpiderFieldSelection;
+import com.bbj.cva.screenobjects.selection.SpiderUnitBar;
+import com.bbj.cva.screenobjects.selection.SpiderUnitSelection;
+>>>>>>> Refined the selection objects/heirarchy
 import com.bbj.cva.screenobjectsdata.SpawnUnitData;
 
 public class CheerVArachnids implements ApplicationListener {
@@ -105,11 +112,27 @@ public class CheerVArachnids implements ApplicationListener {
 		screenObjects.add(new SpiderUnitSelection());
 		screenObjects.add(new CheerborgFieldSelection());
 		screenObjects.add(new SpiderFieldSelection());
+		
+		
+		// FIXME: Eventually we need another screen/mechanism to choose units for the unitbar
+		CheerborgUnitBar cbunitbar = new CheerborgUnitBar();
+		cbunitbar.create();
+		PomSelect so = new PomSelect();
+		so.loadTextureIfNeeded();
+		cbunitbar.addUnitToBar(so);
 
+		SpiderUnitBar spunitbar = new SpiderUnitBar();
+		spunitbar.create();
+		SpiderSelect spo = new SpiderSelect();
+		spo.loadTextureIfNeeded();
+		spunitbar.addUnitToBar(spo);
+		
 		for (IScreenObject o : screenObjects) {
 			o.create();
 		}
-
+		screenObjects.add(0, cbunitbar);
+		screenObjects.add(0, spunitbar);
+		
 		spriteBatch = new SpriteBatch(); // #12
 	}
 
@@ -165,9 +188,34 @@ public class CheerVArachnids implements ApplicationListener {
 
 		@Override
 		public void onEvent(PlaceUnitEvent event) {
+<<<<<<< HEAD
 			createObjectsQueue.add(event.screenObject);
 			if(event.screenObject instanceof IProjectile){
 				CvaModel.thingsCheerborgsInteractWith.add(event.screenObject);
+=======
+			switch (event.screenObject.type)
+			{
+			case POM:
+				Pom screenObject = new Pom();
+				screenObject.setX((int) event.x);
+				screenObject.setY((int) event.y);
+				SpawnUnitData spd = new SpawnUnitData(screenObject, event.x, event.y);
+				createObjectsQueue.add(spd);
+				BolaShot shot = new BolaShot();
+				shot.setX((int) 0);
+				shot.setY((int) event.y);
+				spd = new SpawnUnitData(shot, event.x, event.y);
+				createObjectsQueue.add(spd);
+				CvaModel.thingsCheerborgsInteractWith.add(shot);
+				break;
+			case SPIDER:
+				SpiderUnit spi = new SpiderUnit();
+				spi.setX((int) event.x);
+				spi.setY((int) event.y);
+				SpawnUnitData spud = new SpawnUnitData(spi, event.x, event.y);
+				createObjectsQueue.add(spud);
+				break;
+>>>>>>> Refined the selection objects/heirarchy
 			}
 		}
 	}

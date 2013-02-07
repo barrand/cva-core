@@ -1,4 +1,4 @@
-package com.bbj.cva.screenobjects;
+package com.bbj.cva.screenobjects.selection;
 
 import java.awt.Point;
 
@@ -7,22 +7,19 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.IScreenObject;
 
 public abstract class Selection implements IScreenObject
 {
 	protected Rectangle selectionRect;
 	protected Texture selectionImage;
-	protected Texture selectedImage;
-	private long lastMoveSelectionTime;
+	//protected Texture selectedImage;
 	Point startSpace = new Point(11, 5);
-	private static final long SELECTION_WAIT = 100000000;
-	
 	@Override
 	public void create()
 	{
 		selectionImage = new Texture(Gdx.files.internal("data/selection.png"));
 
-		// TODO Auto-generated method stub
 		selectionRect = new Rectangle();
 		selectionRect.width = CvaModel.TILE_WIDTH;
 		selectionRect.height = CvaModel.TILE_HEIGHT;

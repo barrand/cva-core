@@ -1,6 +1,7 @@
-package com.bbj.cva.screenobjects;
+package com.bbj.cva.screenobjects.selection;
 
 import org.bushe.swing.event.EventBus;
+import org.bushe.swing.event.EventSubscriber;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -8,10 +9,19 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.events.PlaceUnitEvent;
+import com.bbj.cva.events.SpiderUnitTypeEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.ScreenObject;
 
 public class SpiderFieldSelection extends Selection
 {
+	private ScreenObject unitType;
+	
+	public SpiderFieldSelection()
+	{
+		EventBus.subscribe(SpiderUnitTypeEvent.class,  new UnitTypeListener());
+	}
+	
 	@Override
 	public void create()
 	{
@@ -77,13 +87,30 @@ public class SpiderFieldSelection extends Selection
 		}
 		else if (enterWasDownLastFrame == true)
 		{
+<<<<<<< HEAD:src/com/bbj/cva/screenobjects/SpiderFieldSelection.java
 			SpiderUnit spider = new SpiderUnit(selectionRect.x,
 					selectionRect.y);
 			EventBus.publish(new PlaceUnitEvent(spider));
+=======
+			if (unitType != null)
+			{
+				EventBus.publish(new PlaceUnitEvent(selectionRect.x, selectionRect.y, unitType));
+			}
+>>>>>>> Refined the selection objects/heirarchy:src/com/bbj/cva/screenobjects/selection/SpiderFieldSelection.java
 			enterWasDownLastFrame = false;
 		}
 	
 		spriteBatch.draw(selectionImage, selectionRect.x, selectionRect.y);
+	}
+	
+	class UnitTypeListener implements EventSubscriber<SpiderUnitTypeEvent>
+	{
+		@Override
+		public void onEvent(SpiderUnitTypeEvent type)
+		{
+			unitType = type.screenObject;
+		}
+		
 	}
 	
 	@Override
@@ -95,6 +122,7 @@ public class SpiderFieldSelection extends Selection
 	public float getHeight() {
 		return CvaModel.TILE_HEIGHT;
 	}
+<<<<<<< HEAD:src/com/bbj/cva/screenobjects/SpiderFieldSelection.java
 	
 	@Override
 	public void setX(float x) {
@@ -102,5 +130,20 @@ public class SpiderFieldSelection extends Selection
 
 	@Override
 	public void setY(float y) {
+=======
+
+	@Override
+	public int getX()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getY()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+>>>>>>> Refined the selection objects/heirarchy:src/com/bbj/cva/screenobjects/selection/SpiderFieldSelection.java
 	}
 }
