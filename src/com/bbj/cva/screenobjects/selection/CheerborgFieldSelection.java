@@ -99,8 +99,6 @@ public class CheerborgFieldSelection extends Selection
 			if (unitType != null)
 			{
 				EventBus.publish(new PlaceUnitEvent(selectionRect.x + getWidth()/2, selectionRect.y, unitType));
-				BolaShot shot = new BolaShot(0f, selectionRect.y + CvaModel.TILE_HEIGHT/2);
-				EventBus.publish(new PlaceUnitEvent(shot));
 			}
 			enterWasDownLastFrame = false;
 		}

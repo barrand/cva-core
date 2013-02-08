@@ -31,6 +31,8 @@ public class SpiderFieldSelection extends Selection
 		selectionRect = new Rectangle();
 		selectionRect.width = CvaModel.TILE_WIDTH;
 		selectionRect.height = CvaModel.TILE_HEIGHT;
+		selectionRect.x = CvaModel.TILE_WIDTH*3;
+		selectionRect.y = CvaModel.TILE_HEIGHT*4;
 	}
 	
 	@Override
