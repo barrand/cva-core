@@ -1,7 +1,5 @@
 package com.bbj.cva.screenobjects.selection;
 
-import org.bushe.swing.event.EventBus;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -36,7 +34,7 @@ public class CheerborgUnitSelection extends Selection
 		if (init)
 		{
 			init = false;
-			EventBus.publish(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
+			CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
 		}
 		/**
 		 * Detect requested motion.
@@ -49,7 +47,7 @@ public class CheerborgUnitSelection extends Selection
 		{
 			selectionRect.x += CvaModel.TILE_WIDTH;
 			rightWasDownLastFrame = false;
-			EventBus.publish(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
+			CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
 		}
 
 		if (Gdx.input.isKeyPressed(Input.Keys.J))
@@ -61,7 +59,7 @@ public class CheerborgUnitSelection extends Selection
 			if (selectionRect.x - CvaModel.TILE_WIDTH >= CvaModel.TILE_WIDTH*7)
 			{
 				selectionRect.x -= CvaModel.TILE_WIDTH;
-				EventBus.publish(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
+				CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
 			}
 			leftWasDownLastFrame = false;
 			

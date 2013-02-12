@@ -2,15 +2,13 @@ package com.bbj.cva.screenobjects.selection;
 
 import java.util.ArrayList;
 
-import org.bushe.swing.event.EventBus;
-import org.bushe.swing.event.EventSubscriber;
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bbj.cva.events.CheerborgUnitTypeEvent;
 import com.bbj.cva.events.UnitTypeSelectEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.IScreenObject;
 import com.bbj.cva.screenobjects.ScreenObject;
+import com.squareup.otto.Subscribe;
 
 public class CheerborgUnitBar implements IScreenObject
 {
@@ -18,7 +16,7 @@ public class CheerborgUnitBar implements IScreenObject
 	
 	public CheerborgUnitBar()
 	{
-		EventBus.subscribe(UnitTypeSelectEvent.class, new UnitTypeSelectListener());
+		CvaModel.eventBus.register(this);
 	}
 	
 	@Override
@@ -54,28 +52,24 @@ public class CheerborgUnitBar implements IScreenObject
 		}
 	}
 	
-	class UnitTypeSelectListener implements EventSubscriber<UnitTypeSelectEvent> 
-	{
-		@Override
-		public void onEvent(UnitTypeSelectEvent unitSelect)
+	@Subscribe
+	public void onUnitSelected(UnitTypeSelectEvent event) {
+		boolean fireEvent = false;
+		for (ScreenObject so : unitbar)
 		{
-			boolean fireEvent = false;
-			for (ScreenObject so : unitbar)
+			if (Math.abs(so.getX() - event.x) < 0.01)
 			{
-				if (Math.abs(so.getX() - unitSelect.x) < 0.01)
-				{
-					// FIXME: Eventually the screenobjects here should have a state of being 'ready' to deploy, which we will check...
-					fireEvent = true;
-					EventBus.publish(new CheerborgUnitTypeEvent(so)); // FIXME: Should change this to transmit only the Unit enum of the selection
-				}
-			}
-			// FIXME: ...and then we won't have to do this nonsense.
-			if (!fireEvent && (unitSelect.x > getX()) && (unitSelect.x < (getX()+getWidth())))
-			{
-				EventBus.publish(new CheerborgUnitTypeEvent(null));
+				// FIXME: Eventually the screenobjects here should have a state of being 'ready' to deploy, which we will check...
+				fireEvent = true;
+				CvaModel.eventBus.post(new CheerborgUnitTypeEvent(so)); // FIXME: Should change this to transmit only the Unit enum of the selection
 			}
 		}
-		
+		// FIXME: ...and then we won't have to do this nonsense.
+		if (!fireEvent && (event.x > getX()) && (event.x < (getX()+getWidth())))
+		{
+			CvaModel.eventBus.post(new CheerborgUnitTypeEvent(null));
+		}
+
 	}
 
 	@Override

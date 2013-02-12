@@ -2,10 +2,9 @@ package com.bbj.cva.model;
 
 import java.util.ArrayList;
 
-import org.bushe.swing.event.ThreadSafeEventService;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.bbj.cva.screenobjects.ScreenObject;
+import com.squareup.otto.Bus;
 
 public class CvaModel {
 	/**
@@ -28,7 +27,7 @@ public class CvaModel {
 
 	public static Texture pomSelect;
 	public static Texture spiderSelect;
-	public static ThreadSafeEventService eventBus;
+	public static Bus eventBus;
 	
 	public static enum Unit
 	{

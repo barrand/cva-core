@@ -1,7 +1,5 @@
 package com.bbj.cva.screenobjects;
 
-import org.bushe.swing.event.EventBus;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -32,22 +30,22 @@ public class PomDie extends AnimatedScreenObject {
 
 	@Override
 	protected void onAnimationEnd() {
-		EventBus.publish(new RemoveScreenObjectEvent(this));
+		CvaModel.eventBus.post(new RemoveScreenObjectEvent(this));
 	}
 	
 	@Override
 	public int getFrameCols() {
-		return 5;
+		return 10;
 	}
 
 	@Override
 	public int getFrameRows() {
-		return 2;
+		return 12;
 	}
 
 	@Override
 	public float getAnimationSpeed() {
-		return 0.05f;
+		return 0.01f;
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package com.bbj.cva.screenobjects;
 
-import org.bushe.swing.event.EventBus;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,11 +22,11 @@ public class Pom extends AnimatedScreenObject {
 			//if she got hit, then kill her and put in the die animation
 			if(o.unitRect.overlaps(unitRect)){
 				Gdx.app.log("cva", this.toString());
-				EventBus.publish(new RemoveScreenObjectEvent(this));
-				EventBus.publish(new RemoveScreenObjectEvent(o));
+				CvaModel.eventBus.post(new RemoveScreenObjectEvent(this));
+				CvaModel.eventBus.post(new RemoveScreenObjectEvent(o));
 				
 				PomDie pomDie = new PomDie(unitRect.x, unitRect.y);
-				EventBus.publish(new PlaceUnitEvent(pomDie));
+				CvaModel.eventBus.post(new PlaceUnitEvent(pomDie));
 				
 			}
 		}

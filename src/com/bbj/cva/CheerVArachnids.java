@@ -2,12 +2,6 @@ package com.bbj.cva;
 
 import java.util.ArrayList;
 
-import org.bushe.swing.event.EventBus;
-import org.bushe.swing.event.EventServiceExistsException;
-import org.bushe.swing.event.EventServiceLocator;
-import org.bushe.swing.event.EventSubscriber;
-import org.bushe.swing.event.ThreadSafeEventService;
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -16,11 +10,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
+import com.bbj.cva.events.CheerborgUnitTypeEvent;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
-import com.bbj.cva.screenobjects.Pom;
 import com.bbj.cva.screenobjects.IScreenObject;
+import com.bbj.cva.screenobjects.Pom;
 import com.bbj.cva.screenobjects.PomSelect;
 import com.bbj.cva.screenobjects.ScreenObject;
 import com.bbj.cva.screenobjects.SpiderSelect;
@@ -33,6 +28,9 @@ import com.bbj.cva.screenobjects.selection.Selection;
 import com.bbj.cva.screenobjects.selection.SpiderFieldSelection;
 import com.bbj.cva.screenobjects.selection.SpiderUnitBar;
 import com.bbj.cva.screenobjects.selection.SpiderUnitSelection;
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
+import com.squareup.otto.ThreadEnforcer;
 
 public class CheerVArachnids implements ApplicationListener {
 	OrthographicCamera camera;
@@ -60,17 +58,6 @@ public class CheerVArachnids implements ApplicationListener {
 		CvaModel.screenWidth = -1;
 		CvaModel.screenHeight = -1;
 
-		CvaModel.eventBus = new ThreadSafeEventService();
-		try {
-			
-			EventServiceLocator.setEventService(EventServiceLocator.SERVICE_NAME_EVENT_BUS, CvaModel.eventBus);
-		} catch (EventServiceExistsException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		CvaModel.eventBus.subscribe(PlaceUnitEvent.class, new PlaceUnitListener());
-		CvaModel.eventBus.subscribe(RemoveScreenObjectEvent.class,
-				new RemoveScreenObjectListener());
 	}
 
 	public CheerVArachnids(int width, int height) {
@@ -78,14 +65,12 @@ public class CheerVArachnids implements ApplicationListener {
 
 		CvaModel.screenWidth = width;
 		CvaModel.screenHeight = height;
-
-		EventBus.subscribe(PlaceUnitEvent.class, new PlaceUnitListener());
-		EventBus.subscribe(RemoveScreenObjectEvent.class,
-				new RemoveScreenObjectListener());
 	}
 
 	@Override
 	public void create() {
+		CvaModel.eventBus = new Bus(ThreadEnforcer.ANY);
+		CvaModel.eventBus.register(this);
 
 		Texture.setEnforcePotImages(false);
 
@@ -187,41 +172,33 @@ public class CheerVArachnids implements ApplicationListener {
 
 	}
 
-	class PlaceUnitListener implements EventSubscriber<PlaceUnitEvent> {
+	@Subscribe public void placeUnitListener (PlaceUnitEvent event) {
 
-		@Override
-		public void onEvent(PlaceUnitEvent event) 
-		{	
-			switch (event.screenObject.type)
-			{
-			case POM:
-				Pom screenObject = new Pom(event.x, event.y);
-				createObjectsQueue.add(screenObject);
-				break;
-			case POM_DIE:
-				createObjectsQueue.add(event.screenObject);
-				break;
-			case SPIDER:
-				SpiderUnit spi = new SpiderUnit(event.x, event.y);
-				createObjectsQueue.add(spi);
-				break;
-			case BOLA:
-				createObjectsQueue.add(event.screenObject);
-				break;
-			}
-			if(event.screenObject instanceof IProjectile)
-			{
-				CvaModel.thingsCheerborgsInteractWith.add(event.screenObject);
-			}
+		switch (event.screenObject.type) {
+		case POM:
+			Pom screenObject = new Pom(event.x, event.y);
+			createObjectsQueue.add(screenObject);
+			break;
+		case POM_DIE:
+			createObjectsQueue.add(event.screenObject);
+			break;
+		case SPIDER:
+			SpiderUnit spi = new SpiderUnit(event.x, event.y);
+			createObjectsQueue.add(spi);
+			break;
+		case BOLA:
+			createObjectsQueue.add(event.screenObject);
+			break;
+		}
+		if (event.screenObject instanceof IProjectile) {
+			CvaModel.thingsCheerborgsInteractWith.add(event.screenObject);
 		}
 	}
 
-	class RemoveScreenObjectListener implements
-			EventSubscriber<RemoveScreenObjectEvent> {
-		@Override
-		public void onEvent(RemoveScreenObjectEvent event) {
-			objectsToDelete.add(event.screenObject);
-		}
+	@Subscribe
+	public void onRemoveScreenObject(RemoveScreenObjectEvent event) {
+		objectsToDelete.add(event.screenObject);
+
 	}
 
 	@Override
