@@ -14,7 +14,8 @@ public abstract class Selection implements IScreenObject
 	protected Rectangle selectionRect;
 	protected Texture selectionImage;
 	//protected Texture selectedImage;
-	Point startSpace = new Point(11, 5);
+	protected int startSpaceX = 11;
+	protected int startSpaceY = 5;
 	@Override
 	public void create()
 	{
@@ -23,8 +24,8 @@ public abstract class Selection implements IScreenObject
 		selectionRect = new Rectangle();
 		selectionRect.width = CvaModel.TILE_WIDTH;
 		selectionRect.height = CvaModel.TILE_HEIGHT;
-		selectionRect.x = startSpace.x * CvaModel.TILE_WIDTH;
-		selectionRect.y = startSpace.y * CvaModel.TILE_HEIGHT;
+		selectionRect.x = startSpaceX * CvaModel.TILE_WIDTH;
+		selectionRect.y = startSpaceY * CvaModel.TILE_HEIGHT;
 	}
 
 	protected boolean rightWasDownLastFrame = false;

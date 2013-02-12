@@ -1,8 +1,12 @@
 package com.bbj.cva.screenobjects;
 
+import org.bushe.swing.event.EventBus;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
 
 public abstract class ScreenObject implements IScreenObject {
@@ -31,7 +35,17 @@ public abstract class ScreenObject implements IScreenObject {
 	public void render(SpriteBatch spriteBatch) {
 		unitRect.x += getSpeedX() + speedXModifier;
 		unitRect.y += getSpeedY() + speedYModifier;
-		spriteBatch.draw(texture, unitRect.x - unitRect.getWidth()/2 , unitRect.y);
+		spriteBatch.draw(texture, unitRect.x - unitRect.getWidth() / 2,
+				unitRect.y);
+
+		// remove any objects that go off screen
+//		if (unitRect.x < 0 - unitRect.width
+//				|| unitRect.x > CvaModel.screenWidth + unitRect.width
+//				|| unitRect.y < 0 - unitRect.height
+//				|| unitRect.y > CvaModel.screenHeight + unitRect.height) {
+//			Gdx.app.debug("removing something", this.toString());
+//			EventBus.publish(new RemoveScreenObjectEvent(this));
+//		}
 	}
 
 	@Override
@@ -43,19 +57,17 @@ public abstract class ScreenObject implements IScreenObject {
 	public void setY(float y) {
 		unitRect.y = y;
 	}
-	
+
 	@Override
-	public float getX() 
-	{
+	public float getX() {
 		return unitRect.x;
 	}
 
 	@Override
-	public float getY()
-	{
+	public float getY() {
 		return unitRect.y;
 	}
-	
+
 	@Override
 	public void destroy() {
 		//

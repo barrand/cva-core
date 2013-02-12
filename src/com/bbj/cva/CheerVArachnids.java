@@ -30,8 +30,10 @@ import com.bbj.cva.screenobjects.selection.Selection;
 import com.bbj.cva.screenobjects.selection.SpiderFieldSelection;
 import com.bbj.cva.screenobjects.selection.SpiderUnitBar;
 import com.bbj.cva.screenobjects.selection.SpiderUnitSelection;
+import com.mangecailloux.pebble.entity.Component;
+import com.mangecailloux.pebble.event.EventHandler;
 
-public class CheerVArachnids implements ApplicationListener {
+public class CheerVArachnids extends Component implements ApplicationListener {
 	OrthographicCamera camera;
 	SpriteBatch spriteBatch;
 	TiledMap tiledMap;
@@ -56,10 +58,7 @@ public class CheerVArachnids implements ApplicationListener {
 		// Defer until create() when Gdx is initialized.
 		CvaModel.screenWidth = -1;
 		CvaModel.screenHeight = -1;
-
-		EventBus.subscribe(PlaceUnitEvent.class, new PlaceUnitListener());
-		EventBus.subscribe(RemoveScreenObjectEvent.class,
-				new RemoveScreenObjectListener());
+		
 	}
 
 	public CheerVArachnids(int width, int height) {
@@ -67,17 +66,18 @@ public class CheerVArachnids implements ApplicationListener {
 
 		CvaModel.screenWidth = width;
 		CvaModel.screenHeight = height;
-
-		EventBus.subscribe(PlaceUnitEvent.class, new PlaceUnitListener());
-		EventBus.subscribe(RemoveScreenObjectEvent.class,
-				new RemoveScreenObjectListener());
 	}
 
 	@Override
 	public void create() {
 
 		Texture.setEnforcePotImages(false);
-
+		
+		
+		EventBus.subscribe(PlaceUnitEvent.class, new PlaceUnitListener());
+		EventBus.subscribe(RemoveScreenObjectEvent.class,
+				new RemoveScreenObjectListener());
+		
 		/**
 		 * If the viewport's size is not yet known, determine it here.
 		 */
@@ -176,11 +176,23 @@ public class CheerVArachnids implements ApplicationListener {
 
 	}
 
-	class PlaceUnitListener implements EventSubscriber<PlaceUnitEvent> {
+//	class PlaceUnitListener implements EventSubscriber<PlaceUnitEvent> {
+//
+//		@Override
+//		public void onEvent(PlaceUnitEvent event) 
+//		{	
+//		}
+//	}
+	
+	class PlaceUnitListenerHandler extends EventHandler<PlaceUnitEvent>{
+
+		public PlaceUnitListenerHandler(Class<PlaceUnitEvent> _type) {
+			super(_type);
+			// TODO Auto-generated constructor stub
+		}
 
 		@Override
-		public void onEvent(PlaceUnitEvent event) 
-		{	
+		public void onHandle(PlaceUnitEvent event) {
 			switch (event.screenObject.type)
 			{
 			case POM:
@@ -202,16 +214,19 @@ public class CheerVArachnids implements ApplicationListener {
 			{
 				CvaModel.thingsCheerborgsInteractWith.add(event.screenObject);
 			}
+			
 		}
+		
 	}
 
-	class RemoveScreenObjectListener implements
-			EventSubscriber<RemoveScreenObjectEvent> {
-		@Override
-		public void onEvent(RemoveScreenObjectEvent event) {
-			objectsToDelete.add(event.screenObject);
-		}
-	}
+	//todo 
+//	class RemoveScreenObjectListener implements
+//			EventSubscriber<RemoveScreenObjectEvent> {
+//		@Override
+//		public void onEvent(RemoveScreenObjectEvent event) {
+//			objectsToDelete.add(event.screenObject);
+//		}
+//	}
 
 	@Override
 	public void resize(int width, int height)

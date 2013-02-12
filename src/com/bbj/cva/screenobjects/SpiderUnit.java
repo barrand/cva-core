@@ -39,7 +39,7 @@ public class SpiderUnit extends Shooter {
 
 	@Override
 	public float getAnimationSpeed() {
-		return 0.2f;
+		return 0.5f;
 	}
 
 	@Override

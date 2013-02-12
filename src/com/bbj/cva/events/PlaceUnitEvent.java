@@ -1,8 +1,9 @@
 package com.bbj.cva.events;
 
 import com.bbj.cva.screenobjects.ScreenObject;
+import com.mangecailloux.pebble.event.Event;
 
-public class PlaceUnitEvent extends Object
+public class PlaceUnitEvent extends Event
 {
 	public float x;
 	public float y;
@@ -20,5 +21,12 @@ public class PlaceUnitEvent extends Object
 		x = nx;
 		y = ny;
 		this.screenObject = so;
+	}
+
+	@Override
+	public void reset() {
+		x = 0;
+		y = 0;
+		screenObject = null;
 	}
 }

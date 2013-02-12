@@ -23,7 +23,6 @@ public class Pom extends AnimatedScreenObject {
 			
 			//if she got hit, then kill her and put in the die animation
 			if(o.unitRect.overlaps(unitRect)){
-				Gdx.app.log("cva", this.toString());
 				EventBus.publish(new RemoveScreenObjectEvent(this));
 				EventBus.publish(new RemoveScreenObjectEvent(o));
 				
@@ -45,22 +44,22 @@ public class Pom extends AnimatedScreenObject {
 
 	@Override
 	public int getFrameCols() {
-		return 5;
+		return 10;
 	}
 
 	@Override
 	public int getFrameRows() {
-		return 4;
+		return 14;
 	}
 
 	@Override
 	public float getAnimationSpeed() {
-		return 0.05f;
+		return 0.02f;
 	}
 
 	@Override
 	public float getSpeedX() {
-		return -4f;
+		return -2f;
 	}
 
 	@Override
@@ -70,12 +69,12 @@ public class Pom extends AnimatedScreenObject {
 	
 	@Override
 	public float getWidth() {
-		return 50;
+		return 204.8f;
 	}
 
 	@Override
 	public float getHeight() {
-		return 125;
+		return 216;
 	}
 
 }
