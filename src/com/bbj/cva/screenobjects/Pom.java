@@ -45,12 +45,12 @@ public class Pom extends AnimatedScreenObject {
 
 	@Override
 	public int getFrameCols() {
-		return 5;
+		return 10;
 	}
 
 	@Override
 	public int getFrameRows() {
-		return 4;
+		return 14;
 	}
 
 	@Override

@@ -43,7 +43,7 @@ public class CheerborgFieldSelection extends Selection
 		/**
 		 * Detect requested motion.
 		 */
-	
+		
 		if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT))
 		{
 			rightWasDownLastFrame = true;
@@ -83,7 +83,7 @@ public class CheerborgFieldSelection extends Selection
 			downWasDownLastFrame = false;
 		}
 	
-		if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
+		if (Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.isTouched())
 		{
 			enterWasDownLastFrame = true;
 		}
@@ -98,7 +98,7 @@ public class CheerborgFieldSelection extends Selection
 
 			if (unitType != null)
 			{
-				EventBus.publish(new PlaceUnitEvent(selectionRect.x + getWidth()/2, selectionRect.y, unitType));
+				CvaModel.eventBus.publish(new PlaceUnitEvent(selectionRect.x + getWidth()/2, selectionRect.y, unitType));
 			}
 			enterWasDownLastFrame = false;
 		}

@@ -3,7 +3,10 @@ package com.bbj.cva;
 import java.util.ArrayList;
 
 import org.bushe.swing.event.EventBus;
+import org.bushe.swing.event.EventServiceExistsException;
+import org.bushe.swing.event.EventServiceLocator;
 import org.bushe.swing.event.EventSubscriber;
+import org.bushe.swing.event.ThreadSafeEventService;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -57,8 +60,16 @@ public class CheerVArachnids implements ApplicationListener {
 		CvaModel.screenWidth = -1;
 		CvaModel.screenHeight = -1;
 
-		EventBus.subscribe(PlaceUnitEvent.class, new PlaceUnitListener());
-		EventBus.subscribe(RemoveScreenObjectEvent.class,
+		CvaModel.eventBus = new ThreadSafeEventService();
+		try {
+			
+			EventServiceLocator.setEventService(EventServiceLocator.SERVICE_NAME_EVENT_BUS, CvaModel.eventBus);
+		} catch (EventServiceExistsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CvaModel.eventBus.subscribe(PlaceUnitEvent.class, new PlaceUnitListener());
+		CvaModel.eventBus.subscribe(RemoveScreenObjectEvent.class,
 				new RemoveScreenObjectListener());
 	}
 
