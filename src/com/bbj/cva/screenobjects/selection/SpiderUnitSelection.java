@@ -1,13 +1,10 @@
 package com.bbj.cva.screenobjects.selection;
 
-import org.bushe.swing.event.EventBus;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.bbj.cva.events.UnitTypeSelectEvent;
 import com.bbj.cva.model.CvaModel;
 
 public class SpiderUnitSelection extends Selection
@@ -37,7 +34,7 @@ public class SpiderUnitSelection extends Selection
 		if (init)
 		{
 			init = false;
-			EventBus.publish(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
+//			EventBus.publish(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
 		}
 		/**
 		 * Detect requested motion.
@@ -52,7 +49,7 @@ public class SpiderUnitSelection extends Selection
 			if (selectionRect.x + CvaModel.TILE_WIDTH <= CvaModel.TILE_WIDTH*7)
 			{
 				selectionRect.x += CvaModel.TILE_WIDTH;
-				EventBus.publish(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
+//				EventBus.publish(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
 			}
 			rightWasDownLastFrame = false;
 		}
@@ -65,7 +62,7 @@ public class SpiderUnitSelection extends Selection
 		{
 			selectionRect.x -= CvaModel.TILE_WIDTH;
 			leftWasDownLastFrame = false;
-			EventBus.publish(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
+//			EventBus.publish(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
 		}
 
 		spriteBatch.draw(select, selectionRect.x, selectionRect.y);

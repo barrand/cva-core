@@ -1,12 +1,9 @@
 package com.bbj.cva.screenobjects.projectiles;
 
-import org.bushe.swing.event.EventBus;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.ScreenObject;
 

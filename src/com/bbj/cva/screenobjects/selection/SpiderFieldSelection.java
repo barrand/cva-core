@@ -1,8 +1,5 @@
 package com.bbj.cva.screenobjects.selection;
 
-import org.bushe.swing.event.EventBus;
-import org.bushe.swing.event.EventSubscriber;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,7 +16,7 @@ public class SpiderFieldSelection extends Selection
 	
 	public SpiderFieldSelection()
 	{
-		EventBus.subscribe(SpiderUnitTypeEvent.class,  new UnitTypeListener());
+//		EventBus.subscribe(SpiderUnitTypeEvent.class,  new UnitTypeListener());
 	}
 	
 	@Override
@@ -94,7 +91,7 @@ public class SpiderFieldSelection extends Selection
 			//EventBus.publish(new PlaceUnitEvent(spider));
 			if (unitType != null)
 			{
-				EventBus.publish(new PlaceUnitEvent(selectionRect.x + getWidth()/2, selectionRect.y, unitType));
+//				EventBus.publish(new PlaceUnitEvent(selectionRect.x + getWidth()/2, selectionRect.y, unitType));
 			}
 			enterWasDownLastFrame = false;
 		}
@@ -102,15 +99,15 @@ public class SpiderFieldSelection extends Selection
 		spriteBatch.draw(selectionImage, selectionRect.x, selectionRect.y);
 	}
 	
-	class UnitTypeListener implements EventSubscriber<SpiderUnitTypeEvent>
-	{
-		@Override
-		public void onEvent(SpiderUnitTypeEvent type)
-		{
-			unitType = type.screenObject;
-		}
-		
-	}
+//	class UnitTypeListener implements EventSubscriber<SpiderUnitTypeEvent>
+//	{
+//		@Override
+//		public void onEvent(SpiderUnitTypeEvent type)
+//		{
+//			unitType = type.screenObject;
+//		}
+//		
+//	}
 	
 	@Override
 	public float getWidth() {

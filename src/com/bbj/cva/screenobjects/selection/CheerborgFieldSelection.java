@@ -1,18 +1,14 @@
 package com.bbj.cva.screenobjects.selection;
 
-import org.bushe.swing.event.EventBus;
-import org.bushe.swing.event.EventSubscriber;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.bbj.cva.events.CheerborgUnitTypeEvent;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.model.CvaModel;
-import com.bbj.cva.screenobjects.projectiles.BolaShot;
 import com.bbj.cva.screenobjects.ScreenObject;
+import com.mangecailloux.pebble.event.EventManager;
 
 public class CheerborgFieldSelection extends Selection
 {
@@ -20,7 +16,9 @@ public class CheerborgFieldSelection extends Selection
 	
 	public CheerborgFieldSelection()
 	{
-		EventBus.subscribe(CheerborgUnitTypeEvent.class,  new UnitTypeListener());
+		//todo
+//		addEventHandler(new PlaceUnitListenerHandler(PlaceUnitEvent.class));
+//		EventBus.subscribe(CheerborgUnitTypeEvent.class,  new UnitTypeListener());
 	}
 	
 	@Override
@@ -96,9 +94,13 @@ public class CheerborgFieldSelection extends Selection
 			//BolaShot shot = new BolaShot(0f, selectionRect.y + CvaModel.TILE_HEIGHT/2);
 			//EventBus.publish(new PlaceUnitEvent(shot));
 
+			PlaceUnitEvent event = getEvent(PlaceUnitEvent.class);
+			MyEvent.send();
+			
 			if (unitType != null)
 			{
-				EventBus.publish(new PlaceUnitEvent(selectionRect.x + getWidth()/2, selectionRect.y, unitType));
+				//todo
+//				EventBus.publish(new PlaceUnitEvent(selectionRect.x + getWidth()/2, selectionRect.y, unitType));
 			}
 			enterWasDownLastFrame = false;
 		}
@@ -106,15 +108,15 @@ public class CheerborgFieldSelection extends Selection
 		spriteBatch.draw(selectionImage, selectionRect.x, selectionRect.y);
 	}
 
-	class UnitTypeListener implements EventSubscriber<CheerborgUnitTypeEvent>
-	{
-		@Override
-		public void onEvent(CheerborgUnitTypeEvent type)
-		{
-			unitType = type.screenObject;
-		}
-		
-	}
+//	class UnitTypeListener implements EventSubscriber<CheerborgUnitTypeEvent>
+//	{
+//		@Override
+//		public void onEvent(CheerborgUnitTypeEvent type)
+//		{
+//			unitType = type.screenObject;
+//		}
+//		
+//	}
 	
 	@Override
 	public float getWidth() {

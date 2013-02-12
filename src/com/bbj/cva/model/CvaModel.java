@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.bbj.cva.screenobjects.ScreenObject;
+import com.mangecailloux.pebble.event.EventManager;
 
 public class CvaModel {
 	/**

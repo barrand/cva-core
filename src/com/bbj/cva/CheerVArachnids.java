@@ -2,9 +2,6 @@ package com.bbj.cva;
 
 import java.util.ArrayList;
 
-import org.bushe.swing.event.EventBus;
-import org.bushe.swing.event.EventSubscriber;
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -14,10 +11,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
 import com.bbj.cva.events.PlaceUnitEvent;
-import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
-import com.bbj.cva.screenobjects.Pom;
 import com.bbj.cva.screenobjects.IScreenObject;
+import com.bbj.cva.screenobjects.Pom;
 import com.bbj.cva.screenobjects.PomSelect;
 import com.bbj.cva.screenobjects.ScreenObject;
 import com.bbj.cva.screenobjects.SpiderSelect;
@@ -32,6 +28,7 @@ import com.bbj.cva.screenobjects.selection.SpiderUnitBar;
 import com.bbj.cva.screenobjects.selection.SpiderUnitSelection;
 import com.mangecailloux.pebble.entity.Component;
 import com.mangecailloux.pebble.event.EventHandler;
+import com.mangecailloux.pebble.event.EventManager;
 
 public class CheerVArachnids extends Component implements ApplicationListener {
 	OrthographicCamera camera;
@@ -71,12 +68,15 @@ public class CheerVArachnids extends Component implements ApplicationListener {
 	@Override
 	public void create() {
 
+		
+		CvaModel.eventManager = new EventManager();
+		
 		Texture.setEnforcePotImages(false);
 		
-		
-		EventBus.subscribe(PlaceUnitEvent.class, new PlaceUnitListener());
-		EventBus.subscribe(RemoveScreenObjectEvent.class,
-				new RemoveScreenObjectListener());
+		addEventHandler(new PlaceUnitListenerHandler(PlaceUnitEvent.class));
+//		EventBus.subscribe(PlaceUnitEvent.class, new PlaceUnitListener());
+//		EventBus.subscribe(RemoveScreenObjectEvent.class,
+//				new RemoveScreenObjectListener());
 		
 		/**
 		 * If the viewport's size is not yet known, determine it here.
@@ -188,7 +188,6 @@ public class CheerVArachnids extends Component implements ApplicationListener {
 
 		public PlaceUnitListenerHandler(Class<PlaceUnitEvent> _type) {
 			super(_type);
-			// TODO Auto-generated constructor stub
 		}
 
 		@Override
@@ -245,6 +244,18 @@ public class CheerVArachnids extends Component implements ApplicationListener {
 	@Override
 	public void resume()
 	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void onAddToWorld() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void onRemoveFromWorld() {
 		// TODO Auto-generated method stub
 		
 	}
