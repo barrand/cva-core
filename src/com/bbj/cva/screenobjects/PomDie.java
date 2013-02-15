@@ -1,7 +1,5 @@
 package com.bbj.cva.screenobjects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
@@ -13,19 +11,12 @@ public class PomDie extends AnimatedScreenObject {
 		super(x,y);
 		this.loop = false;
 		type = CvaModel.Unit.POM_DIE;
+		texture = CvaModel.pomDie;
 	}
 
 	@Override
 	public void render(SpriteBatch spriteBatch) {
 		super.render(spriteBatch);
-	}
-
-	@Override
-	public void loadTextureIfNeeded() {
-		if(CvaModel.pomDie == null){
-			CvaModel.pomDie = new Texture(Gdx.files.internal("data/spriteSheets/pomDie.png")); // #9
-		}
-		texture = CvaModel.pomDie;
 	}
 
 	@Override

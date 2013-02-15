@@ -1,7 +1,6 @@
 package com.bbj.cva.screenobjects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
@@ -13,6 +12,7 @@ public class Pom extends AnimatedScreenObject {
 	{
 		super(x,y);
 		type = CvaModel.Unit.POM;
+		texture = CvaModel.pomWalk;
 	}
 
 	@Override
@@ -34,31 +34,25 @@ public class Pom extends AnimatedScreenObject {
 	}
 
 	@Override
-	public void loadTextureIfNeeded() {
-		if(CvaModel.pomWalk == null){
-			CvaModel.pomWalk = new Texture(Gdx.files.internal("data/spriteSheets/pomWalk.png")); // #9
-		}
-		texture = CvaModel.pomWalk;
-	}
-
-	@Override
 	public int getFrameCols() {
 		return 10;
 	}
 
 	@Override
 	public int getFrameRows() {
-		return 14;
+		return 8;
 	}
 
+	//smaller is faster
 	@Override
 	public float getAnimationSpeed() {
-		return 0.05f;
+		return 0.017f;
 	}
 
+	//larger is faster
 	@Override
 	public float getSpeedX() {
-		return -4f;
+		return -1.2f;
 	}
 
 	@Override
@@ -68,12 +62,12 @@ public class Pom extends AnimatedScreenObject {
 	
 	@Override
 	public float getWidth() {
-		return 50;
+		return 300;
 	}
 
 	@Override
 	public float getHeight() {
-		return 125;
+		return 300;
 	}
 
 }

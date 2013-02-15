@@ -3,7 +3,6 @@ package com.bbj.cva.screenobjects.selection;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.events.SpiderUnitTypeEvent;
 import com.bbj.cva.events.UnitTypeSelectEvent;
 import com.bbj.cva.model.CvaModel;
@@ -86,13 +85,6 @@ public class SpiderUnitBar implements IScreenObject
 	{
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public void loadTextureIfNeeded()
-	{
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

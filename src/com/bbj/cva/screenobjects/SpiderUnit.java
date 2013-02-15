@@ -1,7 +1,5 @@
 package com.bbj.cva.screenobjects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bbj.cva.model.CvaModel;
@@ -12,6 +10,7 @@ public class SpiderUnit extends Shooter {
 	{
 		super(x,y);
 		type = CvaModel.Unit.SPIDER;
+		texture = CvaModel.spider;
 	}
 
 	@Override
@@ -19,13 +18,6 @@ public class SpiderUnit extends Shooter {
 		super.render(spriteBatch);
 	}
 	
-	@Override
-	public void loadTextureIfNeeded() {
-		if(CvaModel.spider== null){
-			CvaModel.spider = new Texture(Gdx.files.internal("data/spriteSheets/spiderShot.png")); // #9
-		}
-		texture = CvaModel.spider;
-	}
 
 	@Override
 	public int getFrameCols() {

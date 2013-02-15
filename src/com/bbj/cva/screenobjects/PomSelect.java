@@ -1,7 +1,5 @@
 package com.bbj.cva.screenobjects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bbj.cva.model.CvaModel;
 
@@ -11,21 +9,13 @@ public class PomSelect extends ScreenObject
 	{
 		super(x,y);
 		type = CvaModel.Unit.POM;
+		texture = CvaModel.pomSelect;
 	}
 
 	@Override
 	public void render(SpriteBatch spriteBatch) 
 	{
 		super.render(spriteBatch);
-	}
-
-	@Override
-	public void loadTextureIfNeeded() 
-	{
-		if(CvaModel.pomSelect == null){
-			CvaModel.pomSelect = new Texture(Gdx.files.internal("data/spriteSheets/pomSelect.png"));
-		}
-		texture = CvaModel.pomSelect;
 	}
 
 	@Override

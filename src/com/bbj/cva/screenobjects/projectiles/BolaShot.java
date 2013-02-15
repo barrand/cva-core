@@ -1,7 +1,5 @@
 package com.bbj.cva.screenobjects.projectiles;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.ScreenObject;
@@ -12,6 +10,7 @@ public class BolaShot extends ScreenObject implements IProjectile {
 	{
 		super(x, y);
 		type = CvaModel.Unit.BOLA;
+		texture = CvaModel.bolaShot;
 	}
 
 	Rectangle unitRect;//super class
@@ -32,14 +31,6 @@ public class BolaShot extends ScreenObject implements IProjectile {
 	@Override
 	public int getSpeedModifier() {
 		return 0;
-	}
-
-	@Override
-	public void loadTextureIfNeeded() {
-		if(CvaModel.bolaShot== null){
-			CvaModel.bolaShot = new Texture(Gdx.files.internal("data/spriteSheets/webshot.png")); // #9
-		}
-		texture = CvaModel.bolaShot;
 	}
 
 	@Override

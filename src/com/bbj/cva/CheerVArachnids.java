@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
-import com.bbj.cva.events.CheerborgUnitTypeEvent;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
@@ -28,6 +27,7 @@ import com.bbj.cva.screenobjects.selection.Selection;
 import com.bbj.cva.screenobjects.selection.SpiderFieldSelection;
 import com.bbj.cva.screenobjects.selection.SpiderUnitBar;
 import com.bbj.cva.screenobjects.selection.SpiderUnitSelection;
+import com.bbj.cva.util.TextureUtils;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 import com.squareup.otto.ThreadEnforcer;
@@ -74,6 +74,8 @@ public class CheerVArachnids implements ApplicationListener {
 
 		Texture.setEnforcePotImages(false);
 
+		TextureUtils.loadTextures();
+		
 		/**
 		 * If the viewport's size is not yet known, determine it here.
 		 */
@@ -106,13 +108,11 @@ public class CheerVArachnids implements ApplicationListener {
 		CheerborgUnitBar cbunitbar = new CheerborgUnitBar();
 		cbunitbar.create();
 		PomSelect so = new PomSelect(0,0);
-		so.loadTextureIfNeeded();
 		cbunitbar.addUnitToBar(so);
 
 		SpiderUnitBar spunitbar = new SpiderUnitBar();
 		spunitbar.create();
 		SpiderSelect spo = new SpiderSelect(0,0);
-		spo.loadTextureIfNeeded();
 		spunitbar.addUnitToBar(spo);
 		
 		for (IScreenObject o : screenObjects) {

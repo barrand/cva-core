@@ -24,7 +24,6 @@ public abstract class ScreenObject implements IScreenObject {
 
 	@Override
 	public void create() {
-		loadTextureIfNeeded();
 	}
 
 	@Override

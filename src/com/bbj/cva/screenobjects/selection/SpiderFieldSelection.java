@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.events.PlaceUnitEvent;
-import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.events.SpiderUnitTypeEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.ScreenObject;

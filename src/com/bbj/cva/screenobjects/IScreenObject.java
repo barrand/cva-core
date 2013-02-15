@@ -13,7 +13,6 @@ public interface IScreenObject {
 	public float getY();
 	public float getWidth();
 	public float getHeight();
-	public void loadTextureIfNeeded();
 	public float getSpeedX();
 	public float getSpeedY();
 }

@@ -1,7 +1,5 @@
 package com.bbj.cva.screenobjects.selection;
 
-import java.awt.Point;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -40,10 +38,6 @@ public abstract class Selection implements IScreenObject
 	{
 	}
 
-	@Override
-	public void loadTextureIfNeeded() {
-		
-	}
 	@Override
 	public float getSpeedX() {
 		return 0;

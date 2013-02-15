@@ -86,13 +86,6 @@ public class CheerborgUnitBar implements IScreenObject
 	}
 
 	@Override
-	public void loadTextureIfNeeded()
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public float getSpeedX()
 	{
 		// TODO Auto-generated method stub

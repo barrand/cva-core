@@ -24,9 +24,9 @@ public class CvaModel {
 	public static Texture pomDie;
 	public static Texture spider;
 	public static Texture bolaShot;
-
 	public static Texture pomSelect;
 	public static Texture spiderSelect;
+	
 	public static Bus eventBus;
 	
 	public static enum Unit
