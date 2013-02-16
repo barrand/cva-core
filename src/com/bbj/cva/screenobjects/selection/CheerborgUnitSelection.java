@@ -1,12 +1,12 @@
 package com.bbj.cva.screenobjects.selection;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.events.UnitTypeSelectEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.util.PlayerInput;
 
 public class CheerborgUnitSelection extends Selection
 {
@@ -15,8 +15,9 @@ public class CheerborgUnitSelection extends Selection
 	@Override
 	public void create()
 	{
+		playerNum = 2;
 		selectionImage = new Texture(Gdx.files.internal("data/selection.png"));
-		//selectedImage = new Texture(Gdx.files.internal("data/selected.png"));
+		
 		select = selectionImage;
 		
 		selectionRect = new Rectangle();
@@ -39,7 +40,7 @@ public class CheerborgUnitSelection extends Selection
 		/**
 		 * Detect requested motion.
 		 */
-		if (Gdx.input.isKeyPressed(Input.Keys.L))
+		if (PlayerInput.moveSelectRightPressed(playerNum))
 		{
 			rightWasDownLastFrame = true;
 		}
@@ -50,7 +51,7 @@ public class CheerborgUnitSelection extends Selection
 			CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
 		}
 
-		if (Gdx.input.isKeyPressed(Input.Keys.J))
+		if (PlayerInput.moveSelectLeftPressed(playerNum))
 		{
 			leftWasDownLastFrame = true;
 		}

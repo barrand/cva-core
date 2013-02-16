@@ -1,7 +1,6 @@
 package com.bbj.cva.screenobjects.selection;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -9,6 +8,7 @@ import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.SpiderUnitTypeEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.ScreenObject;
+import com.bbj.cva.util.PlayerInput;
 import com.squareup.otto.Subscribe;
 
 public class SpiderFieldSelection extends Selection
@@ -23,6 +23,7 @@ public class SpiderFieldSelection extends Selection
 	@Override
 	public void create()
 	{
+		playerNum = 1;
 		selectionImage = new Texture(Gdx.files.internal("data/selection.png"));
 
 		// TODO Auto-generated method stub
@@ -42,7 +43,7 @@ public class SpiderFieldSelection extends Selection
 		 * Detect requested motion.
 		 */
 	
-		if (Gdx.input.isKeyPressed(Input.Keys.D))
+		if (PlayerInput.moveRightPressed(playerNum))
 		{
 			rightWasDownLastFrame = true;
 		}
@@ -52,7 +53,7 @@ public class SpiderFieldSelection extends Selection
 			rightWasDownLastFrame = false;
 		}
 	
-		if (Gdx.input.isKeyPressed(Input.Keys.A))
+		if (PlayerInput.moveLeftPressed(playerNum))
 		{
 			leftWasDownLastFrame = true;
 		}
@@ -62,7 +63,7 @@ public class SpiderFieldSelection extends Selection
 			leftWasDownLastFrame = false;
 		}
 	
-		if (Gdx.input.isKeyPressed(Input.Keys.W))
+		if (PlayerInput.moveUpPressed(playerNum))
 		{
 			upWasDownLastFrame = true;
 		}
@@ -71,7 +72,7 @@ public class SpiderFieldSelection extends Selection
 			selectionRect.y += CvaModel.TILE_HEIGHT;
 			upWasDownLastFrame = false;
 		}
-		if (Gdx.input.isKeyPressed(Input.Keys.S))
+		if (PlayerInput.moveDownPressed(playerNum))
 		{
 			downWasDownLastFrame = true;
 		}
@@ -81,15 +82,12 @@ public class SpiderFieldSelection extends Selection
 			downWasDownLastFrame = false;
 		}
 	
-		if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
+		if (PlayerInput.actionButtonPressed(playerNum))
 		{
 			enterWasDownLastFrame = true;
 		}
 		else if (enterWasDownLastFrame == true)
 		{
-
-			//SpiderUnit spider = new SpiderUnit(selectionRect.x,selectionRect.y);
-			//CvaModel.eventBus.post(new PlaceUnitEvent(spider));
 			if (unitType != null)
 			{
 				CvaModel.eventBus.post(new PlaceUnitEvent(selectionRect.x + getWidth()/2, selectionRect.y, unitType));

@@ -11,13 +11,14 @@ public abstract class Selection implements IScreenObject
 {
 	protected Rectangle selectionRect;
 	protected Texture selectionImage;
-	//protected Texture selectedImage;
+	protected int playerNum;
 	int startSpaceX = 11;
 	int startSpaceY = 11;
 	
 	@Override
 	public void create()
 	{
+		playerNum = 0;
 		selectionImage = new Texture(Gdx.files.internal("data/selection.png"));
 
 		selectionRect = new Rectangle();

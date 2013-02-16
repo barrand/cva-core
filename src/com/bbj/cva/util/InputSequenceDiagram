@@ -1,0 +1,37 @@
+@startuml
+title Input Communications Options
+hide footbox
+
+participant CheerVArachnids
+participant Selection
+participant InputPlayer << Static Helper >>
+
+create Selection
+CheerVArachnids -> Selection : Create CheerFieldSelector \n [Assign Player #]
+activate Selection
+Selection -> InputPlayer: Player Input was 'Action'? \n [Player #]
+activate InputPlayer
+InputPlayer -> Gdx.Input.Keyboard: Did Player # specific key for 'Action' get pressed?
+activate Gdx.Input.Keyboard
+InputPlayer <-- Gdx.Input.Keyboard: Nope
+deactivate Gdx.Input.Keyboard
+InputPlayer -> Gdx.Input.Touch: Did Player # touch screen?\n(don't know how this will work???)
+activate Gdx.Input.Touch
+InputPlayer <-- Gdx.Input.Touch: Nope
+deactivate Gdx.Input.Touch
+InputPlayer -> OuyaController: Did Player # specific button for 'Action' get pressed?
+activate OuyaController
+InputPlayer <-- OuyaController: Sure Did!
+deactivate OuyaController
+InputPlayer -> GamestixController: Did Player # specific button for 'Action' get pressed?
+activate GamestixController
+InputPlayer <-- GamestixController: Nope
+deactivate GamestixController
+Selection <-- InputPlayer: Yes
+[<- Selection : Launch Event
+deactivate InputPlayer
+deactivate Selection
+@enduml
+
+
+

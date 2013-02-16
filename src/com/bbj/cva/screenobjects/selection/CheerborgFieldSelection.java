@@ -1,7 +1,6 @@
 package com.bbj.cva.screenobjects.selection;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -9,6 +8,7 @@ import com.bbj.cva.events.CheerborgUnitTypeEvent;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.ScreenObject;
+import com.bbj.cva.util.PlayerInput;
 import com.squareup.otto.Subscribe;
 
 public class CheerborgFieldSelection extends Selection {
@@ -20,6 +20,7 @@ public class CheerborgFieldSelection extends Selection {
 
 	@Override
 	public void create() {
+		playerNum = 2;
 		selectionImage = new Texture(Gdx.files.internal("data/selection.png"));
 
 		selectionRect = new Rectangle();
@@ -37,43 +38,36 @@ public class CheerborgFieldSelection extends Selection {
 		 * Detect requested motion.
 		 */
 
-		if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
+		if (PlayerInput.moveRightPressed(playerNum)) {
 			rightWasDownLastFrame = true;
 		} else if (rightWasDownLastFrame == true) {
 			selectionRect.x += CvaModel.TILE_WIDTH;
 			rightWasDownLastFrame = false;
 		}
 
-		if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
+		if (PlayerInput.moveLeftPressed(playerNum)) {
 			leftWasDownLastFrame = true;
 		} else if (leftWasDownLastFrame == true) {
 			selectionRect.x -= CvaModel.TILE_WIDTH;
 			leftWasDownLastFrame = false;
 		}
 
-		if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
+		if (PlayerInput.moveUpPressed(playerNum)) {
 			upWasDownLastFrame = true;
 		} else if (upWasDownLastFrame == true) {
 			selectionRect.y += CvaModel.TILE_HEIGHT;
 			upWasDownLastFrame = false;
 		}
-		if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
+		if (PlayerInput.moveDownPressed(playerNum)) {
 			downWasDownLastFrame = true;
 		} else if (downWasDownLastFrame == true) {
 			selectionRect.y -= CvaModel.TILE_HEIGHT;
 			downWasDownLastFrame = false;
 		}
 
-		if (Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.isTouched()) {
+		if (PlayerInput.actionButtonPressed(playerNum)) {
 			enterWasDownLastFrame = true;
 		} else if (enterWasDownLastFrame == true) {
-
-			// Pom pom = new Pom(selectionRect.x, selectionRect.y);
-			// CvaModel.eventBus.post(new PlaceUnitEvent(pom));
-
-			// BolaShot shot = new BolaShot(0f, selectionRect.y +
-			// CvaModel.TILE_HEIGHT/2);
-			// CvaModel.eventBus.post(new PlaceUnitEvent(shot));
 
 			if (unitType != null) {
 				CvaModel.eventBus.post(new PlaceUnitEvent(selectionRect.x
@@ -88,7 +82,6 @@ public class CheerborgFieldSelection extends Selection {
 	@Subscribe
 	public void onCheerborgUnitType(CheerborgUnitTypeEvent event) {
 		unitType = event.screenObject;
-
 	}
 
 	@Override

@@ -1,12 +1,12 @@
 package com.bbj.cva.screenobjects.selection;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.events.UnitTypeSelectEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.util.PlayerInput;
 
 public class SpiderUnitSelection extends Selection
 {
@@ -16,6 +16,7 @@ public class SpiderUnitSelection extends Selection
 	@Override
 	public void create()
 	{
+		playerNum = 1;
 		selectionImage = new Texture(Gdx.files.internal("data/selection.png"));
 		//selectedImage = new Texture(Gdx.files.internal("data/selected.png"));
 		select = selectionImage;
@@ -41,7 +42,7 @@ public class SpiderUnitSelection extends Selection
 		 * Detect requested motion.
 		 */
 		
-		if (Gdx.input.isKeyPressed(Input.Keys.E))
+		if (PlayerInput.moveSelectRightPressed(playerNum))
 		{
 			rightWasDownLastFrame = true;
 		}
@@ -55,7 +56,7 @@ public class SpiderUnitSelection extends Selection
 			rightWasDownLastFrame = false;
 		}
 
-		if (Gdx.input.isKeyPressed(Input.Keys.Q))
+		if (PlayerInput.moveSelectLeftPressed(playerNum))
 		{
 			leftWasDownLastFrame = true;
 		}
