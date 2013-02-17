@@ -13,17 +13,11 @@ public abstract class AnimatedScreenObject extends ScreenObject implements IAnim
 	SpriteBatch spriteBatch; // #6
 	TextureRegion currentFrame; // #7
 	public boolean loop = true;
-	
 
 	float stateTime; // #8
 
 	public AnimatedScreenObject(float x, float y) {
 		super(x,y);
-		unitRect = new Rectangle();
-		unitRect.width = CvaModel.TILE_WIDTH;
-		unitRect.height = CvaModel.TILE_HEIGHT;
-		unitRect.x = x;
-		unitRect.y = y;
 	}
 
 	@Override
@@ -45,14 +39,15 @@ public abstract class AnimatedScreenObject extends ScreenObject implements IAnim
 
 	@Override
 	public void render(SpriteBatch spriteBatch) {
-		unitRect.x += getSpeedX() + speedXModifier;
-		unitRect.y += getSpeedY() + speedYModifier;
+		x += getSpeedX() + speedXModifier;
+		y += getSpeedY() + speedYModifier;
 		stateTime += Gdx.graphics.getDeltaTime();
         currentFrame = animation.getKeyFrame(stateTime, true);
         if(loop == false && currentFrame == textureFrames[textureFrames.length-1]){
         	onAnimationEnd();
         }
-        spriteBatch.draw(currentFrame, unitRect.x - unitRect.getWidth()/2, unitRect.y);
+        spriteBatch.draw(currentFrame, x-getSpriteWidth()/2, y);
+//        spriteBatch.draw(currentFrame, unitRect.x - unitRect.getWidth()/2, unitRect.y);
 	}
 
 	protected void onAnimationEnd() {

@@ -45,18 +45,18 @@ public class SpiderUnit extends Shooter {
 	}
 	
 	@Override
-	public float getWidth() {
+	public float getSpriteWidth() {
 		return 190;
 	}
 
 	@Override
-	public float getHeight() {
+	public float getSpriteHeight() {
 		return 140;
 	}
 
 	@Override
 	protected ScreenObject getProjectile() {
-		return new BolaShot(unitRect.x + unitRect.width, unitRect.y + unitRect.height/2);
+		return new BolaShot(x + getSpriteWidth(), y + getSpriteHeight()/2);
 	}
 
 	@Override

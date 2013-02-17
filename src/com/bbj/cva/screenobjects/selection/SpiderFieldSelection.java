@@ -90,7 +90,7 @@ public class SpiderFieldSelection extends Selection
 		{
 			if (unitType != null)
 			{
-				CvaModel.eventBus.post(new PlaceUnitEvent(selectionRect.x + getWidth()/2, selectionRect.y, unitType));
+				CvaModel.eventBus.post(new PlaceUnitEvent(selectionRect.x + getSpriteWidth()/2, selectionRect.y, unitType));
 			}
 			enterWasDownLastFrame = false;
 		}
@@ -105,33 +105,12 @@ public class SpiderFieldSelection extends Selection
 	}
 	
 	@Override
-	public float getWidth() {
+	public float getSpriteWidth() {
 		return CvaModel.TILE_WIDTH;
 	}
 
 	@Override
-	public float getHeight() {
+	public float getSpriteHeight() {
 		return CvaModel.TILE_HEIGHT;
-	}
-	
-	@Override
-	public void setX(float x) {
-	}
-
-	@Override
-	public void setY(float y) {
-	}
-	@Override
-	public float getX()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getY()
-	{
-		// TODO Auto-generated method stub
-		return 0;
 	}
 }

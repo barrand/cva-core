@@ -36,7 +36,7 @@ public class SpiderUnitSelection extends Selection
 		if (init)
 		{
 			init = false;
-			CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
+			CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getSpriteWidth()/2));
 		}
 		/**
 		 * Detect requested motion.
@@ -51,7 +51,7 @@ public class SpiderUnitSelection extends Selection
 			if (selectionRect.x + CvaModel.TILE_WIDTH <= CvaModel.TILE_WIDTH*7)
 			{
 				selectionRect.x += CvaModel.TILE_WIDTH;
-				CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
+				CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getSpriteWidth()/2));
 			}
 			rightWasDownLastFrame = false;
 		}
@@ -64,48 +64,20 @@ public class SpiderUnitSelection extends Selection
 		{
 			selectionRect.x -= CvaModel.TILE_WIDTH;
 			leftWasDownLastFrame = false;
-			CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getWidth()/2));
+			CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getSpriteWidth()/2));
 		}
 
 		spriteBatch.draw(select, selectionRect.x, selectionRect.y);
 	}
 	
 	@Override
-	public float getWidth() {
+	public float getSpriteWidth() {
 		return CvaModel.TILE_WIDTH;
 	}
 
 	@Override
-	public float getHeight() {
+	public float getSpriteHeight() {
 		return CvaModel.TILE_HEIGHT;
-	}
-
-	@Override
-	public float getX()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getY()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setX(float x)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setY(float y)
-	{
-		// TODO Auto-generated method stub
-		
 	}
 }
 

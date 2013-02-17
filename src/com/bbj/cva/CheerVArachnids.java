@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.IHitAreaObject;
 import com.bbj.cva.screenobjects.IScreenObject;
 import com.bbj.cva.screenobjects.Pom;
 import com.bbj.cva.screenobjects.PomSelect;
@@ -191,7 +192,7 @@ public class CheerVArachnids implements ApplicationListener {
 			break;
 		}
 		if (event.screenObject instanceof IProjectile) {
-			CvaModel.thingsCheerborgsInteractWith.add(event.screenObject);
+			CvaModel.thingsCheerborgsInteractWith.add((IHitAreaObject) event.screenObject);
 		}
 	}
 

@@ -31,12 +31,12 @@ public class PomDie extends AnimatedScreenObject {
 
 	@Override
 	public int getFrameRows() {
-		return 12;
+		return 7;
 	}
 
 	@Override
 	public float getAnimationSpeed() {
-		return 0.01f;
+		return 0.017f;
 	}
 
 	@Override
@@ -50,12 +50,12 @@ public class PomDie extends AnimatedScreenObject {
 	}
 	
 	@Override
-	public float getWidth() {
+	public float getSpriteWidth() {
 		return 50;
 	}
 
 	@Override
-	public float getHeight() {
+	public float getSpriteHeight() {
 		return 125;
 	}
 

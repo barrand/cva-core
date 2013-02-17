@@ -7,12 +7,8 @@ public interface IScreenObject {
 	public void create();
 	public void destroy();
 	public void render(SpriteBatch spriteBatch);
-	public void setX(float x);
-	public void setY(float y);
-	public float getX();
-	public float getY();
-	public float getWidth();
-	public float getHeight();
+	public float getSpriteWidth();//the actual width of the sprite graphic
+	public float getSpriteHeight();
 	public float getSpeedX();
 	public float getSpeedY();
 }

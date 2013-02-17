@@ -32,8 +32,8 @@ public class SpiderUnitBar implements IScreenObject
 	{
 		int pos = unitbar.size();
 		if (pos >= 5) return false;
-		so.setX(pos*CvaModel.TILE_WIDTH + so.getWidth()/2);  // FIXME: This is too hard-codedy for my taste...
-		so.setY(CvaModel.TILE_HEIGHT*7);
+		so.x = pos*CvaModel.TILE_WIDTH + so.getSpriteWidth()/2;  // FIXME: This is too hard-codedy for my taste...
+		so.y = CvaModel.TILE_HEIGHT*7;
 		unitbar.add(so);
 		return true;
 	}
@@ -59,7 +59,7 @@ public class SpiderUnitBar implements IScreenObject
 		boolean fireEvent = false;
 		for (ScreenObject so : unitbar)
 		{
-			if (Math.abs(so.getX() - event.x) < 0.01)
+			if (Math.abs(so.x - event.x) < 0.01)
 			{
 				// FIXME: Eventually the screenobjects here should have a state of being 'ready' to deploy, which we will check...
 				fireEvent = true;
@@ -67,21 +67,22 @@ public class SpiderUnitBar implements IScreenObject
 			}
 		}
 		// FIXME: ...and then we won't have to do this nonsense.
-		if (!fireEvent && (event.x > getX()) && (event.x < (getX()+getWidth())))
-		{
-			CvaModel.eventBus.post(new SpiderUnitTypeEvent(null));
-		}
+		//not sure on this
+//		if (!fireEvent && (event.x > x) && (event.x < (x+getSpriteWidth())))
+//		{
+//			CvaModel.eventBus.post(new SpiderUnitTypeEvent(null));
+//		}
 
 	}
 
 	@Override
-	public float getWidth()
+	public float getSpriteWidth()
 	{
 		return CvaModel.TILE_WIDTH*5;
 	}
 
 	@Override
-	public float getHeight()
+	public float getSpriteHeight()
 	{
 		// TODO Auto-generated method stub
 		return 0;
@@ -99,32 +100,5 @@ public class SpiderUnitBar implements IScreenObject
 	{
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public float getX()
-	{
-		return 0f;
-	}
-
-	@Override
-	public float getY()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setX(float x)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setY(float y)
-	{
-		// TODO Auto-generated method stub
-		
 	}
 }

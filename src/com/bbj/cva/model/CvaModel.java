@@ -3,6 +3,7 @@ package com.bbj.cva.model;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.bbj.cva.screenobjects.IHitAreaObject;
 import com.bbj.cva.screenobjects.ScreenObject;
 import com.squareup.otto.Bus;
 
@@ -18,7 +19,7 @@ public class CvaModel {
 	public static final float TILE_WIDTH = 128;
 	public static final float TILE_HEIGHT = 135;
 
-	public static ArrayList<ScreenObject> thingsCheerborgsInteractWith = new ArrayList<ScreenObject>();
+	public static ArrayList<IHitAreaObject> thingsCheerborgsInteractWith = new ArrayList<IHitAreaObject>();
 
 	public static Texture pomWalk;
 	public static Texture pomDie;
@@ -26,6 +27,7 @@ public class CvaModel {
 	public static Texture bolaShot;
 	public static Texture pomSelect;
 	public static Texture spiderSelect;
+	public static Texture blue;
 	
 	public static Bus eventBus;
 	

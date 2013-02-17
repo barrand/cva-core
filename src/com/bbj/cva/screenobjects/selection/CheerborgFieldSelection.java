@@ -71,7 +71,7 @@ public class CheerborgFieldSelection extends Selection {
 
 			if (unitType != null) {
 				CvaModel.eventBus.post(new PlaceUnitEvent(selectionRect.x
-						+ getWidth() / 2, selectionRect.y, unitType));
+						+ getSpriteWidth() / 2, selectionRect.y, unitType));
 			}
 			enterWasDownLastFrame = false;
 		}
@@ -83,39 +83,4 @@ public class CheerborgFieldSelection extends Selection {
 	public void onCheerborgUnitType(CheerborgUnitTypeEvent event) {
 		unitType = event.screenObject;
 	}
-
-	@Override
-	public float getWidth() {
-		return CvaModel.TILE_WIDTH;
-	}
-
-	@Override
-	public float getHeight() {
-		return CvaModel.TILE_HEIGHT;
-	}
-
-	@Override
-	public void setX(float x) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setY(float y) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public float getX() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getY() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }

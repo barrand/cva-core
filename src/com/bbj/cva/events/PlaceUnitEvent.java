@@ -11,8 +11,8 @@ public class PlaceUnitEvent extends Object
 	public PlaceUnitEvent(ScreenObject screenObject)
 	{
 		this.screenObject = screenObject;
-		x = screenObject.getX();
-		y = screenObject.getY();
+		x = screenObject.x;
+		y = screenObject.y;
 	}
 	
 	public PlaceUnitEvent(float nx, float ny, ScreenObject so)

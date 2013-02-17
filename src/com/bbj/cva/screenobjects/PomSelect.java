@@ -29,12 +29,12 @@ public class PomSelect extends ScreenObject
 	}
 	
 	@Override
-	public float getWidth() {
+	public float getSpriteWidth() {
 		return 128;
 	}
 
 	@Override
-	public float getHeight() {
+	public float getSpriteHeight() {
 		return 135;
 	}
 }

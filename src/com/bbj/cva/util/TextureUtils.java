@@ -13,5 +13,6 @@ public class TextureUtils {
 		CvaModel.pomSelect = new Texture(Gdx.files.internal("data/spriteSheets/pomSelect.png"));
 		CvaModel.spiderSelect = new Texture(Gdx.files.internal("data/spriteSheets/spiderSelect.png"));
 		CvaModel.spider = new Texture(Gdx.files.internal("data/spriteSheets/spiderShot.png"));
+		CvaModel.blue = new Texture(Gdx.files.internal("data/spriteSheets/blue.png"));
 	}
 }
