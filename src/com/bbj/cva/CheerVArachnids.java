@@ -122,7 +122,8 @@ public class CheerVArachnids implements ApplicationListener {
 		screenObjects.add(0, cbunitbar);
 		screenObjects.add(0, spunitbar);
 		
-		spriteBatch = new SpriteBatch(); // #12
+		spriteBatch = new SpriteBatch();
+		CvaModel.defaultColor = spriteBatch.getColor();
 	}
 
 	@Override

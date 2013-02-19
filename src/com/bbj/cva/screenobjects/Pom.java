@@ -7,7 +7,7 @@ import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
 
-public class Pom extends HitableAnimatedScreenObject {
+public class Pom extends AttackingHitableAnimated {
 
 	public Pom(float x, float y) {
 		super(x, y);
@@ -79,5 +79,21 @@ public class Pom extends HitableAnimatedScreenObject {
 	@Override
 	public float getHitAreaHeight() {
 		return 130;
+	}
+
+	@Override
+	protected float getAttackAreaWidth() {
+		return 100;
+	}
+
+	@Override
+	protected float getAttackAreaHeight() {
+		// TODO Auto-generated method stub
+		return 130;
+	}
+
+	@Override
+	protected boolean attacksToTheLeft() {
+		return true;
 	}
 }

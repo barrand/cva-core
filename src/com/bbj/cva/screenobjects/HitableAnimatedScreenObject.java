@@ -23,7 +23,11 @@ public abstract class HitableAnimatedScreenObject extends AnimatedScreenObject i
 		super.render(spriteBatch);
 		hitArea.x = x - hitArea.width/2;
     	hitArea.y = y + hitArea.height/2;
-    	spriteBatch.draw(CvaModel.blue, hitArea.x, hitArea.y, hitArea.width, hitArea.height, 0, 0, 0, 0, false, false);
+    	if(CvaModel.DEBUG){
+    		spriteBatch.setColor(200, 200, 200, 240);
+    		spriteBatch.draw(CvaModel.blue, hitArea.x, hitArea.y, hitArea.width, hitArea.height, 0, 0, 0, 0, false, false);
+    		spriteBatch.setColor(CvaModel.defaultColor);
+    	}
 	}
 
 
