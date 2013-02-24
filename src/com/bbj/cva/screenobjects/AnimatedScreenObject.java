@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
-import com.bbj.cva.model.CvaModel;
 
 public abstract class AnimatedScreenObject extends ScreenObject implements IAnimatedObject {
 	Animation animation; // #3
@@ -46,7 +44,7 @@ public abstract class AnimatedScreenObject extends ScreenObject implements IAnim
         if(loop == false && currentFrame == textureFrames[textureFrames.length-1]){
         	onAnimationEnd();
         }
-        spriteBatch.draw(currentFrame, x-getSpriteWidth()/2, y);
+        spriteBatch.draw(currentFrame, x, y);
 //        spriteBatch.draw(currentFrame, unitRect.x - unitRect.getWidth()/2, unitRect.y);
 	}
 

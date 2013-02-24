@@ -1,0 +1,865 @@
+pomAll.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+render-grunt-attack/CB-grunt-attack0031
+  rotate: false
+  xy: 0, 0
+  size: 132, 152
+  orig: 300, 300
+  offset: 62, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0033
+  rotate: false
+  xy: 234, 916
+  size: 108, 158
+  orig: 300, 300
+  offset: 85, 36
+  index: -1
+render-grunt-die/CB-grunt-death0012
+  rotate: false
+  xy: 402, 1568
+  size: 100, 150
+  orig: 300, 300
+  offset: 94, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0026
+  rotate: false
+  xy: 208, 1548
+  size: 100, 164
+  orig: 300, 300
+  offset: 85, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0017
+  rotate: false
+  xy: 0, 456
+  size: 132, 152
+  orig: 300, 300
+  offset: 62, 35
+  index: -1
+render-grunt-die/CB-grunt-death0008
+  rotate: false
+  xy: 864, 1544
+  size: 94, 152
+  orig: 300, 300
+  offset: 100, 35
+  index: -1
+render-grunt-die/CB-grunt-death0038
+  rotate: false
+  xy: 504, 456
+  size: 1, 1
+  orig: 300, 300
+  offset: 0, 299
+  index: -1
+render-grunt-attack/CB-grunt-attack0014
+  rotate: false
+  xy: 776, 0
+  size: 112, 152
+  orig: 300, 300
+  offset: 82, 35
+  index: -1
+render-grunt-die/CB-grunt-death0003
+  rotate: false
+  xy: 116, 912
+  size: 118, 156
+  orig: 300, 300
+  offset: 76, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0018
+  rotate: false
+  xy: 308, 1542
+  size: 94, 162
+  orig: 300, 300
+  offset: 89, 34
+  index: -1
+render-grunt-walk/CB-grunt-walking0030
+  rotate: false
+  xy: 376, 610
+  size: 108, 160
+  orig: 300, 300
+  offset: 88, 35
+  index: -1
+render-grunt-die/CB-grunt-death0033
+  rotate: false
+  xy: 776, 1408
+  size: 104, 134
+  orig: 300, 300
+  offset: 102, 29
+  index: -1
+render-grunt-walk/CB-grunt-walking0007
+  rotate: false
+  xy: 110, 1718
+  size: 102, 166
+  orig: 300, 300
+  offset: 85, 32
+  index: -1
+render-grunt-attack/CB-grunt-attack0035
+  rotate: false
+  xy: 524, 152
+  size: 122, 152
+  orig: 300, 300
+  offset: 72, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0037
+  rotate: false
+  xy: 112, 1228
+  size: 100, 158
+  orig: 300, 300
+  offset: 87, 38
+  index: -1
+render-grunt-die/CB-grunt-death0026
+  rotate: false
+  xy: 868, 1696
+  size: 94, 130
+  orig: 300, 300
+  offset: 100, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0022
+  rotate: false
+  xy: 132, 456
+  size: 130, 152
+  orig: 300, 300
+  offset: 64, 35
+  index: -1
+render-grunt-die/CB-grunt-death0021
+  rotate: false
+  xy: 212, 1874
+  size: 120, 116
+  orig: 300, 300
+  offset: 74, 34
+  index: -1
+render-grunt-walk/CB-grunt-walking0011
+  rotate: false
+  xy: 342, 930
+  size: 108, 158
+  orig: 300, 300
+  offset: 87, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0043
+  rotate: false
+  xy: 558, 936
+  size: 108, 158
+  orig: 300, 300
+  offset: 86, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0004
+  rotate: false
+  xy: 314, 1088
+  size: 92, 164
+  orig: 300, 300
+  offset: 86, 36
+  index: -1
+render-grunt-attack/CB-grunt-attack0008
+  rotate: false
+  xy: 314, 1252
+  size: 94, 156
+  orig: 300, 300
+  offset: 111, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0030
+  rotate: false
+  xy: 0, 152
+  size: 132, 152
+  orig: 300, 300
+  offset: 62, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0034
+  rotate: false
+  xy: 504, 458
+  size: 108, 158
+  orig: 300, 300
+  offset: 84, 36
+  index: -1
+render-grunt-attack/CB-grunt-attack0001
+  rotate: false
+  xy: 722, 306
+  size: 108, 158
+  orig: 300, 300
+  offset: 89, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0023
+  rotate: false
+  xy: 310, 1704
+  size: 88, 166
+  orig: 300, 300
+  offset: 90, 34
+  index: -1
+render-grunt-attack/CB-grunt-attack0029
+  rotate: false
+  xy: 0, 152
+  size: 132, 152
+  orig: 300, 300
+  offset: 62, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0016
+  rotate: false
+  xy: 0, 760
+  size: 130, 152
+  orig: 300, 300
+  offset: 64, 35
+  index: -1
+render-grunt-die/CB-grunt-death0025
+  rotate: false
+  xy: 738, 1868
+  size: 82, 114
+  orig: 300, 300
+  offset: 112, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0015
+  rotate: false
+  xy: 796, 632
+  size: 104, 160
+  orig: 300, 300
+  offset: 84, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0037
+  rotate: false
+  xy: 130, 760
+  size: 118, 152
+  orig: 300, 300
+  offset: 76, 35
+  index: -1
+render-grunt-die/CB-grunt-death0030
+  rotate: false
+  xy: 646, 152
+  size: 118, 148
+  orig: 300, 300
+  offset: 88, 29
+  index: -1
+render-grunt-walk/CB-grunt-walking0008
+  rotate: false
+  xy: 810, 468
+  size: 104, 164
+  orig: 300, 300
+  offset: 86, 32
+  index: -1
+render-grunt-die/CB-grunt-death0018
+  rotate: false
+  xy: 812, 1112
+  size: 104, 146
+  orig: 300, 300
+  offset: 90, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0020
+  rotate: false
+  xy: 690, 1706
+  size: 78, 162
+  orig: 300, 300
+  offset: 101, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0034
+  rotate: false
+  xy: 392, 304
+  size: 124, 152
+  orig: 300, 300
+  offset: 70, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0038
+  rotate: false
+  xy: 592, 616
+  size: 98, 158
+  orig: 300, 300
+  offset: 89, 38
+  index: -1
+render-grunt-die/CB-grunt-death0013
+  rotate: false
+  xy: 674, 1398
+  size: 102, 148
+  orig: 300, 300
+  offset: 92, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0005
+  rotate: false
+  xy: 612, 458
+  size: 92, 158
+  orig: 300, 300
+  offset: 112, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0027
+  rotate: false
+  xy: 212, 1074
+  size: 102, 164
+  orig: 300, 300
+  offset: 86, 35
+  index: -1
+render-grunt-die/CB-grunt-death0009
+  rotate: false
+  xy: 886, 1266
+  size: 96, 150
+  orig: 300, 300
+  offset: 98, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0042
+  rotate: false
+  xy: 0, 1544
+  size: 110, 158
+  orig: 300, 300
+  offset: 84, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0001
+  rotate: false
+  xy: 876, 952
+  size: 84, 160
+  orig: 300, 300
+  offset: 103, 38
+  index: -1
+render-grunt-attack/CB-grunt-attack0013
+  rotate: false
+  xy: 598, 1716
+  size: 92, 152
+  orig: 300, 300
+  offset: 111, 35
+  index: -1
+render-grunt-die/CB-grunt-death0004
+  rotate: false
+  xy: 390, 456
+  size: 114, 154
+  orig: 300, 300
+  offset: 80, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0019
+  rotate: false
+  xy: 586, 1392
+  size: 88, 162
+  orig: 300, 300
+  offset: 93, 34
+  index: -1
+render-grunt-walk/CB-grunt-walking0031
+  rotate: false
+  xy: 484, 616
+  size: 108, 158
+  orig: 300, 300
+  offset: 88, 36
+  index: -1
+render-grunt-die/CB-grunt-death0034
+  rotate: false
+  xy: 880, 1416
+  size: 104, 128
+  orig: 300, 300
+  offset: 102, 29
+  index: -1
+render-grunt-walk/CB-grunt-walking0024
+  rotate: false
+  xy: 408, 1248
+  size: 90, 164
+  orig: 300, 300
+  offset: 88, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0028
+  rotate: false
+  xy: 132, 0
+  size: 132, 152
+  orig: 300, 300
+  offset: 62, 35
+  index: -1
+render-grunt-die/CB-grunt-death0027
+  rotate: false
+  xy: 706, 1110
+  size: 106, 142
+  orig: 300, 300
+  offset: 88, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0021
+  rotate: false
+  xy: 262, 304
+  size: 130, 152
+  orig: 300, 300
+  offset: 64, 35
+  index: -1
+render-grunt-die/CB-grunt-death0022
+  rotate: false
+  xy: 456, 1874
+  size: 104, 116
+  orig: 300, 300
+  offset: 90, 33
+  index: -1
+render-grunt-attack/CB-grunt-attack0036
+  rotate: false
+  xy: 656, 0
+  size: 120, 152
+  orig: 300, 300
+  offset: 74, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0005
+  rotate: false
+  xy: 110, 1386
+  size: 94, 166
+  orig: 300, 300
+  offset: 85, 34
+  index: -1
+render-grunt-attack/CB-grunt-attack0007
+  rotate: false
+  xy: 406, 1092
+  size: 94, 156
+  orig: 300, 300
+  offset: 111, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0035
+  rotate: false
+  xy: 704, 464
+  size: 106, 158
+  orig: 300, 300
+  offset: 84, 37
+  index: -1
+render-grunt-die/CB-grunt-death0010
+  rotate: false
+  xy: 788, 1258
+  size: 98, 150
+  orig: 300, 300
+  offset: 96, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0004
+  rotate: false
+  xy: 114, 1070
+  size: 98, 158
+  orig: 300, 300
+  offset: 105, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0028
+  rotate: false
+  xy: 576, 774
+  size: 106, 162
+  orig: 300, 300
+  offset: 85, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0040
+  rotate: false
+  xy: 686, 1546
+  size: 86, 160
+  orig: 300, 300
+  offset: 102, 38
+  index: -1
+render-grunt-attack/CB-grunt-attack0025
+  rotate: false
+  xy: 396, 0
+  size: 130, 152
+  orig: 300, 300
+  offset: 64, 35
+  index: -1
+render-grunt-die/CB-grunt-death0006
+  rotate: false
+  xy: 830, 314
+  size: 104, 154
+  orig: 300, 300
+  offset: 90, 35
+  index: -1
+render-grunt-die/CB-grunt-death0036
+  rotate: false
+  xy: 110, 1884
+  size: 90, 94
+  orig: 300, 300
+  offset: 103, 33
+  index: -1
+render-grunt-die/CB-grunt-death0001
+  rotate: false
+  xy: 0, 1228
+  size: 112, 158
+  orig: 300, 300
+  offset: 85, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0012
+  rotate: false
+  xy: 772, 1546
+  size: 92, 152
+  orig: 300, 300
+  offset: 111, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0012
+  rotate: false
+  xy: 666, 944
+  size: 106, 158
+  orig: 300, 300
+  offset: 86, 35
+  index: -1
+render-grunt-die/CB-grunt-death0031
+  rotate: false
+  xy: 768, 1706
+  size: 100, 134
+  orig: 300, 300
+  offset: 106, 29
+  index: -1
+render-grunt-walk/CB-grunt-walking0009
+  rotate: false
+  xy: 682, 782
+  size: 106, 162
+  orig: 300, 300
+  offset: 86, 33
+  index: -1
+render-grunt-die/CB-grunt-death0019
+  rotate: false
+  xy: 0, 1860
+  size: 110, 130
+  orig: 300, 300
+  offset: 84, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0021
+  rotate: false
+  xy: 934, 314
+  size: 76, 162
+  orig: 300, 300
+  offset: 102, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0033
+  rotate: false
+  xy: 262, 456
+  size: 128, 152
+  orig: 300, 300
+  offset: 66, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0039
+  rotate: false
+  xy: 892, 792
+  size: 90, 160
+  orig: 300, 300
+  offset: 96, 38
+  index: -1
+render-grunt-die/CB-grunt-death0014
+  rotate: false
+  xy: 496, 1726
+  size: 102, 148
+  orig: 300, 300
+  offset: 92, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0020
+  rotate: false
+  xy: 264, 0
+  size: 132, 152
+  orig: 300, 300
+  offset: 62, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0019
+  rotate: false
+  xy: 394, 152
+  size: 130, 152
+  orig: 300, 300
+  offset: 64, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0041
+  rotate: false
+  xy: 888, 0
+  size: 110, 156
+  orig: 300, 300
+  offset: 84, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0006
+  rotate: false
+  xy: 408, 1412
+  size: 94, 156
+  orig: 300, 300
+  offset: 111, 35
+  index: -1
+render-grunt-die/CB-grunt-death0005
+  rotate: false
+  xy: 764, 152
+  size: 110, 154
+  orig: 300, 300
+  offset: 84, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0016
+  rotate: false
+  xy: 204, 1386
+  size: 102, 162
+  orig: 300, 300
+  offset: 84, 34
+  index: -1
+render-grunt-die/CB-grunt-death0035
+  rotate: false
+  xy: 820, 1840
+  size: 90, 124
+  orig: 300, 300
+  offset: 103, 33
+  index: -1
+render-grunt-walk/CB-grunt-walking0025
+  rotate: false
+  xy: 914, 476
+  size: 96, 166
+  orig: 300, 300
+  offset: 85, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0027
+  rotate: false
+  xy: 264, 152
+  size: 130, 152
+  orig: 300, 300
+  offset: 64, 35
+  index: -1
+render-grunt-die/CB-grunt-death0028
+  rotate: false
+  xy: 600, 1102
+  size: 106, 142
+  orig: 300, 300
+  offset: 88, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0024
+  rotate: false
+  xy: 0, 608
+  size: 130, 152
+  orig: 300, 300
+  offset: 64, 35
+  index: -1
+render-grunt-die/CB-grunt-death0023
+  rotate: false
+  xy: 560, 1874
+  size: 94, 116
+  orig: 300, 300
+  offset: 100, 33
+  index: -1
+render-grunt-attack/CB-grunt-attack0045
+  rotate: false
+  xy: 450, 934
+  size: 108, 158
+  orig: 300, 300
+  offset: 88, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0002
+  rotate: false
+  xy: 502, 1412
+  size: 84, 162
+  orig: 300, 300
+  offset: 96, 37
+  index: -1
+render-grunt-die/CB-grunt-death0016
+  rotate: false
+  xy: 212, 1238
+  size: 102, 148
+  orig: 300, 300
+  offset: 92, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0032
+  rotate: false
+  xy: 132, 304
+  size: 130, 152
+  orig: 300, 300
+  offset: 64, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0032
+  rotate: false
+  xy: 874, 156
+  size: 108, 158
+  orig: 300, 300
+  offset: 86, 36
+  index: -1
+render-grunt-die/CB-grunt-death0011
+  rotate: false
+  xy: 500, 1094
+  size: 100, 150
+  orig: 300, 300
+  offset: 94, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0003
+  rotate: false
+  xy: 0, 1702
+  size: 110, 158
+  orig: 300, 300
+  offset: 92, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0029
+  rotate: false
+  xy: 360, 770
+  size: 108, 160
+  orig: 300, 300
+  offset: 85, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0018
+  rotate: false
+  xy: 526, 0
+  size: 130, 152
+  orig: 300, 300
+  offset: 64, 35
+  index: -1
+render-grunt-die/CB-grunt-death0007
+  rotate: false
+  xy: 398, 1718
+  size: 98, 152
+  orig: 300, 300
+  offset: 96, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0040
+  rotate: false
+  xy: 248, 760
+  size: 112, 156
+  orig: 300, 300
+  offset: 82, 35
+  index: -1
+render-grunt-die/CB-grunt-death0037
+  rotate: false
+  xy: 910, 1826
+  size: 46, 46
+  orig: 300, 300
+  offset: 147, 33
+  index: -1
+render-grunt-die/CB-grunt-death0002
+  rotate: false
+  xy: 0, 912
+  size: 116, 158
+  orig: 300, 300
+  offset: 78, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0011
+  rotate: false
+  xy: 502, 1574
+  size: 96, 152
+  orig: 300, 300
+  offset: 112, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0013
+  rotate: false
+  xy: 690, 622
+  size: 106, 160
+  orig: 300, 300
+  offset: 85, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0039
+  rotate: false
+  xy: 516, 304
+  size: 114, 154
+  orig: 300, 300
+  offset: 80, 35
+  index: -1
+render-grunt-die/CB-grunt-death0032
+  rotate: false
+  xy: 306, 1408
+  size: 102, 134
+  orig: 300, 300
+  offset: 104, 29
+  index: -1
+render-grunt-walk/CB-grunt-walking0006
+  rotate: false
+  xy: 110, 1552
+  size: 98, 166
+  orig: 300, 300
+  offset: 85, 32
+  index: -1
+render-grunt-attack/CB-grunt-attack0026
+  rotate: false
+  xy: 0, 304
+  size: 132, 152
+  orig: 300, 300
+  offset: 62, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0036
+  rotate: false
+  xy: 772, 952
+  size: 104, 158
+  orig: 300, 300
+  offset: 85, 38
+  index: -1
+render-grunt-die/CB-grunt-death0015
+  rotate: false
+  xy: 582, 1244
+  size: 102, 148
+  orig: 300, 300
+  offset: 92, 35
+  index: -1
+render-grunt-die/CB-grunt-death0020
+  rotate: false
+  xy: 332, 1870
+  size: 124, 114
+  orig: 300, 300
+  offset: 70, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0010
+  rotate: false
+  xy: 468, 774
+  size: 108, 160
+  orig: 300, 300
+  offset: 87, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0044
+  rotate: false
+  xy: 0, 1386
+  size: 110, 158
+  orig: 300, 300
+  offset: 86, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0015
+  rotate: false
+  xy: 130, 608
+  size: 130, 152
+  orig: 300, 300
+  offset: 64, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0017
+  rotate: false
+  xy: 212, 1712
+  size: 98, 162
+  orig: 300, 300
+  offset: 86, 34
+  index: -1
+render-grunt-attack/CB-grunt-attack0002
+  rotate: false
+  xy: 0, 1070
+  size: 114, 158
+  orig: 300, 300
+  offset: 85, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0022
+  rotate: false
+  xy: 498, 1248
+  size: 84, 164
+  orig: 300, 300
+  offset: 94, 34
+  index: -1
+render-grunt-die/CB-grunt-death0029
+  rotate: false
+  xy: 900, 642
+  size: 106, 146
+  orig: 300, 300
+  offset: 88, 31
+  index: -1
+render-grunt-attack/CB-grunt-attack0023
+  rotate: false
+  xy: 132, 152
+  size: 132, 152
+  orig: 300, 300
+  offset: 62, 35
+  index: -1
+render-grunt-die/CB-grunt-death0024
+  rotate: false
+  xy: 654, 1868
+  size: 84, 116
+  orig: 300, 300
+  offset: 110, 34
+  index: -1
+render-grunt-attack/CB-grunt-attack0010
+  rotate: false
+  xy: 916, 1112
+  size: 94, 154
+  orig: 300, 300
+  offset: 111, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0014
+  rotate: false
+  xy: 788, 792
+  size: 104, 160
+  orig: 300, 300
+  offset: 85, 34
+  index: -1
+render-grunt-attack/CB-grunt-attack0038
+  rotate: false
+  xy: 260, 608
+  size: 116, 152
+  orig: 300, 300
+  offset: 78, 35
+  index: -1
+render-grunt-walk/CB-grunt-walking0003
+  rotate: false
+  xy: 598, 1554
+  size: 88, 162
+  orig: 300, 300
+  offset: 90, 36
+  index: -1
+render-grunt-die/CB-grunt-death0017
+  rotate: false
+  xy: 684, 1252
+  size: 104, 146
+  orig: 300, 300
+  offset: 90, 35
+  index: -1
+render-grunt-attack/CB-grunt-attack0009
+  rotate: false
+  xy: 630, 304
+  size: 92, 154
+  orig: 300, 300
+  offset: 112, 35
+  index: -1
