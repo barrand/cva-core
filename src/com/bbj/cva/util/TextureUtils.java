@@ -2,17 +2,37 @@ package com.bbj.cva.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.bbj.cva.model.CvaModel;
 
 public class TextureUtils {
 
 	public static void loadTextures(){
+		TextureAtlas pomAtlas = new TextureAtlas(
+				Gdx.files.internal("data/spriteSheets/pomAll.txt"));
+		CvaModel.pomWalk = createAnimation(40, "render-grunt-walk/CB-grunt-walking", pomAtlas);
+		CvaModel.pomWalk.setPlayMode(Animation.LOOP);
+		CvaModel.pomDie = createAnimation(38, "render-grunt-die/CB-grunt-death", pomAtlas);
+		CvaModel.pomDie.setPlayMode(Animation.NORMAL);
+		CvaModel.pomAttack = createAnimation(40, "render-grunt-walk/CB-grunt-walking", pomAtlas);
+		CvaModel.pomAttack.setPlayMode(Animation.LOOP);
+		
 		CvaModel.bolaShot = new Texture(Gdx.files.internal("data/spriteSheets/webshot.png"));
-		CvaModel.pomWalk = new Texture(Gdx.files.internal("data/spriteSheets/pomWalk.png"));
-		CvaModel.pomDie = new Texture(Gdx.files.internal("data/spriteSheets/pomDie.png"));
 		CvaModel.pomSelect = new Texture(Gdx.files.internal("data/spriteSheets/pomSelect.png"));
 		CvaModel.spiderSelect = new Texture(Gdx.files.internal("data/spriteSheets/spiderSelect.png"));
-		CvaModel.spider = new Texture(Gdx.files.internal("data/spriteSheets/spiderShot.png"));
 		CvaModel.blue = new Texture(Gdx.files.internal("data/spriteSheets/blue.png"));
+	}
+	
+	private static Animation createAnimation(int numberOfFrames,
+			String fileNamePrefix, TextureAtlas textureAtlas) {
+		AtlasRegion[] walkAtlases = new AtlasRegion[numberOfFrames];
+		for (int ct = 1; ct < numberOfFrames + 1; ct++) {
+			String name = fileNamePrefix + String.format("%04d", ct);
+			Gdx.app.log("cva", "name " + name);
+			walkAtlases[ct - 1] = textureAtlas.findRegion(name);
+		}
+		return new Animation(0.03f, walkAtlases);
 	}
 }

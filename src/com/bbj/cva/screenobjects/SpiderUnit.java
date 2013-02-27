@@ -10,17 +10,12 @@ public class SpiderUnit extends Shooter {
 	{
 		super(x,y);
 		type = CvaModel.Unit.SPIDER;
-		texture = CvaModel.spider;
+//		texture = CvaModel.spider;
 	}
 
 	@Override
 	public void render(SpriteBatch spriteBatch) {
 		super.render(spriteBatch);
-	}
-
-	@Override
-	public float getAnimationSpeed() {
-		return 0.2f;
 	}
 
 	@Override
@@ -52,12 +47,6 @@ public class SpiderUnit extends Shooter {
 	protected TextureRegion getShootingFrame() {
 //		return textureFrames[4];
 		return new TextureRegion();
-	}
-
-	@Override
-	protected String getTextureAtlasUrl() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

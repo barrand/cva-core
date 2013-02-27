@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.squareup.otto.Bus;
 
@@ -21,9 +22,10 @@ public class CvaModel {
 
 	public static ArrayList<IHitAreaObject> thingsCheerborgsInteractWith = new ArrayList<IHitAreaObject>();
 
-	public static Texture pomWalk;
-	public static Texture pomDie;
-	public static Texture spider;
+	public static Animation pomWalk;
+	public static Animation pomDie;
+	public static Animation pomAttack;
+	public static Animation spider;
 	public static Texture bolaShot;
 	public static Texture pomSelect;
 	public static Texture spiderSelect;

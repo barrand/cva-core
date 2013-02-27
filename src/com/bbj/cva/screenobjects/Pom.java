@@ -6,13 +6,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
-import com.bbj.cva.screenobjects.interfaces.IAnimatedAttacker;
-import com.bbj.cva.screenobjects.interfaces.IAnimatedDier;
-import com.bbj.cva.screenobjects.interfaces.IAnimatedWalker;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.bbj.cva.screenobjects.projectiles.IProjectile;
 
-public class Pom extends AttackingHitableAnimated implements IAnimatedWalker, IAnimatedDier, IAnimatedAttacker {
+public class Pom extends AttackingHitableAnimated {
 
 	private float speedX = -1.2f;
 	
@@ -24,7 +21,7 @@ public class Pom extends AttackingHitableAnimated implements IAnimatedWalker, IA
 	@Override
 	public void create(){
 		super.create();
-		currentAnim = walkAnim;
+		currentAnim = CvaModel.pomWalk;
 	}
 
 	@Override
@@ -108,37 +105,4 @@ public class Pom extends AttackingHitableAnimated implements IAnimatedWalker, IA
 		}
 	}
 
-	@Override
-	public String getWalkRegionName() {
-		return "render-grunt-walk/CB-grunt-walking";
-	}
-	@Override
-	public String getDieRegionName() {
-		return "render-grunt-die/CB-grunt-death";
-	}
-
-	@Override
-	public String getAttackRegionName() {
-		return "render-grunt-attack/CB-grunt-attack";
-	}
-
-	@Override
-	public int getAttackNumFrames() {
-		return 45;
-	}
-
-	@Override
-	public int getDieNumFrames() {
-		return 38;
-	}
-
-	@Override
-	public int getWalkNumFrames() {
-		return 40;
-	}
-
-	@Override
-	protected String getTextureAtlasUrl() {
-		return "data/spriteSheets/pomAll.txt";
-	}
 }
