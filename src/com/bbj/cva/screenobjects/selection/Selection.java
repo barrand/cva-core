@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.model.CvaModel;
-import com.bbj.cva.screenobjects.IScreenObject;
+import com.bbj.cva.screenobjects.interfaces.IScreenObject;
 
 public abstract class Selection implements IScreenObject
 {

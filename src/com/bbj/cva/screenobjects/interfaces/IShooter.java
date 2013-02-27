@@ -1,4 +1,4 @@
-package com.bbj.cva.screenobjects;
+package com.bbj.cva.screenobjects.interfaces;
 
 import com.bbj.cva.screenobjects.projectiles.IProjectile;
 

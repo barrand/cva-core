@@ -3,8 +3,8 @@ package com.bbj.cva.screenobjects.projectiles;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.HitableScreenObject;
-import com.bbj.cva.screenobjects.IHitAreaObject;
 import com.bbj.cva.screenobjects.ScreenObject;
+import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 
 public class BolaShot extends HitableScreenObject implements IProjectile {
 	

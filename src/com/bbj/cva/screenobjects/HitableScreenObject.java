@@ -3,6 +3,7 @@ package com.bbj.cva.screenobjects;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 
 public abstract class HitableScreenObject extends ScreenObject implements IHitAreaObject {
 

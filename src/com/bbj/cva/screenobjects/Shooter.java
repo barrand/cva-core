@@ -29,7 +29,8 @@ public abstract class Shooter extends AnimatedScreenObject {
 	}
 
 	protected abstract ScreenObject getProjectile();
-
 	protected abstract TextureRegion getShootingFrame();
+	protected abstract String getShootingRegionName();
+	protected abstract int getShootingNumFrames();
 
 }

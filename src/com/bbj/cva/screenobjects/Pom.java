@@ -1,98 +1,35 @@
 package com.bbj.cva.screenobjects;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.interfaces.IAnimatedAttacker;
+import com.bbj.cva.screenobjects.interfaces.IAnimatedDier;
+import com.bbj.cva.screenobjects.interfaces.IAnimatedWalker;
+import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
+import com.bbj.cva.screenobjects.projectiles.IProjectile;
 
-public class Pom extends AttackingHitableAnimated {
+public class Pom extends AttackingHitableAnimated implements IAnimatedWalker, IAnimatedDier, IAnimatedAttacker {
 
-	Animation walkAnim;
-	Animation dieAnim;
-	protected Animation currentAnim;
-	private boolean checkForInteractions = true;
 	private float speedX = -1.2f;
 	
 	public Pom(float x, float y) {
 		super(x, y);
 		type = CvaModel.Unit.POM;
-		texture = CvaModel.pomWalk;
-		
-		TextureAtlas ta = new TextureAtlas(Gdx.files.internal("data/spriteSheets/pomAll.txt"));
-//		ta.findRegion(spriteName);
-		
-		int numberOfFrames = 40;
-		AtlasRegion[] walkAtlases = new AtlasRegion[numberOfFrames];
-		for(int ct = 1; ct < numberOfFrames; ct++)
-		{
-			String name = "render-grunt-walk/CB-grunt-walking"+String.format("%04d", ct);
-			Gdx.app.log("cva", "name " + name);
-			walkAtlases[ct] =ta.findRegion(name);
-		}
-		walkAnim = new Animation(getAnimationSpeed(), walkAtlases);
-		walkAnim.setPlayMode(Animation.LOOP);
-		
-		numberOfFrames = 38;
-		AtlasRegion[] dieAtlases = new AtlasRegion[numberOfFrames];
-		for(int ct = 1; ct < numberOfFrames; ct++)
-		{
-			String name = "render-grunt-die/CB-grunt-death"+String.format("%04d", ct);
-			Gdx.app.log("cva", "name " + name);
-			dieAtlases[ct] =ta.findRegion(name);
-		}
-		dieAnim = new Animation(getAnimationSpeed(), dieAtlases);
-		dieAnim.setPlayMode(Animation.NORMAL);
-		
+	}
+	
+	@Override
+	public void create(){
+		super.create();
 		currentAnim = walkAnim;
-		
 	}
 
 	@Override
 	public void render(SpriteBatch spriteBatch) {
-		
-		if(checkForInteractions){
-			
-			for (IHitAreaObject o : CvaModel.thingsCheerborgsInteractWith) {
-				
-				// if she got hit, then kill her and put in the die animation
-				if (o.getHitArea().overlaps(hitArea)) {
-					Gdx.app.log("cva", this.toString());
-					stateTime = 0f;
-					currentAnim = dieAnim;
-					speedX = 0f;
-					checkForInteractions = false;
-					loop = false;
-					CvaModel.eventBus.post(new RemoveScreenObjectEvent((ScreenObject)o));
-				}
-			}
-		}
-		
-		
-		x += getSpeedX() + speedXModifier;
-		y += getSpeedY() + speedYModifier;
-		hitArea.x = x;
-		hitArea.y = y;
-		stateTime += Gdx.graphics.getDeltaTime();
-        AtlasRegion currentFrame = (AtlasRegion) currentAnim.getKeyFrame(stateTime, loop);
-        if(CvaModel.DEBUG){
-        	spriteBatch.setColor(255, 0, 0, 240);
-        	attackArea.x = x - attackArea.width;
-        	spriteBatch.draw(CvaModel.blue, attackArea.x, attackArea.y, attackArea.width, attackArea.height, 0, 0, 0, 0, false, false);
-        	spriteBatch.setColor(CvaModel.defaultColor);
-        }
-        if(!loop && currentAnim.isAnimationFinished(stateTime)){
-        	onAnimationEnd();
-        }
-        if(currentFrame != null){
-//        	Gdx.app.log("cva", Float.toString(stateTime));
-        	spriteBatch.draw(currentFrame, x + currentFrame.offsetX, y + currentFrame.offsetY);
-        }
-		
-//		super.render(spriteBatch);
+		super.render(spriteBatch);
 	}
 
 	@Override
@@ -100,19 +37,8 @@ public class Pom extends AttackingHitableAnimated {
 		CvaModel.eventBus.post(new RemoveScreenObjectEvent(this));
 	}
 	
-	@Override
-	public int getFrameCols() {
-		return 10;
-	}
-
-	@Override
-	public int getFrameRows() {
-		return 8;
-	}
-
 	// smaller is faster
-	@Override
-	public float getAnimationSpeed() {
+	protected float getAnimationSpeed() {
 		return 0.03f;
 	}
 
@@ -161,5 +87,58 @@ public class Pom extends AttackingHitableAnimated {
 	@Override
 	protected boolean attacksToTheLeft() {
 		return true;
+	}
+
+	@Override
+	protected ArrayList<IHitAreaObject> getInteractables() {
+		return CvaModel.thingsCheerborgsInteractWith;
+	}
+
+	@Override
+	protected void handleCollision(IHitAreaObject o) {
+		if(o instanceof IProjectile){
+			Gdx.app.log("cva", this.toString());
+			stateTime = 0f;
+			currentAnim = dieAnim;
+			speedX = 0f;
+			checkForInteractions = false;
+			loop = false;
+			CvaModel.eventBus.post(new RemoveScreenObjectEvent(
+					(ScreenObject) o));
+		}
+	}
+
+	@Override
+	public String getWalkRegionName() {
+		return "render-grunt-walk/CB-grunt-walking";
+	}
+	@Override
+	public String getDieRegionName() {
+		return "render-grunt-die/CB-grunt-death";
+	}
+
+	@Override
+	public String getAttackRegionName() {
+		return "render-grunt-attack/CB-grunt-attack";
+	}
+
+	@Override
+	public int getAttackNumFrames() {
+		return 45;
+	}
+
+	@Override
+	public int getDieNumFrames() {
+		return 38;
+	}
+
+	@Override
+	public int getWalkNumFrames() {
+		return 40;
+	}
+
+	@Override
+	protected String getTextureAtlasUrl() {
+		return "data/spriteSheets/pomAll.txt";
 	}
 }

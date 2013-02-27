@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.bbj.cva.screenobjects.IHitAreaObject;
+import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.squareup.otto.Bus;
 
 public class CvaModel {

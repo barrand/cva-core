@@ -17,17 +17,6 @@ public class SpiderUnit extends Shooter {
 	public void render(SpriteBatch spriteBatch) {
 		super.render(spriteBatch);
 	}
-	
-
-	@Override
-	public int getFrameCols() {
-		return 5;
-	}
-
-	@Override
-	public int getFrameRows() {
-		return 2;
-	}
 
 	@Override
 	public float getAnimationSpeed() {
@@ -61,6 +50,25 @@ public class SpiderUnit extends Shooter {
 
 	@Override
 	protected TextureRegion getShootingFrame() {
-		return textureFrames[4];
+//		return textureFrames[4];
+		return new TextureRegion();
+	}
+
+	@Override
+	protected String getTextureAtlasUrl() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected String getShootingRegionName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected int getShootingNumFrames() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

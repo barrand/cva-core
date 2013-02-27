@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bbj.cva.events.SpiderUnitTypeEvent;
 import com.bbj.cva.events.UnitTypeSelectEvent;
 import com.bbj.cva.model.CvaModel;
-import com.bbj.cva.screenobjects.IScreenObject;
 import com.bbj.cva.screenobjects.ScreenObject;
+import com.bbj.cva.screenobjects.interfaces.IScreenObject;
 import com.squareup.otto.Subscribe;
 
 // FIXME: This class is SO SIMILAR to the Cheerborg Unit Bar.  Only like 3 things are different.  Consider creating parent class...
