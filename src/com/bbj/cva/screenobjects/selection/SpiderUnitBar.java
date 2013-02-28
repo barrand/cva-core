@@ -36,7 +36,7 @@ public class SpiderUnitBar implements IScreenObject
 	{
 		int pos = unitbar.size();
 		if (pos >= 5) return false;
-		so.x = pos*CvaModel.TILE_WIDTH + so.getSpriteWidth()/2;  // FIXME: This is too hard-codedy for my taste...
+		so.x = pos*CvaModel.TILE_WIDTH;
 		so.y = CvaModel.TILE_HEIGHT*7;
 		unitbar.add(so);
 		return true;
@@ -63,7 +63,7 @@ public class SpiderUnitBar implements IScreenObject
 		boolean fireEvent = false;
 		for (ScreenObjectSimple so : unitbar)
 		{
-			if (Math.abs(so.x - event.x) < 0.01)
+			if (Math.abs(so.x - event.x) < 75.0)
 			{
 				// FIXME: Eventually the screenobjects here should have a state of being 'ready' to deploy, which we will check...
 				fireEvent = true;

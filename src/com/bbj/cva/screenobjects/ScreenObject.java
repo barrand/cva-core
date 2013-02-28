@@ -114,9 +114,10 @@ public abstract class ScreenObject implements IScreenObject {
 		if(this instanceof IShooter){
 			// only shoot once per animation cycle and reset when going to a
 			// different animation
+			// FIXME: Bryce, I kinda broke the way this worked trying to fix Unit Selection.  Need to fix!
 			if (currentFrame == ((IShooter)this).getShootingFrame() && !alreadyShot) {
 				ScreenObject projectile = (ScreenObject) ((IShooter)this).getProjectile();
-				CvaModel.eventBus.post(new PlaceUnitEvent(projectile));
+				CvaModel.eventBus.post(new PlaceUnitEvent(projectile.x, projectile.y, CvaModel.Unit.BOLA));
 				alreadyShot = true;
 			} else if (alreadyShot && currentFrame != ((IShooter)this).getShootingFrame()) {
 				alreadyShot = false;

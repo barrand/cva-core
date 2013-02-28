@@ -176,25 +176,26 @@ public class CheerVArachnids implements ApplicationListener {
 
 	@Subscribe public void placeUnitListener (PlaceUnitEvent event) {
 
-		switch (event.screenObject.type) {
+		switch (event.unitType) {
 		case POM:
 			Pom screenObject = new Pom(event.x, event.y);
 			createObjectsQueue.add(screenObject);
 			break;
 		case POM_DIE:
-			createObjectsQueue.add(event.screenObject);
+			//createObjectsQueue.add(event.screenObject);
 			break;
 		case SPIDER:
 			SpiderUnit spi = new SpiderUnit(event.x, event.y);
 			createObjectsQueue.add(spi);
 			break;
 		case BOLA:
-			createObjectsQueue.add(event.screenObject);
+			//createObjectsQueue.add(event.screenObject);
 			break;
 		}
-		if (event.screenObject instanceof IProjectile) {
-			CvaModel.thingsCheerborgsInteractWith.add((IHitAreaObject) event.screenObject);
-		}
+		// FIXME: Bryce, don't know what to do about this...guess we can fix when Spiders come back online.
+		//if (event.screenObject instanceof IProjectile) {
+		//	CvaModel.thingsCheerborgsInteractWith.add((IHitAreaObject) event.screenObject);
+		//}
 	}
 
 	@Subscribe

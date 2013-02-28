@@ -1,12 +1,12 @@
 package com.bbj.cva.events;
 
-import com.bbj.cva.screenobjects.ScreenObject;
+import com.bbj.cva.model.CvaModel;
 
 public class UnitTypeEvent
 {
-	public ScreenObject screenObject;
-	public UnitTypeEvent(ScreenObject screenObject) 
+	public CvaModel.Unit unitType;
+	public UnitTypeEvent(CvaModel.Unit ut) 
 	{
-		this.screenObject = screenObject;
+		this.unitType = ut;
 	}
 }

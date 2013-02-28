@@ -13,7 +13,7 @@ import com.squareup.otto.Subscribe;
 
 public class SpiderFieldSelection extends Selection
 {
-	private ScreenObject unitType;
+	private CvaModel.Unit unitType;
 	
 	public SpiderFieldSelection()
 	{
@@ -99,8 +99,8 @@ public class SpiderFieldSelection extends Selection
 	}
 	
 	@Subscribe
-	public void onSelect(SpiderUnitTypeEvent event) {
-		unitType = event.screenObject;
+	public void onSpiderUnitType(SpiderUnitTypeEvent event) {
+		unitType = event.unitType;
 
 	}
 	

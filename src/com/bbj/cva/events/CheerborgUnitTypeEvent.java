@@ -1,13 +1,13 @@
 package com.bbj.cva.events;
 
-import com.bbj.cva.screenobjects.ScreenObject;
+import com.bbj.cva.model.CvaModel;
 
 public class CheerborgUnitTypeEvent extends UnitTypeEvent
 {
 
-	public CheerborgUnitTypeEvent(ScreenObject screenObject)
+	public CheerborgUnitTypeEvent(CvaModel.Unit unitType)
 	{
-		super(screenObject);
+		super(unitType);
 	}
 
 }

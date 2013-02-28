@@ -8,11 +8,12 @@ import com.bbj.cva.events.CheerborgUnitTypeEvent;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.ScreenObject;
+import com.bbj.cva.screenobjects.ScreenObjectSimple;
 import com.bbj.cva.util.PlayerInput;
 import com.squareup.otto.Subscribe;
 
 public class CheerborgFieldSelection extends Selection {
-	private ScreenObject unitType;
+	private CvaModel.Unit unitType;
 
 	public CheerborgFieldSelection() {
 		CvaModel.eventBus.register(this);
@@ -81,6 +82,6 @@ public class CheerborgFieldSelection extends Selection {
 
 	@Subscribe
 	public void onCheerborgUnitType(CheerborgUnitTypeEvent event) {
-		unitType = event.screenObject;
+		unitType = event.unitType;
 	}
 }

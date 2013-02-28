@@ -1,13 +1,12 @@
 package com.bbj.cva.events;
 
-import com.bbj.cva.screenobjects.ScreenObject;
+import com.bbj.cva.model.CvaModel;
 
 public class SpiderUnitTypeEvent extends UnitTypeEvent
 {
 
-	public SpiderUnitTypeEvent(ScreenObject screenObject)
+	public SpiderUnitTypeEvent(CvaModel.Unit unitType)
 	{
-		super(screenObject);
+		super(unitType);
 	}
-
 }

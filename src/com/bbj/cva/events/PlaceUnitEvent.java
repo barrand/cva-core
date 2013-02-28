@@ -1,24 +1,17 @@
 package com.bbj.cva.events;
 
-import com.bbj.cva.screenobjects.ScreenObject;
+import com.bbj.cva.model.CvaModel;
 
 public class PlaceUnitEvent extends Object
 {
 	public float x;
 	public float y;
-	public ScreenObject screenObject;  // FIXME: Should just change this to be the Unit enum...
+	public CvaModel.Unit unitType;
 	
-	public PlaceUnitEvent(ScreenObject screenObject)
-	{
-		this.screenObject = screenObject;
-		x = screenObject.x;
-		y = screenObject.y;
-	}
-	
-	public PlaceUnitEvent(float nx, float ny, ScreenObject so)
+	public PlaceUnitEvent(float nx, float ny, CvaModel.Unit ut)
 	{
 		x = nx;
 		y = ny;
-		this.screenObject = so;
+		this.unitType = ut;
 	}
 }
