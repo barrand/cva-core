@@ -1,12 +1,13 @@
 package com.bbj.cva.screenobjects.projectiles;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.model.CvaModel;
-import com.bbj.cva.screenobjects.HitableScreenObject;
 import com.bbj.cva.screenobjects.ScreenObject;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 
-public class BolaShot extends HitableScreenObject implements IProjectile {
+public class BolaShot extends ScreenObject implements IProjectile {
 	
 	public BolaShot(float x, float y) 
 	{
@@ -63,5 +64,19 @@ public class BolaShot extends HitableScreenObject implements IProjectile {
 	@Override
 	public float getHitAreaHeight() {
 		return 40;
+	}
+
+	@Override
+	public Rectangle getHitArea() {
+		return hitArea;
+	}
+
+	@Override
+	public ArrayList<IHitAreaObject> getInteractables() {
+		return null;
+	}
+
+	@Override
+	public void handleCollision(IHitAreaObject o) {
 	}
 }

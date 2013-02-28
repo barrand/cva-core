@@ -3,10 +3,14 @@ package com.bbj.cva.screenobjects.selection;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.SpiderUnitTypeEvent;
 import com.bbj.cva.events.UnitTypeSelectEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.Pom;
 import com.bbj.cva.screenobjects.ScreenObject;
+import com.bbj.cva.screenobjects.ScreenObjectSimple;
+import com.bbj.cva.screenobjects.SpiderUnit;
 import com.bbj.cva.screenobjects.interfaces.IScreenObject;
 import com.squareup.otto.Subscribe;
 
@@ -14,7 +18,7 @@ import com.squareup.otto.Subscribe;
 
 public class SpiderUnitBar implements IScreenObject
 {
-	private ArrayList<ScreenObject> unitbar;
+	private ArrayList<ScreenObjectSimple> unitbar;
 	
 	public SpiderUnitBar()
 	{
@@ -24,11 +28,11 @@ public class SpiderUnitBar implements IScreenObject
 	@Override
 	public void create()
 	{
-		unitbar = new ArrayList<ScreenObject>();
+		unitbar = new ArrayList<ScreenObjectSimple>();
 		
 	}
 
-	public boolean addUnitToBar(ScreenObject so)
+	public boolean addUnitToBar(ScreenObjectSimple so)
 	{
 		int pos = unitbar.size();
 		if (pos >= 5) return false;
@@ -48,7 +52,7 @@ public class SpiderUnitBar implements IScreenObject
 	@Override
 	public void render(SpriteBatch spriteBatch)
 	{
-		for (ScreenObject unit : unitbar)
+		for (ScreenObjectSimple unit : unitbar)
 		{
 			unit.render(spriteBatch);
 		}
@@ -57,13 +61,14 @@ public class SpiderUnitBar implements IScreenObject
 	@Subscribe
 	public void onUnitSelect(UnitTypeSelectEvent event) {
 		boolean fireEvent = false;
-		for (ScreenObject so : unitbar)
+		for (ScreenObjectSimple so : unitbar)
 		{
 			if (Math.abs(so.x - event.x) < 0.01)
 			{
 				// FIXME: Eventually the screenobjects here should have a state of being 'ready' to deploy, which we will check...
 				fireEvent = true;
-				CvaModel.eventBus.post(new SpiderUnitTypeEvent(so)); // FIXME: Should change this to transmit only the Unit enum of the selection
+//				SpiderUnit spider = new SpiderUnit(so.x, so.y);
+//				CvaModel.eventBus.post(new PlaceUnitEvent(spider)); // FIXME: Should change this to transmit only the Unit enum of the selection
 			}
 		}
 		// FIXME: ...and then we won't have to do this nonsense.

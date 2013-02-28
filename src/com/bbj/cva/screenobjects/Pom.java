@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.interfaces.IAttacker;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.bbj.cva.screenobjects.projectiles.IProjectile;
 
-public class Pom extends AttackingHitableAnimated {
+public class Pom extends ScreenObject implements IHitAreaObject, IAttacker {
 
 	private float speedX = -1.2f;
 	
@@ -71,28 +73,27 @@ public class Pom extends AttackingHitableAnimated {
 	}
 
 	@Override
-	protected float getAttackAreaWidth() {
+	public float getAttackAreaWidth() {
 		return 100;
 	}
 
 	@Override
-	protected float getAttackAreaHeight() {
-		// TODO Auto-generated method stub
+	public float getAttackAreaHeight() {
 		return 130;
 	}
 
 	@Override
-	protected boolean attacksToTheLeft() {
+	public boolean attacksToTheLeft() {
 		return true;
 	}
 
 	@Override
-	protected ArrayList<IHitAreaObject> getInteractables() {
+	public ArrayList<IHitAreaObject> getInteractables() {
 		return CvaModel.thingsCheerborgsInteractWith;
 	}
 
 	@Override
-	protected void handleCollision(IHitAreaObject o) {
+	public void handleCollision(IHitAreaObject o) {
 		if(o instanceof IProjectile){
 			Gdx.app.log("cva", this.toString());
 			stateTime = 0f;
@@ -103,6 +104,11 @@ public class Pom extends AttackingHitableAnimated {
 			CvaModel.eventBus.post(new RemoveScreenObjectEvent(
 					(ScreenObject) o));
 		}
+	}
+
+	@Override
+	public Rectangle getHitArea() {
+		return hitArea;
 	}
 
 }

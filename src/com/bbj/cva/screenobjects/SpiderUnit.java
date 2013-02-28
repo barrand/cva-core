@@ -1,11 +1,17 @@
 package com.bbj.cva.screenobjects;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
+import com.bbj.cva.screenobjects.interfaces.IShooter;
 import com.bbj.cva.screenobjects.projectiles.BolaShot;
+import com.bbj.cva.screenobjects.projectiles.IProjectile;
 
-public class SpiderUnit extends Shooter {
+public class SpiderUnit extends ScreenObject implements IShooter, IHitAreaObject {
 	public SpiderUnit(float x, float y)
 	{
 		super(x,y);
@@ -39,25 +45,52 @@ public class SpiderUnit extends Shooter {
 	}
 
 	@Override
-	protected ScreenObject getProjectile() {
+	public IProjectile getProjectile() {
 		return new BolaShot(x + getSpriteWidth(), y + getSpriteHeight()/2);
 	}
 
 	@Override
-	protected TextureRegion getShootingFrame() {
+	public TextureRegion getShootingFrame() {
 //		return textureFrames[4];
 		return new TextureRegion();
 	}
 
 	@Override
-	protected String getShootingRegionName() {
+	public String getShootingRegionName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected int getShootingNumFrames() {
+	public int getShootingNumFrames() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public float getHitAreaWidth() {
+		return 50;
+	}
+
+	@Override
+	public float getHitAreaHeight() {
+		return 100;
+	}
+
+	@Override
+	public Rectangle getHitArea() {
+		return hitArea;
+	}
+
+	@Override
+	public ArrayList<IHitAreaObject> getInteractables() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void handleCollision(IHitAreaObject o) {
+		// TODO Auto-generated method stub
+		
 	}
 }

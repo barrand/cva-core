@@ -4,15 +4,18 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bbj.cva.events.CheerborgUnitTypeEvent;
+import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.UnitTypeSelectEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.Pom;
 import com.bbj.cva.screenobjects.ScreenObject;
+import com.bbj.cva.screenobjects.ScreenObjectSimple;
 import com.bbj.cva.screenobjects.interfaces.IScreenObject;
 import com.squareup.otto.Subscribe;
 
 public class CheerborgUnitBar implements IScreenObject
 {
-	private ArrayList<ScreenObject> unitbar;
+	private ArrayList<ScreenObjectSimple> unitbar;
 	
 	public CheerborgUnitBar()
 	{
@@ -22,11 +25,11 @@ public class CheerborgUnitBar implements IScreenObject
 	@Override
 	public void create()
 	{
-		unitbar = new ArrayList<ScreenObject>();
+		unitbar = new ArrayList<ScreenObjectSimple>();
 		
 	}
 
-	public boolean addUnitToBar(ScreenObject so)
+	public boolean addUnitToBar(ScreenObjectSimple so)
 	{
 		int pos = unitbar.size();
 		if (pos >= 5) return false;
@@ -46,7 +49,7 @@ public class CheerborgUnitBar implements IScreenObject
 	@Override
 	public void render(SpriteBatch spriteBatch)
 	{
-		for (ScreenObject unit : unitbar)
+		for (ScreenObjectSimple unit : unitbar)
 		{
 			unit.render(spriteBatch);
 		}
@@ -55,13 +58,15 @@ public class CheerborgUnitBar implements IScreenObject
 	@Subscribe
 	public void onUnitSelected(UnitTypeSelectEvent event) {
 		boolean fireEvent = false;
-		for (ScreenObject so : unitbar)
+		for (ScreenObjectSimple so : unitbar)
 		{
 			if (Math.abs(so.x - event.x) < 0.01)
 			{
 				// FIXME: Eventually the screenobjects here should have a state of being 'ready' to deploy, which we will check...
 				fireEvent = true;
-				CvaModel.eventBus.post(new CheerborgUnitTypeEvent(so)); // FIXME: Should change this to transmit only the Unit enum of the selection
+//				CvaModel.eventBus.post(new CheerborgUnitTypeEvent(so)); // FIXME: Should change this to transmit only the Unit enum of the selection
+				Pom pom = new Pom(so.x, so.y);
+				CvaModel.eventBus.post(new PlaceUnitEvent(pom));
 			}
 		}
 		// FIXME: ...and then we won't have to do this nonsense.

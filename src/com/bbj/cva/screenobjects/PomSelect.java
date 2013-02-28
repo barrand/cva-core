@@ -3,7 +3,7 @@ package com.bbj.cva.screenobjects;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bbj.cva.model.CvaModel;
 
-public class PomSelect extends ScreenObject 
+public class PomSelect extends ScreenObjectSimple 
 {
 	public PomSelect(float x, float y)
 	{
@@ -36,5 +36,17 @@ public class PomSelect extends ScreenObject
 	@Override
 	public float getSpriteHeight() {
 		return 135;
+	}
+
+	@Override
+	public void create() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
 	}
 }
