@@ -1,0 +1,18 @@
+@startuml
+title Event driven Placement of Units
+hide footbox
+
+participant CheerborgFieldSelection
+
+CheerborgUnitSelection ->> CheerborgUnitBar: 'Moved' over a unit <<UnitTypeSelectEvent>>
+activate CheerborgUnitBar
+CheerborgUnitBar -> CheerborgUnitBar: Store selected unit
+deactivate CheerborgUnitBar
+CheerborgFieldSelection ->> CheerborgUnitBar: 'Enter' was pressed.\nI want to place a unit! <<QueryUnitAvailableEvent>>
+activate CheerborgUnitBar
+CheerborgUnitBar -> CheerborgUnitBar: Check if unit is place-able
+opt Unit IS place-able
+CheerborgUnitBar ->> CheerVArachnids: <<PlaceUnitEvent>>
+end
+deactivate CheerborgUnitBar
+@enduml
