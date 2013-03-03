@@ -1,0 +1,46 @@
+spiderAll.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+spiderShoot001
+  rotate: false
+  xy: 360, 0
+  size: 180, 114
+  orig: 190, 140
+  offset: 5, 14
+  index: -1
+spiderDie001
+  rotate: false
+  xy: 900, 0
+  size: 180, 114
+  orig: 190, 140
+  offset: 5, 14
+  index: -1
+spiderDie002
+  rotate: false
+  xy: 720, 0
+  size: 180, 114
+  orig: 180, 114
+  offset: 0, 0
+  index: -1
+spiderShoot002
+  rotate: false
+  xy: 180, 0
+  size: 180, 114
+  orig: 180, 114
+  offset: 0, 0
+  index: -1
+spiderDie003
+  rotate: false
+  xy: 540, 0
+  size: 180, 114
+  orig: 180, 114
+  offset: 0, 0
+  index: -1
+spiderShoot003
+  rotate: false
+  xy: 0, 0
+  size: 180, 114
+  orig: 180, 114
+  offset: 0, 0
+  index: -1

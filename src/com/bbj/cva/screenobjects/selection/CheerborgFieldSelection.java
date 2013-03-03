@@ -7,8 +7,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.events.CheerborgUnitTypeEvent;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.model.CvaModel;
-import com.bbj.cva.screenobjects.ScreenObject;
-import com.bbj.cva.screenobjects.ScreenObjectSimple;
 import com.bbj.cva.util.PlayerInput;
 import com.squareup.otto.Subscribe;
 

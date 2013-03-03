@@ -5,23 +5,40 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.bbj.cva.screenobjects.interfaces.IShooter;
 import com.bbj.cva.screenobjects.projectiles.BolaShot;
 import com.bbj.cva.screenobjects.projectiles.IProjectile;
 
-public class SpiderUnit extends ScreenObject implements IShooter, IHitAreaObject {
-	public SpiderUnit(float x, float y)
-	{
-		super(x,y);
+public class SpiderUnit extends ScreenObject implements IShooter,
+		IHitAreaObject {
+	
+	public SpiderUnit(float x, float y) {
+		super(x, y);
 		type = CvaModel.Unit.SPIDER;
-//		texture = CvaModel.spider;
+	}
+
+	@Override
+	public void create() {
+		super.create();
+		currentAnim = CvaModel.spiderShoot;
 	}
 
 	@Override
 	public void render(SpriteBatch spriteBatch) {
 		super.render(spriteBatch);
+	}
+
+	@Override
+	public void onAnimationEnd() {
+		CvaModel.eventBus.post(new RemoveScreenObjectEvent(this));
+	}
+
+	// smaller is faster
+	protected float getAnimationSpeed() {
+		return 0.13f;
 	}
 
 	@Override
@@ -33,7 +50,7 @@ public class SpiderUnit extends ScreenObject implements IShooter, IHitAreaObject
 	public float getSpeedY() {
 		return 0f;
 	}
-	
+
 	@Override
 	public float getSpriteWidth() {
 		return 190;
@@ -46,12 +63,12 @@ public class SpiderUnit extends ScreenObject implements IShooter, IHitAreaObject
 
 	@Override
 	public IProjectile getProjectile() {
-		return new BolaShot(x + getSpriteWidth(), y + getSpriteHeight()/2);
+		return new BolaShot(x + getSpriteWidth(), y + getSpriteHeight() / 2);
 	}
 
 	@Override
 	public TextureRegion getShootingFrame() {
-//		return textureFrames[4];
+		// return textureFrames[4];
 		return new TextureRegion();
 	}
 
@@ -91,6 +108,6 @@ public class SpiderUnit extends ScreenObject implements IShooter, IHitAreaObject
 	@Override
 	public void handleCollision(IHitAreaObject o) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

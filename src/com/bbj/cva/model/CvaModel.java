@@ -25,7 +25,8 @@ public class CvaModel {
 	public static Animation pomWalk;
 	public static Animation pomDie;
 	public static Animation pomAttack;
-	public static Animation spider;
+	public static Animation spiderShoot;
+	public static Animation spiderDie;
 	public static Texture bolaShot;
 	public static Texture pomSelect;
 	public static Texture spiderSelect;

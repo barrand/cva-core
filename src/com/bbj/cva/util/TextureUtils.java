@@ -18,6 +18,13 @@ public class TextureUtils {
 		CvaModel.pomDie.setPlayMode(Animation.NORMAL);
 		CvaModel.pomAttack = createAnimation(40, "render-grunt-walk/CB-grunt-walking", pomAtlas);
 		CvaModel.pomAttack.setPlayMode(Animation.LOOP);
+
+		TextureAtlas spiderAtlas = new TextureAtlas(
+				Gdx.files.internal("data/spriteSheets/spiderAll.txt"));
+		CvaModel.spiderShoot = createAnimation(3, "spiderShoot", spiderAtlas);
+		CvaModel.spiderShoot.setPlayMode(Animation.NORMAL);
+		CvaModel.spiderDie = createAnimation(3, "spiderDie", spiderAtlas);
+		CvaModel.spiderDie.setPlayMode(Animation.LOOP);
 		
 		CvaModel.bolaShot = new Texture(Gdx.files.internal("data/spriteSheets/webshot.png"));
 		CvaModel.pomSelect = new Texture(Gdx.files.internal("data/spriteSheets/pomSelect.png"));
