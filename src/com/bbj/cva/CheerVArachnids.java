@@ -18,9 +18,7 @@ import com.bbj.cva.screenobjects.PomSelect;
 import com.bbj.cva.screenobjects.ScreenObject;
 import com.bbj.cva.screenobjects.SpiderSelect;
 import com.bbj.cva.screenobjects.SpiderUnit;
-import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.bbj.cva.screenobjects.interfaces.IScreenObject;
-import com.bbj.cva.screenobjects.projectiles.IProjectile;
 import com.bbj.cva.screenobjects.selection.CheerborgFieldSelection;
 import com.bbj.cva.screenobjects.selection.CheerborgUnitBar;
 import com.bbj.cva.screenobjects.selection.CheerborgUnitSelection;
@@ -124,6 +122,13 @@ public class CheerVArachnids implements ApplicationListener {
 		
 		spriteBatch = new SpriteBatch();
 		CvaModel.defaultColor = spriteBatch.getColor();
+		
+//		Gdx.app.debug("cva", "Controllers: " + Controllers.getControllers().size);
+//		int i = 0;
+//		for(Controller controller: Controllers.getControllers()) {
+//			Gdx.app.debug("cva", "#" + i++ + ": " + controller.getName());
+//		}
+//		if(Controllers.getControllers().size == 0) Gdx.app.debug("cva", "No controllers attached");
 	}
 
 	@Override
