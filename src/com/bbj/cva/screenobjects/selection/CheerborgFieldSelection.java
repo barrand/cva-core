@@ -1,9 +1,15 @@
 package com.bbj.cva.screenobjects.selection;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.ControllerListener;
+import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.controllers.PovDirection;
+import com.badlogic.gdx.controllers.mappings.Ouya;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.bbj.cva.events.CheerborgUnitTypeEvent;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.model.CvaModel;
@@ -27,6 +33,89 @@ public class CheerborgFieldSelection extends Selection {
 		selectionRect.height = CvaModel.TILE_HEIGHT;
 		selectionRect.x = CvaModel.TILE_WIDTH * 11;
 		selectionRect.y = CvaModel.TILE_HEIGHT * 4;
+
+		// setup the listener that prints events to the console
+		Controllers.addListener(new ControllerListener() {
+			public int indexOf(Controller controller) {
+				return Controllers.getControllers().indexOf(controller, true);
+			}
+
+			@Override
+			public void connected(Controller controller) {
+				Gdx.app.log("cva", "connected " + controller.getName());
+				int i = 0;
+				for (Controller c : Controllers.getControllers()) {
+					Gdx.app.log("cva", "#" + i++ + ": " + c.getName());
+				}
+			}
+
+			@Override
+			public void disconnected(Controller controller) {
+				Gdx.app.log("cva", "disconnected " + controller.getName());
+				int i = 0;
+				for (Controller c : Controllers.getControllers()) {
+					Gdx.app.log("cva", "#" + i++ + ": " + c.getName());
+				}
+				if (Controllers.getControllers().size == 0)
+					Gdx.app.log("cva", "No controllers attached");
+			}
+
+			@Override
+			public boolean buttonDown(Controller controller, int buttonIndex) {
+				Gdx.app.log("cva", "#" + indexOf(controller) + ", button "
+						+ buttonIndex + " down");
+				if(buttonIndex == Ouya.BUTTON_DPAD_LEFT){
+					selectionRect.x -= CvaModel.TILE_WIDTH;
+				}else if(buttonIndex == Ouya.BUTTON_DPAD_DOWN){
+					selectionRect.y -= CvaModel.TILE_WIDTH;
+				}else if(buttonIndex == Ouya.BUTTON_DPAD_RIGHT){
+					selectionRect.x += CvaModel.TILE_WIDTH;
+					
+				}else if(buttonIndex == Ouya.BUTTON_DPAD_UP){
+					selectionRect.y += CvaModel.TILE_WIDTH;
+				}
+				return false;
+			}
+
+			@Override
+			public boolean buttonUp(Controller controller, int buttonIndex) {
+				Gdx.app.log("cva", "#" + indexOf(controller) + ", button "
+						+ buttonIndex + " up");
+				return false;
+			}
+
+			@Override
+			public boolean axisMoved(Controller controller, int axisIndex,
+					float value) {
+				return false;
+			}
+
+			@Override
+			public boolean povMoved(Controller controller, int povIndex,
+					PovDirection value) {
+				return false;
+			}
+
+			@Override
+			public boolean xSliderMoved(Controller controller, int sliderIndex,
+					boolean value) {
+				return false;
+			}
+
+			@Override
+			public boolean ySliderMoved(Controller controller, int sliderIndex,
+					boolean value) {
+				return false;
+			}
+
+			@Override
+			public boolean accelerometerMoved(Controller controller,
+					int accelerometerIndex, Vector3 value) {
+				// not printing this as we get to many values
+				return false;
+			}
+		});
+
 	}
 
 	@Override

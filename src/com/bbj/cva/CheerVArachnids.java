@@ -5,13 +5,16 @@ import java.util.ArrayList;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
+import com.badlogic.gdx.math.Vector3;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
@@ -125,12 +128,12 @@ public class CheerVArachnids implements ApplicationListener {
 		spriteBatch = new SpriteBatch();
 		CvaModel.defaultColor = spriteBatch.getColor();
 		
-		Gdx.app.debug("cva", "Controllers: " + Controllers.getControllers().size);
-//		int i = 0;
-//		for(Controller controller: Controllers.getControllers()) {
-//			Gdx.app.debug("cva", "#" + i++ + ": " + controller.getName());
-//		}
-//		if(Controllers.getControllers().size == 0) Gdx.app.debug("cva", "No controllers attached");
+		Gdx.app.debug("cva","Controllers: " + Controllers.getControllers().size);
+		int i = 0;
+		for(Controller controller: Controllers.getControllers()) {
+			Gdx.app.debug("cva","#" + i++ + ": " + controller.getName());
+		}
+		if(Controllers.getControllers().size == 0) Gdx.app.debug("cva","No controllers attached");
 	}
 
 	@Override
