@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -123,7 +125,7 @@ public class CheerVArachnids implements ApplicationListener {
 		spriteBatch = new SpriteBatch();
 		CvaModel.defaultColor = spriteBatch.getColor();
 		
-//		Gdx.app.debug("cva", "Controllers: " + Controllers.getControllers().size);
+		Gdx.app.debug("cva", "Controllers: " + Controllers.getControllers().size);
 //		int i = 0;
 //		for(Controller controller: Controllers.getControllers()) {
 //			Gdx.app.debug("cva", "#" + i++ + ": " + controller.getName());
