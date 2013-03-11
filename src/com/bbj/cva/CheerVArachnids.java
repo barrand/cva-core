@@ -24,6 +24,7 @@ import com.bbj.cva.screenobjects.ScreenObject;
 import com.bbj.cva.screenobjects.SpiderSelect;
 import com.bbj.cva.screenobjects.SpiderUnit;
 import com.bbj.cva.screenobjects.interfaces.IScreenObject;
+import com.bbj.cva.screenobjects.projectiles.BolaShot;
 import com.bbj.cva.screenobjects.selection.CheerborgFieldSelection;
 import com.bbj.cva.screenobjects.selection.CheerborgUnitBar;
 import com.bbj.cva.screenobjects.selection.CheerborgUnitSelection;
@@ -191,15 +192,13 @@ public class CheerVArachnids implements ApplicationListener {
 			Pom screenObject = new Pom(event.x, event.y);
 			createObjectsQueue.add(screenObject);
 			break;
-		case POM_DIE:
-			//createObjectsQueue.add(event.screenObject);
-			break;
 		case SPIDER:
 			SpiderUnit spi = new SpiderUnit(event.x, event.y);
 			createObjectsQueue.add(spi);
 			break;
 		case BOLA:
-			//createObjectsQueue.add(event.screenObject);
+			BolaShot bola = new BolaShot(event.x, event.y);
+			createObjectsQueue.add(bola);
 			break;
 		}
 		// FIXME: Bryce, don't know what to do about this...guess we can fix when Spiders come back online.

@@ -7,21 +7,23 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.interfaces.IAnimated;
 import com.bbj.cva.screenobjects.interfaces.IAttacker;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.bbj.cva.screenobjects.projectiles.IProjectile;
 
-public class Pom extends ScreenObject implements IHitAreaObject, IAttacker {
+public class Pom extends ScreenObject implements IHitAreaObject, IAttacker,
+		IAnimated {
 
 	private float speedX = -1.2f;
-	
+
 	public Pom(float x, float y) {
 		super(x, y);
 		type = CvaModel.Unit.POM;
 	}
-	
+
 	@Override
-	public void create(){
+	public void create() {
 		super.create();
 		currentAnim = CvaModel.pomWalk;
 	}
@@ -32,10 +34,10 @@ public class Pom extends ScreenObject implements IHitAreaObject, IAttacker {
 	}
 
 	@Override
-	public void onAnimationEnd(){
+	public void onAnimationEnd() {
 		CvaModel.eventBus.post(new RemoveScreenObjectEvent(this));
 	}
-	
+
 	// smaller is faster
 	protected float getAnimationSpeed() {
 		return 0.03f;
@@ -44,7 +46,7 @@ public class Pom extends ScreenObject implements IHitAreaObject, IAttacker {
 	// larger is faster
 	@Override
 	public float getSpeedX() {
-		return speedX ;
+		return speedX;
 	}
 
 	@Override
@@ -94,15 +96,15 @@ public class Pom extends ScreenObject implements IHitAreaObject, IAttacker {
 
 	@Override
 	public void handleCollision(IHitAreaObject o) {
-		if(o instanceof IProjectile){
+		if (o instanceof IProjectile) {
 			Gdx.app.log("cva", this.toString());
 			stateTime = 0f;
 			currentAnim = dieAnim;
 			speedX = 0f;
 			checkForInteractions = false;
 			loop = false;
-			CvaModel.eventBus.post(new RemoveScreenObjectEvent(
-					(ScreenObject) o));
+			CvaModel.eventBus
+					.post(new RemoveScreenObjectEvent((ScreenObject) o));
 		}
 	}
 
@@ -110,5 +112,4 @@ public class Pom extends ScreenObject implements IHitAreaObject, IAttacker {
 	public Rectangle getHitArea() {
 		return hitArea;
 	}
-
 }

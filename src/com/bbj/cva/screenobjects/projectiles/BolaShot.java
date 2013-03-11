@@ -6,21 +6,18 @@ import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.ScreenObject;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
+import com.bbj.cva.screenobjects.interfaces.INonAnimated;
 
-public class BolaShot extends ScreenObject implements IProjectile {
-	
-	public BolaShot(float x, float y) 
-	{
+public class BolaShot extends ScreenObject implements IProjectile, INonAnimated {
+
+	public BolaShot(float x, float y) {
 		super(x, y);
 		type = CvaModel.Unit.BOLA;
 		texture = CvaModel.bolaShot;
 	}
 
-	Rectangle unitRect;//super class
-	float x, y; //super class
-	public static int SPEED;
-	public int speedModifier;//should put this in a super class
-		
+	public int speedModifier;// should put this in a super class
+
 	@Override
 	public int getDamage() {
 		return 5;

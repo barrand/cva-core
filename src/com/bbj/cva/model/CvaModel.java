@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.squareup.otto.Bus;
 
@@ -26,6 +27,7 @@ public class CvaModel {
 	public static Animation pomDie;
 	public static Animation pomAttack;
 	public static Animation spiderShoot;
+	public static AtlasRegion spiderShootingFrame;
 	public static Animation spiderDie;
 	public static Texture bolaShot;
 	public static Texture pomSelect;
@@ -40,6 +42,6 @@ public class CvaModel {
 	public static boolean DEBUG = true;
 
 	public static enum Unit {
-		POM, POM_DIE, SPIDER, BOLA
+		POM, SPIDER, BOLA
 	}
 }
