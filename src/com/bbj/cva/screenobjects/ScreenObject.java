@@ -134,7 +134,7 @@ public abstract class ScreenObject implements IScreenObject {
 			if (!loop && currentAnim.isAnimationFinished(stateTime)) {
 				onAnimationEnd();
 			}
-			spriteBatch.draw(currentFrame, x + currentFrame.offsetX, y
+			spriteBatch.draw(currentFrame, x + currentFrame.offsetX - currentFrame.originalWidth/2, y
 					+ currentFrame.offsetY);
 		}else if(this instanceof INonAnimated){
 			spriteBatch.draw(texture, x, y);
