@@ -53,6 +53,9 @@ public abstract class ScreenObject implements IScreenObject {
 	public ScreenObject(float x, float y) {
 		stateTime = 0f;
 
+		this.x = x;
+		this.y = y;
+		
 		if (this instanceof IAttacker) {
 			attackArea = new Rectangle();
 			attackArea.width = ((IAttacker) this).getAttackAreaWidth();
