@@ -2,6 +2,8 @@ package com.bbj.cva.screenobjects.projectiles;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.ScreenObject;
@@ -23,6 +25,12 @@ public class BolaShot extends ScreenObject implements IProjectile, INonAnimated 
 		return 5;
 	}
 
+	@Override 
+	public void render(SpriteBatch spriteBatch){
+		super.render(spriteBatch);
+		Gdx.app.log("cva", Float.toString(x));
+	}
+	
 	@Override
 	public int getPushBack() {
 		return 0;
@@ -35,7 +43,7 @@ public class BolaShot extends ScreenObject implements IProjectile, INonAnimated 
 
 	@Override
 	public float getSpeedX() {
-		return 10f;
+		return 8;
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.events.PlaceUnitEvent;
+import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.interfaces.IAnimated;
 import com.bbj.cva.screenobjects.interfaces.IAttacker;
@@ -81,6 +82,12 @@ public abstract class ScreenObject implements IScreenObject {
 		x += getSpeedX() + speedXModifier;
 		y += getSpeedY() + speedYModifier;
 
+		//todo make this better. right now it just removes the object if it is way off the stage
+		if(x >= 2000 || x < -500){
+			CvaModel.eventBus
+			.post(new RemoveScreenObjectEvent((ScreenObject) this));
+		}
+		
 		AtlasRegion currentFrame = null;
 		
 		if (this instanceof IAnimated) {
@@ -91,7 +98,7 @@ public abstract class ScreenObject implements IScreenObject {
 		
 		if (this instanceof IHitAreaObject) {
 			hitArea.x = x - hitArea.width / 2;
-			hitArea.y = y + hitArea.height / 2;
+			hitArea.y = y;
 			if (CvaModel.DEBUG) {
 				spriteBatch.setColor(200, 200, 200, 240);
 				spriteBatch
@@ -106,7 +113,8 @@ public abstract class ScreenObject implements IScreenObject {
 
 				for (IHitAreaObject o : ((IHitAreaObject) this)
 						.getInteractables()) {
-					if (o.getHitArea().overlaps(hitArea)) {
+//					Gdx.app.log("cva", "overlap?" + Float.toString(((ScreenObject)o).hitArea.x) + " y " +  ((ScreenObject)o).y);
+					if (((ScreenObject)o).hitArea.overlaps(hitArea)) {
 						((IHitAreaObject) this).handleCollision(o);
 					}
 				}
@@ -119,7 +127,7 @@ public abstract class ScreenObject implements IScreenObject {
 			} else {
 				attackArea.x = x + attackArea.width;
 			}
-			attackArea.y = y + attackArea.height / 2;
+			attackArea.y = y;
 			if (CvaModel.DEBUG) {
 				spriteBatch.setColor(255, 0, 0, 240);
 				spriteBatch.draw(CvaModel.blue, attackArea.x, attackArea.y,
@@ -134,17 +142,16 @@ public abstract class ScreenObject implements IScreenObject {
 			if (!loop && currentAnim.isAnimationFinished(stateTime)) {
 				onAnimationEnd();
 			}
-			spriteBatch.draw(currentFrame, x + currentFrame.offsetX - currentFrame.originalWidth/2, y
-					+ currentFrame.offsetY);
+			spriteBatch.draw(currentFrame, x + currentFrame.offsetX - currentFrame.originalWidth/2, y);
 		}else if(this instanceof INonAnimated){
-			spriteBatch.draw(texture, x, y);
+			spriteBatch.draw(texture, x-texture.getWidth()/2, y);
 		}
 
 		if (this instanceof IShooter) {
 			// only shoot once per animation cycle and reset when going to a
 			// different animation
 			AtlasRegion shootingFrame = ((IShooter) this).getShootingFrame();
-			if (currentFrame == ((IShooter) this).getShootingFrame()
+			if (currentFrame == shootingFrame
 					&& !alreadyShot) {
 				ScreenObject projectile = (ScreenObject) ((IShooter) this)
 						.getProjectile();
@@ -152,7 +159,7 @@ public abstract class ScreenObject implements IScreenObject {
 						projectile.y, CvaModel.Unit.BOLA));
 				alreadyShot = true;
 			} else if (alreadyShot
-					&& currentFrame != ((IShooter) this).getShootingFrame()) {
+					&& currentFrame != shootingFrame) {
 				alreadyShot = false;
 			}
 		}

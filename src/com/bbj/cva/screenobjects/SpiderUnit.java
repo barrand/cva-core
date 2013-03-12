@@ -65,7 +65,12 @@ public class SpiderUnit extends ScreenObject implements IShooter,
 
 	@Override
 	public IProjectile getProjectile() {
-		return new BolaShot(x + getSpriteWidth(), y + getSpriteHeight() / 2);
+		//todo this needs to be abstracted when I get more shooters
+		BolaShot bolaShot = new BolaShot(x, y);
+		bolaShot.y = y + getSpriteHeight()/2 - bolaShot.getSpriteHeight()/2;
+		bolaShot.x = x + getHitAreaWidth()/2;
+		CvaModel.thingsCheerborgsInteractWith.add(bolaShot);
+		return bolaShot;
 	}
 
 	@Override
@@ -82,7 +87,7 @@ public class SpiderUnit extends ScreenObject implements IShooter,
 
 	@Override
 	public float getHitAreaWidth() {
-		return 50;
+		return 200;
 	}
 
 	@Override

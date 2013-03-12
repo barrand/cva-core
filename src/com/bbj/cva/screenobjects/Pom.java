@@ -15,7 +15,8 @@ import com.bbj.cva.screenobjects.projectiles.IProjectile;
 public class Pom extends ScreenObject implements IHitAreaObject, IAttacker,
 		IAnimated {
 
-	private float speedX = -1.2f;
+//	private float speedX = -1.2f;
+	private float speedX = 0f;
 
 	public Pom(float x, float y) {
 		super(x, y);
