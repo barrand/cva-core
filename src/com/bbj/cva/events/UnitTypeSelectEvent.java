@@ -1,16 +1,13 @@
 package com.bbj.cva.events;
 
+import com.badlogic.gdx.math.Rectangle;
+
 public class UnitTypeSelectEvent extends Object
 {
-	public float x;
+	public Rectangle selection;
 
-	public UnitTypeSelectEvent()
+	public UnitTypeSelectEvent(Rectangle rect)
 	{
-		x = 0;
-	}
-
-	public UnitTypeSelectEvent(float nx)
-	{
-		x = nx;
+		selection = rect;
 	}
 }

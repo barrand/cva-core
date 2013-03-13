@@ -4,13 +4,10 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bbj.cva.events.PlaceUnitEvent;
-import com.bbj.cva.events.SpiderUnitTypeEvent;
+import com.bbj.cva.events.QuerySpiderUnitAvailableEvent;
 import com.bbj.cva.events.UnitTypeSelectEvent;
 import com.bbj.cva.model.CvaModel;
-import com.bbj.cva.screenobjects.Pom;
-import com.bbj.cva.screenobjects.ScreenObject;
 import com.bbj.cva.screenobjects.ScreenObjectSimple;
-import com.bbj.cva.screenobjects.SpiderUnit;
 import com.bbj.cva.screenobjects.interfaces.IScreenObject;
 import com.squareup.otto.Subscribe;
 
@@ -59,26 +56,36 @@ public class SpiderUnitBar implements IScreenObject
 	}
 	
 	@Subscribe
-	public void onUnitSelect(UnitTypeSelectEvent event) {
-		boolean fireEvent = false;
+	public void onUnitSelected(UnitTypeSelectEvent event) {
+		if (event.selection.x >= (CvaModel.TILE_WIDTH*7))
+			return;
 		for (ScreenObjectSimple so : unitbar)
 		{
-			if (Math.abs(so.x - event.x) < 75.0)
+			if (event.selection.contains(so.x+5, so.y+5))
 			{
-				// FIXME: Eventually the screenobjects here should have a state of being 'ready' to deploy, which we will check...
-				fireEvent = true;
-//				SpiderUnit spider = new SpiderUnit(so.x, so.y);
-//				CvaModel.eventBus.post(new PlaceUnitEvent(spider)); // FIXME: Should change this to transmit only the Unit enum of the selection
+				so.selected = true;
+			}
+			else
+			{
+				so.selected = false;
 			}
 		}
-		// FIXME: ...and then we won't have to do this nonsense.
-		//not sure on this
-//		if (!fireEvent && (event.x > x) && (event.x < (x+getSpriteWidth())))
-//		{
-//			CvaModel.eventBus.post(new SpiderUnitTypeEvent(null));
-//		}
-
 	}
+
+	@Subscribe
+	public void onQueryAvailability(QuerySpiderUnitAvailableEvent event) {
+		for (ScreenObjectSimple so : unitbar)
+		{
+			if (so.selected)
+			{
+				if (so.isAvailable())
+				{
+					CvaModel.eventBus.post(new PlaceUnitEvent(event.x, event.y, so.type));
+				}
+			}
+		}
+	}
+	
 
 	@Override
 	public float getSpriteWidth()

@@ -9,13 +9,20 @@ public abstract class ScreenObjectSimple implements IScreenObject {
 	protected Texture texture;
 	public CvaModel.Unit type;
 	public float x,y;
+	public boolean selected;
 
 	public ScreenObjectSimple(float x, float y) {
 		this.x = x;
 		this.y = y;
+		selected = false;
 	}
 
 	public void render(SpriteBatch spriteBatch) {
 		spriteBatch.draw(texture, x, y);
+	}
+	
+	public boolean isAvailable()
+	{
+		return true;
 	}
 }

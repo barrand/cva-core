@@ -36,7 +36,7 @@ public class SpiderUnitSelection extends Selection
 		if (init)
 		{
 			init = false;
-			CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getSpriteWidth()/2));
+			CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect));
 		}
 		/**
 		 * Detect requested motion.
@@ -51,7 +51,7 @@ public class SpiderUnitSelection extends Selection
 			if (selectionRect.x + CvaModel.TILE_WIDTH <= CvaModel.TILE_WIDTH*7)
 			{
 				selectionRect.x += CvaModel.TILE_WIDTH;
-				CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getSpriteWidth()/2));
+				CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect));
 			}
 			rightWasDownLastFrame = false;
 		}
@@ -64,7 +64,7 @@ public class SpiderUnitSelection extends Selection
 		{
 			selectionRect.x -= CvaModel.TILE_WIDTH;
 			leftWasDownLastFrame = false;
-			CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getSpriteWidth()/2));
+			CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect));
 		}
 
 		spriteBatch.draw(select, selectionRect.x, selectionRect.y);

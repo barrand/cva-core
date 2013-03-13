@@ -35,7 +35,7 @@ public class CheerborgUnitSelection extends Selection
 		if (init)
 		{
 			init = false;
-			CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getSpriteWidth()/2));
+			CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect));
 		}
 		/**
 		 * Detect requested motion.
@@ -48,7 +48,7 @@ public class CheerborgUnitSelection extends Selection
 		{
 			selectionRect.x += CvaModel.TILE_WIDTH;
 			rightWasDownLastFrame = false;
-			CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getSpriteWidth()/2));
+			CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect));
 		}
 
 		if (PlayerInput.moveSelectLeftPressed(playerNum))
@@ -60,7 +60,7 @@ public class CheerborgUnitSelection extends Selection
 			if (selectionRect.x - CvaModel.TILE_WIDTH >= CvaModel.TILE_WIDTH*7)
 			{
 				selectionRect.x -= CvaModel.TILE_WIDTH;
-				CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect.x+getSpriteWidth()/2));
+				CvaModel.eventBus.post(new UnitTypeSelectEvent(selectionRect));
 			}
 			leftWasDownLastFrame = false;
 			

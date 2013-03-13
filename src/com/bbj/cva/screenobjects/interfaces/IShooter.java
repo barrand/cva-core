@@ -1,7 +1,6 @@
 package com.bbj.cva.screenobjects.interfaces;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bbj.cva.screenobjects.projectiles.IProjectile;
 
 public interface IShooter {

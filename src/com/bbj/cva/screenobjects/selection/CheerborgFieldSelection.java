@@ -10,15 +10,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.bbj.cva.events.CheerborgUnitTypeEvent;
-import com.bbj.cva.events.PlaceUnitEvent;
+import com.bbj.cva.events.QueryCheerUnitAvailableEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.util.PlayerInput;
-import com.squareup.otto.Subscribe;
 
 public class CheerborgFieldSelection extends Selection {
-	private CvaModel.Unit unitType;
-
 	public CheerborgFieldSelection() {
 		CvaModel.eventBus.register(this);
 	}
@@ -156,19 +152,11 @@ public class CheerborgFieldSelection extends Selection {
 		if (PlayerInput.actionButtonPressed(playerNum)) {
 			enterWasDownLastFrame = true;
 		} else if (enterWasDownLastFrame == true) {
-
-			if (unitType != null) {
-				CvaModel.eventBus.post(new PlaceUnitEvent(selectionRect.x
-						+ getSpriteWidth() / 2, selectionRect.y, unitType));
-			}
+			CvaModel.eventBus.post(new QueryCheerUnitAvailableEvent(selectionRect.x, selectionRect.y));
 			enterWasDownLastFrame = false;
 		}
 
 		spriteBatch.draw(selectionImage, selectionRect.x, selectionRect.y);
 	}
 
-	@Subscribe
-	public void onCheerborgUnitType(CheerborgUnitTypeEvent event) {
-		unitType = event.unitType;
-	}
 }

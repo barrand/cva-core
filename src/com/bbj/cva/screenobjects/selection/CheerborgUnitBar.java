@@ -3,12 +3,10 @@ package com.bbj.cva.screenobjects.selection;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.bbj.cva.events.CheerborgUnitTypeEvent;
 import com.bbj.cva.events.PlaceUnitEvent;
+import com.bbj.cva.events.QueryCheerUnitAvailableEvent;
 import com.bbj.cva.events.UnitTypeSelectEvent;
 import com.bbj.cva.model.CvaModel;
-import com.bbj.cva.screenobjects.Pom;
-import com.bbj.cva.screenobjects.ScreenObject;
 import com.bbj.cva.screenobjects.ScreenObjectSimple;
 import com.bbj.cva.screenobjects.interfaces.IScreenObject;
 import com.squareup.otto.Subscribe;
@@ -26,7 +24,6 @@ public class CheerborgUnitBar implements IScreenObject
 	public void create()
 	{
 		unitbar = new ArrayList<ScreenObjectSimple>();
-		
 	}
 
 	public boolean addUnitToBar(ScreenObjectSimple so)
@@ -57,26 +54,35 @@ public class CheerborgUnitBar implements IScreenObject
 	
 	@Subscribe
 	public void onUnitSelected(UnitTypeSelectEvent event) {
-		boolean fireEvent = false;
+		if (event.selection.x < (CvaModel.TILE_WIDTH*7))
+			return;
 		for (ScreenObjectSimple so : unitbar)
 		{
-			if (Math.abs(so.x - event.x) < 75.0)
+			if (event.selection.contains(so.x+5, so.y+5))
 			{
-				// FIXME: Eventually the screenobjects here should have a state of being 'ready' to deploy, which we will check...
-				fireEvent = true;
-				CvaModel.eventBus.post(new CheerborgUnitTypeEvent(so.type));
+				so.selected = true;
+			}
+			else
+			{
+				so.selected = false;
 			}
 		}
-		// FIXME: ...and then we won't have to do this nonsense.
-		
-		//todo, I'm not sure what this is supposed to do
-//		if (!fireEvent && (event.x > getX()) && (event.x < (getX()+getSpriteWidth())))
-//		{
-//			CvaModel.eventBus.post(new CheerborgUnitTypeEvent(null));
-//		}
-
 	}
 
+	@Subscribe
+	public void onQueryAvailability(QueryCheerUnitAvailableEvent event) {
+		for (ScreenObjectSimple so : unitbar)
+		{
+			if (so.selected)
+			{
+				if (so.isAvailable())
+				{
+					CvaModel.eventBus.post(new PlaceUnitEvent(event.x, event.y, so.type));
+				}
+			}
+		}
+	}
+	
 	@Override
 	public float getSpriteWidth()
 	{
