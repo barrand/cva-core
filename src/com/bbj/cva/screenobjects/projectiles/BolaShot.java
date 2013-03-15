@@ -10,7 +10,7 @@ import com.bbj.cva.screenobjects.ScreenObject;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.bbj.cva.screenobjects.interfaces.INonAnimated;
 
-public class BolaShot extends ScreenObject implements IProjectile, INonAnimated {
+public class BolaShot extends ScreenObject implements IProjectile, INonAnimated, IHitAreaObject {
 
 	public BolaShot(float x, float y) {
 		super(x, y);
@@ -28,7 +28,7 @@ public class BolaShot extends ScreenObject implements IProjectile, INonAnimated 
 	@Override 
 	public void render(SpriteBatch spriteBatch){
 		super.render(spriteBatch);
-		Gdx.app.log("cva", Float.toString(x));
+//		Gdx.app.log("cva bola shot", Float.toString(hitArea.x) + " - width - " + Float.toString(hitArea.width));
 	}
 	
 	@Override
@@ -74,6 +74,12 @@ public class BolaShot extends ScreenObject implements IProjectile, INonAnimated 
 	@Override
 	public Rectangle getHitArea() {
 		return hitArea;
+	}
+	
+	@Override
+	public void destroy(){
+		super.destroy();
+		CvaModel.thingsCheerborgsInteractWith.remove(this);
 	}
 
 	@Override

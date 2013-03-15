@@ -1,5 +1,7 @@
 package com.bbj.cva.screenobjects;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -97,10 +99,10 @@ public abstract class ScreenObject implements IScreenObject {
 		}
 		
 		if (this instanceof IHitAreaObject) {
-			hitArea.x = x - hitArea.width / 2;
+			hitArea.x = x - hitArea.width/2;
 			hitArea.y = y;
-			if (CvaModel.DEBUG) {
-				spriteBatch.setColor(200, 200, 200, 240);
+			if (CvaModel.DEBUG && this instanceof IHitAreaObject) {
+				spriteBatch.setColor(50, 10, 20, 220);
 				spriteBatch
 						.draw(CvaModel.blue, hitArea.x, hitArea.y,
 								hitArea.width, hitArea.height, 0, 0, 0, 0,
@@ -113,7 +115,6 @@ public abstract class ScreenObject implements IScreenObject {
 
 				for (IHitAreaObject o : ((IHitAreaObject) this)
 						.getInteractables()) {
-//					Gdx.app.log("cva", "overlap?" + Float.toString(((ScreenObject)o).hitArea.x) + " y " +  ((ScreenObject)o).y);
 					if (((ScreenObject)o).hitArea.overlaps(hitArea)) {
 						((IHitAreaObject) this).handleCollision(o);
 					}
@@ -129,7 +130,7 @@ public abstract class ScreenObject implements IScreenObject {
 			}
 			attackArea.y = y;
 			if (CvaModel.DEBUG) {
-				spriteBatch.setColor(255, 0, 0, 240);
+				spriteBatch.setColor(255, 0, 0, 200);
 				spriteBatch.draw(CvaModel.blue, attackArea.x, attackArea.y,
 						attackArea.width, attackArea.height, 0, 0, 0, 0, false,
 						false);
@@ -155,8 +156,7 @@ public abstract class ScreenObject implements IScreenObject {
 					&& !alreadyShot) {
 				ScreenObject projectile = (ScreenObject) ((IShooter) this)
 						.getProjectile();
-				CvaModel.eventBus.post(new PlaceUnitEvent(projectile.x,
-						projectile.y, CvaModel.Unit.BOLA));
+				CvaModel.eventBus.post(new PlaceUnitEvent(projectile));
 				alreadyShot = true;
 			} else if (alreadyShot
 					&& currentFrame != shootingFrame) {

@@ -19,8 +19,8 @@ public class TextureUtils {
 		CvaModel.pomDie = createAnimation(38,
 				"render-grunt-die/CB-grunt-death", pomAtlas, 0.03f);
 		CvaModel.pomDie.setPlayMode(Animation.NORMAL);
-		CvaModel.pomAttack = createAnimation(40,
-				"render-grunt-walk/CB-grunt-walking", pomAtlas, 0.03f);
+		CvaModel.pomAttack = createAnimation(44,
+				"render-grunt-attack/CB-grunt-attack", pomAtlas, 0.04f);
 		CvaModel.pomAttack.setPlayMode(Animation.LOOP);
 
 		TextureAtlas spiderAtlas = new TextureAtlas(

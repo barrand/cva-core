@@ -1,17 +1,13 @@
 package com.bbj.cva.events;
 
-import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.ScreenObject;
 
 public class PlaceUnitEvent extends Object
 {
-	public float x;
-	public float y;
-	public CvaModel.Unit unitType;
+	public ScreenObject screenObject;
 	
-	public PlaceUnitEvent(float nx, float ny, CvaModel.Unit ut)
+	public PlaceUnitEvent(ScreenObject screenObject)
 	{
-		x = nx;
-		y = ny;
-		this.unitType = ut;
+		this.screenObject = screenObject;
 	}
 }

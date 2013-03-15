@@ -3,20 +3,23 @@ package com.bbj.cva.screenobjects;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.interfaces.IAnimated;
 import com.bbj.cva.screenobjects.interfaces.IAttacker;
+import com.bbj.cva.screenobjects.interfaces.ICheerAttackable;
+import com.bbj.cva.screenobjects.interfaces.IDier;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.bbj.cva.screenobjects.projectiles.IProjectile;
 
-public class Pom extends ScreenObject implements IHitAreaObject, IAttacker,
+public class Pom extends ScreenObject implements IHitAreaObject, IAttacker, IDier,
 		IAnimated {
 
 //	private float speedX = -1.2f;
-	private float speedX = 0f;
+	private float speedX = -10f;
 
 	public Pom(float x, float y) {
 		super(x, y);
@@ -97,20 +100,34 @@ public class Pom extends ScreenObject implements IHitAreaObject, IAttacker,
 
 	@Override
 	public void handleCollision(IHitAreaObject o) {
-		if (o instanceof IProjectile) {
-			Gdx.app.log("cva", this.toString());
-			stateTime = 0f;
-			currentAnim = dieAnim;
+//		if (o instanceof IProjectile) {
+//			Gdx.app.log("cva", this.toString());
+//			stateTime = 0f;
+//			currentAnim = getDieAnimation();
+//			speedX = 0f;
+//			checkForInteractions = false;
+//			loop = false;
+//			CvaModel.eventBus
+//					.post(new RemoveScreenObjectEvent((ScreenObject) o));
+//		}
+		if (o instanceof ICheerAttackable) {
+			currentAnim = getAttackAnimation();
 			speedX = 0f;
-			checkForInteractions = false;
-			loop = false;
-			CvaModel.eventBus
-					.post(new RemoveScreenObjectEvent((ScreenObject) o));
 		}
 	}
 
 	@Override
 	public Rectangle getHitArea() {
 		return hitArea;
+	}
+
+	@Override
+	public Animation getDieAnimation() {
+		return CvaModel.pomDie;
+	}
+
+	@Override
+	public Animation getAttackAnimation() {
+		return CvaModel.pomAttack;
 	}
 }

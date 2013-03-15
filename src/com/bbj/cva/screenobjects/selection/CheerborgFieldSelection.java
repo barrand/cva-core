@@ -10,8 +10,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.bbj.cva.events.QueryCheerUnitAvailableEvent;
+import com.bbj.cva.events.PlaceUnitEvent;
+//import com.bbj.cva.events.QueryCheerUnitAvailableEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.Pom;
 import com.bbj.cva.util.PlayerInput;
 
 public class CheerborgFieldSelection extends Selection {
@@ -152,7 +154,21 @@ public class CheerborgFieldSelection extends Selection {
 		if (PlayerInput.actionButtonPressed(playerNum)) {
 			enterWasDownLastFrame = true;
 		} else if (enterWasDownLastFrame == true) {
-			CvaModel.eventBus.post(new QueryCheerUnitAvailableEvent(selectionRect.x, selectionRect.y));
+			//todo brad
+//			CvaModel.eventBus.post(new QueryCheerUnitAvailableEvent(selectionRect.x, selectionRect.y));
+//			if (unitType != null) {
+//				switch (unitType) {
+//				case POM:
+					Pom screenObject = new Pom(selectionRect.x
+							+ getSpriteWidth() / 2, selectionRect.y);
+					CvaModel.eventBus.post(new PlaceUnitEvent(screenObject));
+//					break;
+//				case SPIDER:
+//					break;
+//				case BOLA:
+//					break;
+//				}
+//			}
 			enterWasDownLastFrame = false;
 		}
 

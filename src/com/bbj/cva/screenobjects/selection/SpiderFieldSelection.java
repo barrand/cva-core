@@ -4,8 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.bbj.cva.events.QuerySpiderUnitAvailableEvent;
+import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.SpiderUnit;
 import com.bbj.cva.util.PlayerInput;
 
 public class SpiderFieldSelection extends Selection {
@@ -64,7 +65,20 @@ public class SpiderFieldSelection extends Selection {
 		if (PlayerInput.actionButtonPressed(playerNum)) {
 			enterWasDownLastFrame = true;
 		} else if (enterWasDownLastFrame == true) {
-			CvaModel.eventBus.post(new QuerySpiderUnitAvailableEvent(selectionRect.x, selectionRect.y));
+			//todo fix this
+//			CvaModel.eventBus.post(new QuerySpiderUnitAvailableEvent(selectionRect.x, selectionRect.y));
+//			switch (unitType) {
+//			case POM:
+//				break;
+//			case SPIDER:
+				SpiderUnit screenObject = new SpiderUnit(selectionRect.x
+						+ getSpriteWidth() / 2, selectionRect.y);
+				CvaModel.eventBus.post(new PlaceUnitEvent(screenObject));
+				CvaModel.thingsCheerborgsInteractWith.add(screenObject);
+//				break;
+//			case BOLA:
+//				break;
+//			}
 			enterWasDownLastFrame = false;
 		}
 

@@ -8,13 +8,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.interfaces.IAnimated;
+import com.bbj.cva.screenobjects.interfaces.ICheerAttackable;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.bbj.cva.screenobjects.interfaces.IShooter;
 import com.bbj.cva.screenobjects.projectiles.BolaShot;
 import com.bbj.cva.screenobjects.projectiles.IProjectile;
 
 public class SpiderUnit extends ScreenObject implements IShooter,
-		IHitAreaObject, IAnimated {
+		ICheerAttackable, IAnimated {
 	
 	public SpiderUnit(float x, float y) {
 		super(x, y);
@@ -114,5 +115,11 @@ public class SpiderUnit extends ScreenObject implements IShooter,
 	@Override
 	public AtlasRegion getShootingFrame() {
 		return CvaModel.spiderShootingFrame;
+	}
+
+	@Override
+	public int getDefense() {
+		// TODO Auto-generated method stub
+		return 50;
 	}
 }
