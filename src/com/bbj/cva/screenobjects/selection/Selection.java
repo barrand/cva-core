@@ -40,26 +40,7 @@ public abstract class Selection implements IScreenObject
 	}
 
 	@Override
-	public float getSpeedX() {
-		return 0;
-	}
-	@Override
-	public float getSpeedY() {
-		return 0;
-	}
-	
-	@Override
 	public void destroy() {
 		//
-	}
-	
-	@Override
-	public float getSpriteWidth() {
-		return CvaModel.TILE_WIDTH;
-	}
-
-	@Override
-	public float getSpriteHeight() {
-		return CvaModel.TILE_HEIGHT;
 	}
 }

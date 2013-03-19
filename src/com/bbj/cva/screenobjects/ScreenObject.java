@@ -1,7 +1,5 @@
 package com.bbj.cva.screenobjects;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -13,12 +11,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.model.ScreenObjectStats;
 import com.bbj.cva.screenobjects.interfaces.IAnimated;
 import com.bbj.cva.screenobjects.interfaces.IAttacker;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.bbj.cva.screenobjects.interfaces.INonAnimated;
 import com.bbj.cva.screenobjects.interfaces.IScreenObject;
 import com.bbj.cva.screenobjects.interfaces.IShooter;
+import com.bbj.cva.util.StatsMachine;
 
 public abstract class ScreenObject implements IScreenObject {
 
@@ -27,6 +27,8 @@ public abstract class ScreenObject implements IScreenObject {
 	protected Animation dieAnim;
 	protected Animation attackAnim;
 	protected Animation currentAnim;
+
+	protected ScreenObjectStats stats;
 
 	protected Texture texture; // used in non animated objects instead of the
 								// animations
@@ -53,24 +55,26 @@ public abstract class ScreenObject implements IScreenObject {
 
 	float stateTime; // #8
 
-	public ScreenObject(float x, float y) {
+	public ScreenObject(float x, float y, CvaModel.Unit type) {
+		this.type = type;
+		stats = StatsMachine.getStatsByType(type);
 		stateTime = 0f;
 
 		this.x = x;
 		this.y = y;
-		
+
 		if (this instanceof IAttacker) {
 			attackArea = new Rectangle();
-			attackArea.width = ((IAttacker) this).getAttackAreaWidth();
-			attackArea.height = ((IAttacker) this).getAttackAreaHeight();
+			attackArea.width = stats.attackAreaWidth;
+			attackArea.height = stats.attackAreaHeight;
 			attackArea.x = x;
 			attackArea.y = y;
 		}
 
 		if (this instanceof IHitAreaObject) {
 			hitArea = new Rectangle();
-			hitArea.width = ((IHitAreaObject) this).getHitAreaWidth();
-			hitArea.height = ((IHitAreaObject) this).getHitAreaHeight();
+			hitArea.width = stats.hitAreaWidth;
+			hitArea.height = stats.hitAreaHeight;
 			hitArea.x = x;
 			hitArea.y = y;
 		}
@@ -81,25 +85,26 @@ public abstract class ScreenObject implements IScreenObject {
 	}
 
 	public void render(SpriteBatch spriteBatch) {
-		x += getSpeedX() + speedXModifier;
-		y += getSpeedY() + speedYModifier;
+		x += stats.speedX + speedXModifier;
+		y += stats.speedY + speedYModifier;
 
-		//todo make this better. right now it just removes the object if it is way off the stage
-		if(x >= 2000 || x < -500){
-			CvaModel.eventBus
-			.post(new RemoveScreenObjectEvent((ScreenObject) this));
+		// todo make this better. right now it just removes the object if it is
+		// way off the stage
+		if (x >= 2000 || x < -500) {
+			CvaModel.eventBus.post(new RemoveScreenObjectEvent(
+					(ScreenObject) this));
 		}
-		
+
 		AtlasRegion currentFrame = null;
-		
+
 		if (this instanceof IAnimated) {
 			stateTime += Gdx.graphics.getDeltaTime();
-			currentFrame = (AtlasRegion) currentAnim.getKeyFrame(
-					stateTime, loop);
+			currentFrame = (AtlasRegion) currentAnim.getKeyFrame(stateTime,
+					loop);
 		}
-		
+
 		if (this instanceof IHitAreaObject) {
-			hitArea.x = x - hitArea.width/2;
+			hitArea.x = x - hitArea.width / 2;
 			hitArea.y = y;
 			if (CvaModel.DEBUG && this instanceof IHitAreaObject) {
 				spriteBatch.setColor(50, 10, 20, 220);
@@ -115,7 +120,7 @@ public abstract class ScreenObject implements IScreenObject {
 
 				for (IHitAreaObject o : ((IHitAreaObject) this)
 						.getInteractables()) {
-					if (((ScreenObject)o).hitArea.overlaps(hitArea)) {
+					if (((ScreenObject) o).hitArea.overlaps(hitArea)) {
 						((IHitAreaObject) this).handleCollision(o);
 					}
 				}
@@ -123,7 +128,7 @@ public abstract class ScreenObject implements IScreenObject {
 		}
 
 		if (this instanceof IAttacker) {
-			if (((IAttacker) this).attacksToTheLeft()) {
+			if (stats.attacksToTheLeft) {
 				attackArea.x = x - attackArea.width;
 			} else {
 				attackArea.x = x + attackArea.width;
@@ -138,28 +143,26 @@ public abstract class ScreenObject implements IScreenObject {
 			}
 		}
 
-
 		if (this instanceof IAnimated) {
 			if (!loop && currentAnim.isAnimationFinished(stateTime)) {
 				onAnimationEnd();
 			}
-			spriteBatch.draw(currentFrame, x + currentFrame.offsetX - currentFrame.originalWidth/2, y);
-		}else if(this instanceof INonAnimated){
-			spriteBatch.draw(texture, x-texture.getWidth()/2, y);
+			spriteBatch.draw(currentFrame, x + currentFrame.offsetX
+					- currentFrame.originalWidth / 2, y);
+		} else if (this instanceof INonAnimated) {
+			spriteBatch.draw(texture, x - texture.getWidth() / 2, y);
 		}
 
 		if (this instanceof IShooter) {
 			// only shoot once per animation cycle and reset when going to a
 			// different animation
 			AtlasRegion shootingFrame = ((IShooter) this).getShootingFrame();
-			if (currentFrame == shootingFrame
-					&& !alreadyShot) {
+			if (currentFrame == shootingFrame && !alreadyShot) {
 				ScreenObject projectile = (ScreenObject) ((IShooter) this)
 						.getProjectile();
 				CvaModel.eventBus.post(new PlaceUnitEvent(projectile));
 				alreadyShot = true;
-			} else if (alreadyShot
-					&& currentFrame != shootingFrame) {
+			} else if (alreadyShot && currentFrame != shootingFrame) {
 				alreadyShot = false;
 			}
 		}
@@ -172,5 +175,4 @@ public abstract class ScreenObject implements IScreenObject {
 	public void destroy() {
 
 	}
-
 }

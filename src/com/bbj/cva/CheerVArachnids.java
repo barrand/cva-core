@@ -5,26 +5,20 @@ import java.util.ArrayList;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controller;
-import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
-import com.badlogic.gdx.math.Vector3;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
-import com.bbj.cva.screenobjects.Pom;
 import com.bbj.cva.screenobjects.PomSelect;
 import com.bbj.cva.screenobjects.ScreenObject;
 import com.bbj.cva.screenobjects.SpiderSelect;
-import com.bbj.cva.screenobjects.SpiderUnit;
 import com.bbj.cva.screenobjects.interfaces.IScreenObject;
-import com.bbj.cva.screenobjects.projectiles.BolaShot;
 import com.bbj.cva.screenobjects.selection.CheerborgFieldSelection;
 import com.bbj.cva.screenobjects.selection.CheerborgUnitBar;
 import com.bbj.cva.screenobjects.selection.CheerborgUnitSelection;
@@ -98,7 +92,7 @@ public class CheerVArachnids implements ApplicationListener {
 		tiledMapHelper.prepareCamera(tiledMapHelper.getWidth(),
 				tiledMapHelper.getHeight());
 
-		TiledMap map = tiledMapHelper.getMap();
+//		TiledMap map = tiledMapHelper.getMap();
 
 		createObjectsQueue = new ArrayList<ScreenObject>();
 		// add all the objects that are going to be on screen here

@@ -84,32 +84,4 @@ public class SpiderUnitBar implements IScreenObject
 //			}
 //		}
 //	}
-	
-
-	@Override
-	public float getSpriteWidth()
-	{
-		return CvaModel.TILE_WIDTH*5;
-	}
-
-	@Override
-	public float getSpriteHeight()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getSpeedX()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getSpeedY()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

@@ -19,26 +19,6 @@ public class SpiderSelect extends ScreenObjectSimple
 	}
 
 	@Override
-	public float getSpeedX() {
-		return 0f;
-	}
-
-	@Override
-	public float getSpeedY() {
-		return 0f;
-	}
-	
-	@Override
-	public float getSpriteWidth() {
-		return 128;
-	}
-
-	@Override
-	public float getSpriteHeight() {
-		return 135;
-	}
-
-	@Override
 	public void create() {
 		// TODO Auto-generated method stub
 		

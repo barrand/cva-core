@@ -42,6 +42,6 @@ public class CvaModel {
 	public static boolean DEBUG = true;
 
 	public static enum Unit {
-		POM, SPIDER, BOLA
+		POM, SPIDER, BOLA_SHOT
 	}
 }

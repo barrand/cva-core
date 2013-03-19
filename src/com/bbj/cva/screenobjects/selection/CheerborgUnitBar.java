@@ -3,7 +3,6 @@ package com.bbj.cva.screenobjects.selection;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.UnitTypeSelectEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.ScreenObjectSimple;
@@ -82,31 +81,4 @@ public class CheerborgUnitBar implements IScreenObject
 //			}
 //		}
 //	}
-	
-	@Override
-	public float getSpriteWidth()
-	{
-		return CvaModel.TILE_WIDTH*5;
-	}
-
-	@Override
-	public float getSpriteHeight()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getSpeedX()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getSpeedY()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

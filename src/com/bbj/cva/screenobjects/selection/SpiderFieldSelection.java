@@ -72,7 +72,7 @@ public class SpiderFieldSelection extends Selection {
 //				break;
 //			case SPIDER:
 				SpiderUnit screenObject = new SpiderUnit(selectionRect.x
-						+ getSpriteWidth() / 2, selectionRect.y);
+						+ CvaModel.TILE_WIDTH / 2, selectionRect.y);
 				CvaModel.eventBus.post(new PlaceUnitEvent(screenObject));
 				CvaModel.thingsCheerborgsInteractWith.add(screenObject);
 //				break;
@@ -85,14 +85,4 @@ public class SpiderFieldSelection extends Selection {
 		spriteBatch.draw(selectionImage, selectionRect.x, selectionRect.y);
 	}
 
-
-	@Override
-	public float getSpriteWidth() {
-		return CvaModel.TILE_WIDTH;
-	}
-
-	@Override
-	public float getSpriteHeight() {
-		return CvaModel.TILE_HEIGHT;
-	}
 }

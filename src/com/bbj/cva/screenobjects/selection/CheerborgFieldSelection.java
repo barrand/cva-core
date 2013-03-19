@@ -160,7 +160,7 @@ public class CheerborgFieldSelection extends Selection {
 //				switch (unitType) {
 //				case POM:
 					Pom screenObject = new Pom(selectionRect.x
-							+ getSpriteWidth() / 2, selectionRect.y);
+							+ CvaModel.TILE_WIDTH / 2, selectionRect.y);
 					CvaModel.eventBus.post(new PlaceUnitEvent(screenObject));
 //					break;
 //				case SPIDER:
