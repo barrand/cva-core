@@ -13,11 +13,14 @@ import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.model.ScreenObjectStats;
 import com.bbj.cva.screenobjects.interfaces.IAnimated;
+import com.bbj.cva.screenobjects.interfaces.IAttackable;
 import com.bbj.cva.screenobjects.interfaces.IAttacker;
+import com.bbj.cva.screenobjects.interfaces.IDier;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.bbj.cva.screenobjects.interfaces.INonAnimated;
 import com.bbj.cva.screenobjects.interfaces.IScreenObject;
 import com.bbj.cva.screenobjects.interfaces.IShooter;
+import com.bbj.cva.screenobjects.projectiles.IProjectile;
 import com.bbj.cva.util.StatsMachine;
 
 public abstract class ScreenObject implements IScreenObject {
@@ -43,13 +46,11 @@ public abstract class ScreenObject implements IScreenObject {
 
 	protected boolean alreadyShot = false;
 
+	protected int health;
+
 	protected Rectangle attackArea;
 	protected Animation attackingAnim;
 
-	public static float SPEEDX;
-	public static float SPEEDY;
-	public float speedXModifier;
-	public float speedYModifier;
 	public CvaModel.Unit type;
 	public float x, y;
 
@@ -58,6 +59,7 @@ public abstract class ScreenObject implements IScreenObject {
 	public ScreenObject(float x, float y, CvaModel.Unit type) {
 		this.type = type;
 		stats = StatsMachine.getStatsByType(type);
+		health = stats.maxHealth;
 		stateTime = 0f;
 
 		this.x = x;
@@ -85,8 +87,8 @@ public abstract class ScreenObject implements IScreenObject {
 	}
 
 	public void render(SpriteBatch spriteBatch) {
-		x += stats.speedX + speedXModifier;
-		y += stats.speedY + speedYModifier;
+		x += stats.speedX;
+		y += stats.speedY;
 
 		// todo make this better. right now it just removes the object if it is
 		// way off the stage
@@ -168,8 +170,54 @@ public abstract class ScreenObject implements IScreenObject {
 		}
 	}
 
+	public void handleCollision(IHitAreaObject o) {
+		if (o instanceof IProjectile) {
+			Gdx.app.log("cva", this.toString());
+			IProjectile projectile = (IProjectile) o;
+			takeDamage(projectile.getDamage());
+
+			// remove the projectile since it already hit something
+			// maybe we could do projectiles that go through all offense?
+			CvaModel.eventBus
+					.post(new RemoveScreenObjectEvent((ScreenObject) o));
+		}
+
+		// todo, should probably check what state I'm in, and if I'm not
+		// currently attacking then start, but if I'm already attacking, don't
+		// start it again
+		if (o instanceof IAttackable) {
+			startAttacking();
+		}
+	}
+
+	public void takeDamage(int damage) {
+		health -= damage;
+		if (health <= 0) {
+			die();
+		}
+	}
+
+	protected void startAttacking() {
+		currentAnim = ((IAttacker) this).getAttackAnimation();
+
+		stats.speedX = 0f;
+	}
+
+	protected void die() {
+		stateTime = 0f;
+		currentAnim = ((IDier) this).getDieAnimation();
+		stats.speedX = 0f;
+		checkForInteractions = false;
+		loop = false;
+
+	}
+
 	protected void onAnimationEnd() {
 		// override me if needed
+	}
+
+	public int getDamage() {
+		return stats.attackStrength;
 	}
 
 	public void destroy() {

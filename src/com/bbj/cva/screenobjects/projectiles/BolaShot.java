@@ -17,11 +17,6 @@ public class BolaShot extends ScreenObject implements IProjectile, INonAnimated,
 
 	public int speedModifier;// should put this in a super class
 
-	@Override
-	public int getDamage() {
-		return 5;
-	}
-
 	@Override 
 	public void render(SpriteBatch spriteBatch){
 		super.render(spriteBatch);

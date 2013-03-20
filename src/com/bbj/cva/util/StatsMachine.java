@@ -22,7 +22,7 @@ public class StatsMachine {
 			break;
 		case BOLA_SHOT:
 			stats.maxHealth = 0;
-			stats.attackStrength = 10;
+			stats.attackStrength = 50;
 			stats.speedX = 8;
 			stats.speedY = 0;
 			stats.spriteWidth = 40;

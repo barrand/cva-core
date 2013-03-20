@@ -8,7 +8,6 @@ import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.interfaces.IAnimated;
 import com.bbj.cva.screenobjects.interfaces.IAttacker;
-import com.bbj.cva.screenobjects.interfaces.ICheerAttackable;
 import com.bbj.cva.screenobjects.interfaces.IDier;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 
@@ -42,20 +41,21 @@ public class Pom extends ScreenObject implements IHitAreaObject, IAttacker, IDie
 
 	@Override
 	public void handleCollision(IHitAreaObject o) {
+		super.handleCollision(o);
 //		if (o instanceof IProjectile) {
 //			Gdx.app.log("cva", this.toString());
 //			stateTime = 0f;
 //			currentAnim = getDieAnimation();
-//			speedX = 0f;
+//			stats.speedX = 0f;
 //			checkForInteractions = false;
 //			loop = false;
 //			CvaModel.eventBus
 //					.post(new RemoveScreenObjectEvent((ScreenObject) o));
 //		}
-		if (o instanceof ICheerAttackable) {
-			currentAnim = getAttackAnimation();
-			stats.speedX = 0f;
-		}
+//		if (o instanceof ICheerAttackable) {
+//			currentAnim = getAttackAnimation();
+//			stats.speedX = 0f;
+//		}
 	}
 
 	@Override

@@ -7,14 +7,14 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
 import com.bbj.cva.screenobjects.interfaces.IAnimated;
-import com.bbj.cva.screenobjects.interfaces.ICheerAttackable;
+import com.bbj.cva.screenobjects.interfaces.IAttackable;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.bbj.cva.screenobjects.interfaces.IShooter;
 import com.bbj.cva.screenobjects.projectiles.BolaShot;
 import com.bbj.cva.screenobjects.projectiles.IProjectile;
 
 public class SpiderUnit extends ScreenObject implements IShooter,
-		ICheerAttackable, IAnimated {
+		IAttackable, IAnimated {
 	
 	public SpiderUnit(float x, float y) {
 		super(x, y, CvaModel.Unit.SPIDER);
