@@ -4,15 +4,18 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.model.CvaModel.ActionState;
 import com.bbj.cva.screenobjects.interfaces.IAnimated;
 import com.bbj.cva.screenobjects.interfaces.IAttacker;
 import com.bbj.cva.screenobjects.interfaces.IDier;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
+import com.bbj.cva.screenobjects.interfaces.IWalker;
 
 public class Pom extends ScreenObject implements IHitAreaObject, IAttacker, IDier,
-		IAnimated {
+		IAnimated, IWalker {
 
 	public Pom(float x, float y) {
 		super(x, y, CvaModel.Unit.POM);
@@ -21,7 +24,6 @@ public class Pom extends ScreenObject implements IHitAreaObject, IAttacker, IDie
 	@Override
 	public void create() {
 		super.create();
-		currentAnim = CvaModel.pomWalk;
 	}
 
 	@Override
@@ -66,5 +68,25 @@ public class Pom extends ScreenObject implements IHitAreaObject, IAttacker, IDie
 	@Override
 	public Animation getAttackAnimation() {
 		return CvaModel.pomAttack;
+	}
+
+	@Override
+	public ActionState getInitActionState() {
+		return CvaModel.ActionState.WALKING;
+	}
+
+	@Override
+	public AtlasRegion getAttackingFrame() {
+		return CvaModel.pomAttackingFrame;
+	}
+
+	@Override
+	public Animation getWalkAnimation() {
+		return CvaModel.pomWalk;
+	}
+
+	@Override
+	protected void goToNormalState() {
+		startWalking();
 	}
 }

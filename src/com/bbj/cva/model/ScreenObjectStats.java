@@ -4,8 +4,8 @@ package com.bbj.cva.model;
 public class ScreenObjectStats {
 	public int maxHealth;
 	public int attackStrength;
-	public float speedX;
-	public float speedY = 0f;
+	public float baseSpeedX;
+	public float baseSpeedY = 0f;
 	public float spriteWidth;
 	public float spriteHeight;
 	public float hitAreaWidth;

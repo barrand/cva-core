@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.model.CvaModel.ActionState;
 import com.bbj.cva.screenobjects.ScreenObject;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.bbj.cva.screenobjects.interfaces.INonAnimated;
@@ -36,5 +37,15 @@ public class BolaShot extends ScreenObject implements IProjectile, INonAnimated,
 
 	@Override
 	public void handleCollision(IHitAreaObject o) {
+	}
+	
+	@Override
+	public ActionState getInitActionState() {
+		return CvaModel.ActionState.NOTHING;
+	}
+
+	@Override
+	protected void goToNormalState() {
+		startProjectiling();
 	}
 }

@@ -26,6 +26,7 @@ public class CvaModel {
 	public static Animation pomWalk;
 	public static Animation pomDie;
 	public static Animation pomAttack;
+	public static AtlasRegion pomAttackingFrame;
 	public static Animation spiderShoot;
 	public static AtlasRegion spiderShootingFrame;
 	public static Animation spiderDie;
@@ -43,5 +44,9 @@ public class CvaModel {
 
 	public static enum Unit {
 		POM, SPIDER, BOLA_SHOT
+	}
+
+	public static enum ActionState {
+		WALKING, ATTACKING, DYING, SHOOTING, NOTHING
 	}
 }

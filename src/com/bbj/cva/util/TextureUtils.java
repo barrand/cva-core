@@ -18,19 +18,21 @@ public class TextureUtils {
 		CvaModel.pomDie = createAnimation(38,
 				"render-grunt-die/CB-grunt-death", pomAtlas, 0.03f);
 		CvaModel.pomDie.setPlayMode(Animation.NORMAL);
-		CvaModel.pomAttack = createAnimation(44,
-				"render-grunt-attack/CB-grunt-attack", pomAtlas, 0.04f);
+		AnimationInfo ai = createAnimationWithSpecialFrame(44,
+				"render-grunt-attack/CB-grunt-attack", pomAtlas, 0.04f, 28);
+		CvaModel.pomAttack = ai.animation;
+		CvaModel.pomAttackingFrame = ai.specialFrame;
 		CvaModel.pomAttack.setPlayMode(Animation.LOOP);
 
 		TextureAtlas spiderAtlas = new TextureAtlas(
 				Gdx.files.internal("data/spriteSheets/spiderAll.txt"));
-		AnimationInfo ai = createAnimationShooter(3, "spiderShoot",
+		ai = createAnimationWithSpecialFrame(3, "spiderShoot",
 				spiderAtlas, 1f, 2);
 		CvaModel.spiderShoot = ai.animation;
-		CvaModel.spiderShootingFrame = ai.shootingFrame;
-		CvaModel.spiderShoot.setPlayMode(Animation.NORMAL);
+		CvaModel.spiderShootingFrame = ai.specialFrame;
+		CvaModel.spiderShoot.setPlayMode(Animation.LOOP);
 		CvaModel.spiderDie = createAnimation(3, "spiderDie", spiderAtlas, 1f);
-		CvaModel.spiderDie.setPlayMode(Animation.LOOP);
+		CvaModel.spiderDie.setPlayMode(Animation.NORMAL);
 
 		CvaModel.bolaShot = new Texture(
 				Gdx.files.internal("data/spriteSheets/webshot.png"));
@@ -53,8 +55,8 @@ public class TextureUtils {
 		return new Animation(animSpeed, walkAtlases);
 	}
 
-	private static AnimationInfo createAnimationShooter(int numberOfFrames,
-			String fileNamePrefix, TextureAtlas textureAtlas, float animSpeed, int frameNum) {
+	private static AnimationInfo createAnimationWithSpecialFrame(int numberOfFrames,
+			String fileNamePrefix, TextureAtlas textureAtlas, float animSpeed, int specialFrameNum) {
 		AnimationInfo toReturn = new AnimationInfo();
 		AtlasRegion[] walkAtlases = new AtlasRegion[numberOfFrames];
 		for (int ct = 1; ct < numberOfFrames + 1; ct++) {
@@ -62,8 +64,8 @@ public class TextureUtils {
 			Gdx.app.log("cva", "shooter name " + name);
 			AtlasRegion ar = textureAtlas.findRegion(name);
 			walkAtlases[ct - 1] = ar;
-			if (ct == frameNum) {
-				toReturn.shootingFrame = ar;
+			if (ct == specialFrameNum) {
+				toReturn.specialFrame = ar;
 			}
 		}
 		toReturn.animation = new Animation(animSpeed, walkAtlases);
@@ -73,5 +75,5 @@ public class TextureUtils {
 
 class AnimationInfo{
 	Animation animation;
-	AtlasRegion shootingFrame;
+	AtlasRegion specialFrame;
 }

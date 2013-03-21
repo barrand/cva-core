@@ -2,19 +2,22 @@ package com.bbj.cva.screenobjects;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.model.CvaModel.ActionState;
 import com.bbj.cva.screenobjects.interfaces.IAnimated;
 import com.bbj.cva.screenobjects.interfaces.IAttackable;
+import com.bbj.cva.screenobjects.interfaces.IDier;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.bbj.cva.screenobjects.interfaces.IShooter;
 import com.bbj.cva.screenobjects.projectiles.BolaShot;
 import com.bbj.cva.screenobjects.projectiles.IProjectile;
 
 public class SpiderUnit extends ScreenObject implements IShooter,
-		IAttackable, IAnimated {
+		IAttackable, IAnimated, IDier {
 	
 	public SpiderUnit(float x, float y) {
 		super(x, y, CvaModel.Unit.SPIDER);
@@ -23,7 +26,6 @@ public class SpiderUnit extends ScreenObject implements IShooter,
 	@Override
 	public void create() {
 		super.create();
-		currentAnim = CvaModel.spiderShoot;
 	}
 
 	@Override
@@ -49,30 +51,46 @@ public class SpiderUnit extends ScreenObject implements IShooter,
 
 	@Override
 	public String getShootingRegionName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public int getShootingNumFrames() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public ArrayList<IHitAreaObject> getInteractables() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void handleCollision(IHitAreaObject o) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public AtlasRegion getShootingFrame() {
 		return CvaModel.spiderShootingFrame;
+	}
+
+	@Override
+	public ActionState getInitActionState() {
+		return CvaModel.ActionState.SHOOTING;
+	}
+
+	@Override
+	public Animation getDieAnimation() {
+		return CvaModel.spiderDie;
+	}
+
+	@Override
+	public Animation getShootingAnimation() {
+		return CvaModel.spiderShoot;
+	}
+
+	@Override
+	protected void goToNormalState() {
+		startShooting();
 	}
 }
