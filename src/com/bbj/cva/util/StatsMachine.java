@@ -11,8 +11,7 @@ public class StatsMachine {
 		case POM:
 			stats.maxHealth = 100;
 			stats.attackStrength = 100;
-			stats.baseSpeedX = -10f;
-//			stats.speedX = -1.2f;
+			stats.baseSpeedX = -1.2f;
 			stats.baseSpeedY = 0f;
 			stats.spriteWidth = 300;
 			stats.spriteHeight = 300;

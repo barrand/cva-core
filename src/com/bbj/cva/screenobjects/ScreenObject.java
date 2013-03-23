@@ -96,7 +96,7 @@ public abstract class ScreenObject implements IScreenObject {
 	public void render(SpriteBatch spriteBatch) {
 		x += currentSpeedX;
 		y += currentSpeedY;
-		
+
 		// todo make this better. right now it just removes the object if it is
 		// way off the stage
 		if (x >= 2000 || x < -500) {
@@ -136,6 +136,7 @@ public abstract class ScreenObject implements IScreenObject {
 			if (checkForInteractions
 					&& ((IHitAreaObject) this).getInteractables() != null) {
 
+				int hitCount = 0;
 				// loop through the interactable objects and see if there are
 				// ones to interact with which that this object is touching
 				for (IHitAreaObject o : ((IHitAreaObject) this)
@@ -144,8 +145,15 @@ public abstract class ScreenObject implements IScreenObject {
 							&& ((ScreenObject) o).hitArea.overlaps(hitArea)) {
 						// if we find something then handle the collision of
 						// whatever it is
+						hitCount++;
 						((IHitAreaObject) this).handleCollision(o);
 					}
+				}
+				
+				// if this object isn't running into anything and we aren't in
+				// our normal state, then we should go back to our normal state
+				if (actionState != getInitActionState() && hitCount == 0) {
+					goToNormalState();
 				}
 			}
 		}
@@ -221,10 +229,9 @@ public abstract class ScreenObject implements IScreenObject {
 			// going to a different animation
 			AtlasRegion attackFrame = ((IAttacker) this).getAttackingFrame();
 			if (currentFrame == attackFrame && !alreadyAttacked) {
-				//attack the object with our attack strength, if we kill it then we need to go back to normal
-				if(((ScreenObject) o).takeDamage(stats.attackStrength)){
-					goToNormalState();
-				}
+				// attack the object with our attack strength, if we kill it
+				// then we need to go back to normal
+				((ScreenObject) o).takeDamage(stats.attackStrength);
 				alreadyAttacked = true;
 			} else if (alreadyAttacked && currentFrame != attackFrame) {
 				alreadyAttacked = false;
@@ -241,20 +248,17 @@ public abstract class ScreenObject implements IScreenObject {
 	 * @param damage
 	 * @return
 	 */
-	public boolean takeDamage(int damage) {
+	public void takeDamage(int damage) {
 		health -= damage;
 		if (health <= 0) {
 			startDying();
-			return true;
-		} else {
-			return false;
 		}
 	}
 
-	protected void startProjectiling(){
+	protected void startProjectiling() {
 		currentSpeedX = stats.baseSpeedX;
 	}
-	
+
 	protected void startWalking() {
 		stateTime = 0f;
 		actionState = CvaModel.ActionState.WALKING;

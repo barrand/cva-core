@@ -40,7 +40,7 @@ public class CvaModel {
 										// to normal after tinting something
 
 	public static Bus eventBus;
-	public static boolean DEBUG = true;
+	public static boolean DEBUG = false;
 
 	public static enum Unit {
 		POM, SPIDER, BOLA_SHOT
