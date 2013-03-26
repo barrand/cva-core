@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.tiled.TileMapRenderer;
 import com.badlogic.gdx.graphics.g2d.tiled.TiledMap;
+import com.badlogic.gdx.math.Vector2;
 import com.bbj.cva.CheerVArachnids;
 import com.bbj.cva.TiledMapHelper;
 import com.bbj.cva.events.PlaceUnitEvent;
@@ -37,6 +38,7 @@ public class GameScreen extends AbstractScreen
 	TiledMap tiledMap;
 	TileMapRenderer tileMapRenderer;
 	Selection selection;
+	Vector2 v;
 
 	// this holds all the objects that are going to be on screen
 	// when we render the whole world, we'll call render on each
@@ -63,6 +65,7 @@ public class GameScreen extends AbstractScreen
 	
 	@Override
 	public void show() {
+		v = new Vector2(0,0);
 		Texture.setEnforcePotImages(false);
 
 		TextureUtils.loadTextures();
@@ -182,7 +185,12 @@ public class GameScreen extends AbstractScreen
 	@Subscribe
 	public void onRemoveScreenObject(RemoveScreenObjectEvent event) {
 		objectsToDelete.add(event.screenObject);
-
+		v.x = event.screenObject.x;
+		v.y = event.screenObject.y;
+		if (CvaModel.occupancyList.contains(v))
+		{
+			CvaModel.occupancyList.remove(v);
+		}
 	}
 
 	@Override

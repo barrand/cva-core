@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.squareup.otto.Bus;
 
@@ -22,6 +23,7 @@ public class CvaModel {
 	public static final float TILE_HEIGHT = 135;
 
 	public static ArrayList<IHitAreaObject> thingsCheerborgsInteractWith = new ArrayList<IHitAreaObject>();
+	public static ArrayList<Vector2> occupancyList = new ArrayList<Vector2>();
 
 	public static Animation pomWalk;
 	public static Animation pomDie;

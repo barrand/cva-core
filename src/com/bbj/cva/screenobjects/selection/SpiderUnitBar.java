@@ -3,6 +3,7 @@ package com.bbj.cva.screenobjects.selection;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.QuerySpiderUnitAvailableEvent;
 import com.bbj.cva.events.UnitTypeSelectEvent;
@@ -84,8 +85,13 @@ public class SpiderUnitBar implements IScreenObject
 				if (so.isAvailable())
 				{
 					ScreenObject screenObject = ScreenObjectFactory.createUnit(event.x, event.y, so.type);
-					CvaModel.eventBus.post(new PlaceUnitEvent(screenObject));
-					CvaModel.thingsCheerborgsInteractWith.add((IHitAreaObject) screenObject);
+					Vector2 v = new Vector2(event.x, event.y);
+					if (!CvaModel.occupancyList.contains(v))
+					{
+						CvaModel.eventBus.post(new PlaceUnitEvent(screenObject));
+						CvaModel.thingsCheerborgsInteractWith.add((IHitAreaObject) screenObject);
+						CvaModel.occupancyList.add(v);
+					}
 				}
 			}
 		}
