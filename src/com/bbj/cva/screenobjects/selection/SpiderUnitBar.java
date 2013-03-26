@@ -3,9 +3,14 @@ package com.bbj.cva.screenobjects.selection;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.bbj.cva.events.PlaceUnitEvent;
+import com.bbj.cva.events.QuerySpiderUnitAvailableEvent;
 import com.bbj.cva.events.UnitTypeSelectEvent;
 import com.bbj.cva.model.CvaModel;
+import com.bbj.cva.screenobjects.ScreenObject;
+import com.bbj.cva.screenobjects.ScreenObjectFactory;
 import com.bbj.cva.screenobjects.ScreenObjectSimple;
+import com.bbj.cva.screenobjects.interfaces.IHitAreaObject;
 import com.bbj.cva.screenobjects.interfaces.IScreenObject;
 import com.squareup.otto.Subscribe;
 
@@ -70,18 +75,19 @@ public class SpiderUnitBar implements IScreenObject
 		}
 	}
 
-//	@Subscribe
-	//todo brad
-//	public void onQueryAvailability(QuerySpiderUnitAvailableEvent event) {
-//		for (ScreenObjectSimple so : unitbar)
-//		{
-//			if (so.selected)
-//			{
-//				if (so.isAvailable())
-//				{
-//					CvaModel.eventBus.post(new PlaceUnitEvent(event.x, event.y, so.type));
-//				}
-//			}
-//		}
-//	}
+	@Subscribe
+	public void onQueryAvailability(QuerySpiderUnitAvailableEvent event) {
+		for (ScreenObjectSimple so : unitbar)
+		{
+			if (so.selected)
+			{
+				if (so.isAvailable())
+				{
+					ScreenObject screenObject = ScreenObjectFactory.createUnit(event.x, event.y, so.type);
+					CvaModel.eventBus.post(new PlaceUnitEvent(screenObject));
+					CvaModel.thingsCheerborgsInteractWith.add((IHitAreaObject) screenObject);
+				}
+			}
+		}
+	}
 }
