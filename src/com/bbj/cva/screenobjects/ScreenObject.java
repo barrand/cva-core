@@ -1,12 +1,16 @@
 package com.bbj.cva.screenobjects;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Array;
 import com.bbj.cva.events.PlaceUnitEvent;
 import com.bbj.cva.events.RemoveScreenObjectEvent;
 import com.bbj.cva.model.CvaModel;
@@ -59,6 +63,13 @@ public abstract class ScreenObject implements IScreenObject {
 	public CvaModel.Unit type;
 	public float x, y;
 
+	ParticleEffect effect;
+	int emitterIndex;
+	Array<ParticleEmitter> emitters;
+	int particleCount = 10;
+	float fpsCounter;
+	InputProcessor inputProcessor;
+
 	float stateTime; // #8
 
 	public ScreenObject(float x, float y, CvaModel.Unit type) {
@@ -91,11 +102,22 @@ public abstract class ScreenObject implements IScreenObject {
 	public void create() {
 		goToNormalState();
 
+		effect = new ParticleEffect();
+		effect.load(Gdx.files.internal("data/particles/explosion.p"),
+				Gdx.files.internal("data/particles"));
+		// Of course, a ParticleEffect is normally just used, without messing
+		// around with its emitters.
+		emitters = new Array(effect.getEmitters());
+		effect.getEmitters().clear();
+		effect.getEmitters().add(emitters.get(0));
+
 	}
 
 	public void render(SpriteBatch spriteBatch) {
 		x += currentSpeedX;
 		y += currentSpeedY;
+
+		float delta = Gdx.graphics.getDeltaTime();
 
 		// todo make this better. right now it just removes the object if it is
 		// way off the stage
@@ -149,7 +171,7 @@ public abstract class ScreenObject implements IScreenObject {
 						((IHitAreaObject) this).handleCollision(o);
 					}
 				}
-				
+
 				// if this object isn't running into anything and we aren't in
 				// our normal state, then we should go back to our normal state
 				if (actionState != getInitActionState() && hitCount == 0) {
@@ -183,6 +205,9 @@ public abstract class ScreenObject implements IScreenObject {
 			}
 			spriteBatch.draw(currentFrame, x + currentFrame.offsetX
 					- currentFrame.originalWidth / 2, y);
+
+			effect.draw(spriteBatch, delta);
+
 		} else if (this instanceof INonAnimated) {
 			spriteBatch.draw(texture, x - texture.getWidth() / 2, y);
 		}
@@ -209,7 +234,8 @@ public abstract class ScreenObject implements IScreenObject {
 		if (o instanceof IProjectile) {
 			Gdx.app.log("cva", this.toString());
 			IProjectile projectile = (IProjectile) o;
-			takeDamage(projectile.getDamage());
+			takeDamage(projectile.getDamage(), ((ScreenObject) projectile).x,
+					((ScreenObject) projectile).y);
 
 			// remove the projectile since it already hit something
 			// maybe we could do projectiles that go through all offense?
@@ -231,7 +257,7 @@ public abstract class ScreenObject implements IScreenObject {
 			if (currentFrame == attackFrame && !alreadyAttacked) {
 				// attack the object with our attack strength, if we kill it
 				// then we need to go back to normal
-				((ScreenObject) o).takeDamage(stats.attackStrength);
+				((ScreenObject) o).takeDamage(stats.attackStrength, 20, 20);
 				alreadyAttacked = true;
 			} else if (alreadyAttacked && currentFrame != attackFrame) {
 				alreadyAttacked = false;
@@ -248,8 +274,24 @@ public abstract class ScreenObject implements IScreenObject {
 	 * @param damage
 	 * @return
 	 */
-	public void takeDamage(int damage) {
+	public void takeDamage(int damage, float x, float y) {
 		health -= damage;
+		effect.setPosition(x, y);
+		ParticleEmitter emitter = emitters.get(emitterIndex);
+		particleCount += 100;
+		System.out.println(particleCount);
+		particleCount = Math.max(0, particleCount);
+		if (particleCount > emitter.getMaxParticleCount())
+			emitter.setMaxParticleCount(particleCount * 2);
+		emitter.getEmission().setHigh(
+				particleCount / emitter.getLife().getHighMax() * 1000);
+		effect.getEmitters().clear();
+		effect.getEmitters().add(emitter);
+
+		emitters = new Array(effect.getEmitters());
+		effect.getEmitters().add(emitters.get(0));
+		emitters.get(0).start();
+
 		if (health <= 0) {
 			startDying();
 		}
@@ -295,7 +337,8 @@ public abstract class ScreenObject implements IScreenObject {
 	}
 
 	public void destroy() {
-
+		// spriteBatch.dispose();
+		effect.dispose();
 	}
 
 	abstract public CvaModel.ActionState getInitActionState();
